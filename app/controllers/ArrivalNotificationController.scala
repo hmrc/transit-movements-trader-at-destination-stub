@@ -22,9 +22,14 @@ import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 class ArrivalNotificationController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
+  val mrn_length = 18
+
   def post(): Action[AnyContent] = Action {
     implicit request =>
+      request.body.asXml match {
+        case Some(xml) if (xml \\ "CC007A" \\ "HEAHEA" \\ "DocNumHEA5").text.length == mrn_length => Ok
+        case _ => BadRequest
+      }
 
-      NotImplemented
   }
 }

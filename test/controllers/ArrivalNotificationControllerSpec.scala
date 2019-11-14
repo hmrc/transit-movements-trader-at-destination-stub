@@ -18,20 +18,49 @@ package controllers
 
 import org.scalatest.{FreeSpec, MustMatchers, OptionValues}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.test.FakeRequest
+import play.api.mvc.AnyContentAsXml
 import play.api.test.Helpers._
+import play.api.test.{FakeHeaders, FakeRequest}
 
 class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with GuiceOneAppPerSuite with OptionValues {
 
   "post" - {
 
-    "must return Not Implemented" in {
+    "must return status ok for valid input" in {
+
+      val xml = <CC007A>
+        <HEAHEA>
+          <DocNumHEA5>19IT02110010007827</DocNumHEA5>
+        </HEAHEA>
+      </CC007A>
+
+      val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(Seq.empty), AnyContentAsXml(xml))
+
+      val result = route(app, request).value
+
+      status(result) mustEqual OK
+    }
+
+    "must return status ok for invalid input" in {
+
+      val xml = <CC007A>
+        <DocNumHEA5>19IT02110010007827</DocNumHEA5>
+      </CC007A>
+
+      val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(Seq.empty), AnyContentAsXml(xml))
+
+      val result = route(app, request).value
+
+      status(result) mustEqual BAD_REQUEST
+    }
+
+    "must return status bad request when there is no data" in {
 
       val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
 
       val result = route(app, request).value
 
-      status(result) mustEqual NOT_IMPLEMENTED
+      status(result) mustEqual BAD_REQUEST
     }
   }
 }
