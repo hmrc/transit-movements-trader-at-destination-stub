@@ -20,16 +20,22 @@ import javax.inject.Inject
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-class ArrivalNotificationController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+import scala.xml.NodeSeq
 
-  val mrn_length = 18
+class ArrivalNotificationController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
   def post(): Action[AnyContent] = Action {
     implicit request =>
       request.body.asXml match {
-        case Some(xml) if (xml \\ "CC007A" \\ "HEAHEA" \\ "DocNumHEA5").text.length == mrn_length => Ok
+        case Some(xml) if getValidMrn(xml) => Ok
         case _ => BadRequest
       }
-
   }
+
+  private def getValidMrn(xml: NodeSeq): Boolean = {
+    val mrnFormat: String = """^(\d{2})([A-Z]{2})([A-Z0-9]{13})(\d)$"""
+    val mrn: NodeSeq = xml \\ "CC007A" \\ "HEAHEA" \\ "DocNumHEA5"
+    mrn.text.matches(mrnFormat)
+  }
+
 }

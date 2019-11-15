@@ -22,34 +22,65 @@ import play.api.mvc.AnyContentAsXml
 import play.api.test.Helpers._
 import play.api.test.{FakeHeaders, FakeRequest}
 
+import scala.xml.NodeSeq
+
 class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with GuiceOneAppPerSuite with OptionValues {
+
+  private def fakePostRequest(content: NodeSeq): FakeRequest[AnyContentAsXml] = {
+    FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(Seq.empty), AnyContentAsXml(content))
+  }
+
+  private def buildXml(mrn: String): NodeSeq = {
+    <CC007A>
+      <HEAHEA>
+        <DocNumHEA5>{mrn}</DocNumHEA5>
+      </HEAHEA>
+    </CC007A>
+  }
+
+  private val invalidXml: NodeSeq = {
+    <CC007A>
+      <DocNumHEA5>19IT02110010007827</DocNumHEA5>
+    </CC007A>
+  }
 
   "post" - {
 
     "must return status ok for valid input" in {
 
-      val xml = <CC007A>
-        <HEAHEA>
-          <DocNumHEA5>19IT02110010007827</DocNumHEA5>
-        </HEAHEA>
-      </CC007A>
-
-      val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(Seq.empty), AnyContentAsXml(xml))
-
-      val result = route(app, request).value
+      val xml = buildXml("19GB00000000000001")
+      val result = route(app, fakePostRequest(xml)).value
 
       status(result) mustEqual OK
     }
 
-    "must return status ok for invalid input" in {
+    "must return status bad request for missing element" in {
 
-      val xml = <CC007A>
-        <DocNumHEA5>19IT02110010007827</DocNumHEA5>
-      </CC007A>
+      val result = route(app, fakePostRequest(invalidXml)).value
 
-      val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(Seq.empty), AnyContentAsXml(xml))
+      status(result) mustEqual BAD_REQUEST
+    }
 
-      val result = route(app, request).value
+    "must return status bad request for invalid year" in {
+
+      val xml: NodeSeq = buildXml("ABGB00000000000001")
+      val result = route(app, fakePostRequest(xml)).value
+
+      status(result) mustEqual BAD_REQUEST
+    }
+
+    "must return status bad request for invalid country code" in {
+
+      val xml: NodeSeq = buildXml("191200000000000001")
+      val result = route(app, fakePostRequest(xml)).value
+
+      status(result) mustEqual BAD_REQUEST
+    }
+
+    "must return status bad request for invalid serial number" in {
+
+      val xml: NodeSeq = buildXml("19GB")
+      val result = route(app, fakePostRequest(xml)).value
 
       status(result) mustEqual BAD_REQUEST
     }
@@ -57,10 +88,10 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     "must return status bad request when there is no data" in {
 
       val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
-
       val result = route(app, request).value
 
       status(result) mustEqual BAD_REQUEST
     }
   }
+
 }
