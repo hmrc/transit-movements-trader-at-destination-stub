@@ -24,10 +24,9 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents) extends 
 
   def post(): Action[AnyContent] = Action {
     implicit request =>
-//      request.body.asXml match {
-//        case Some(xml) => Ok
-//        case _ => BadRequest
-//      }
-      Ok
+      request.body.asXml match {
+        case Some(xml) => Ok
+        case _ => BadRequest
+      }
   }
 }
