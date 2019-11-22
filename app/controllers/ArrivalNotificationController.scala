@@ -18,15 +18,21 @@ package controllers
 
 import javax.inject.Inject
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import services.HeaderValidatorService
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-class ArrivalNotificationController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class ArrivalNotificationController @Inject()(
+                                               cc: ControllerComponents,
+                                               headerValidatorService: HeaderValidatorService) extends BackendController(cc) {
 
   def post(): Action[AnyContent] = Action {
     implicit request =>
-      request.body.asXml match {
-        case Some(xml) => Ok
-        case _ => BadRequest
-      }
+      if(headerValidatorService.validate(request.headers)) {
+        request.body.asXml match {
+          case Some(xml) => Ok
+          case _ => BadRequest
+        }
+      } else
+        BadRequest
   }
 }
