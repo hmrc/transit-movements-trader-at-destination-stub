@@ -21,8 +21,6 @@ import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import services.HeaderValidatorService
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-import scala.xml.NodeSeq
-
 class ArrivalNotificationController @Inject()(
                                                cc: ControllerComponents,
                                                headerValidatorService: HeaderValidatorService) extends BackendController(cc) {
@@ -31,17 +29,10 @@ class ArrivalNotificationController @Inject()(
     implicit request =>
       if(headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
-          case Some(xml) if getValidMrn(xml) => Ok
+          case Some(xml) => Ok
           case _ => BadRequest
         }
       } else
         BadRequest
   }
-
-  private def getValidMrn(xml: NodeSeq): Boolean = {
-    val mrnFormat: String = """^(\d{2})([A-Z]{2})([A-Z0-9]{13})(\d)$"""
-    val mrn: NodeSeq = xml \\ "CC007A" \\ "HEAHEA" \\ "DocNumHEA5"
-    mrn.text.matches(mrnFormat)
-  }
-
 }

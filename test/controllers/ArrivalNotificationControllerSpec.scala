@@ -62,38 +62,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       status(result) mustEqual OK
     }
 
-    "BAD_REQUEST for missing element" in {
-
-      val result = route(app, fakePostRequest(invalidXml, validHeaders)).value
-
-      status(result) mustEqual BAD_REQUEST
-    }
-
-    "BAD_REQUEST for invalid year" in {
-
-      val xml: NodeSeq = buildXml("ABGB00000000000001")
-      val result = route(app, fakePostRequest(xml, validHeaders)).value
-
-      status(result) mustEqual BAD_REQUEST
-    }
-
-    "BAD_REQUEST for invalid country code" in {
-
-      val xml: NodeSeq = buildXml("191200000000000001")
-      val result = route(app, fakePostRequest(xml, validHeaders)).value
-
-      status(result) mustEqual BAD_REQUEST
-    }
-
-    "BAD_REQUEST for invalid serial number" in {
-
-      val xml: NodeSeq = buildXml("19GB")
-      val result = route(app, fakePostRequest(xml, validHeaders)).value
-
-      status(result) mustEqual BAD_REQUEST
-    }
-
-    "BAD_REQUEST when there is no data" in {
+    "must return status bad request when there is no data" in {
 
       val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
       val result = route(app, request).value
