@@ -25,7 +25,7 @@ class HeaderValidatorServiceImpl extends HeaderValidatorService {
 
     val contentType = headers.get("Content-Type").isDefined
 
-    val messageCode = headers.get("MessageCode").isDefined
+    val messageCode = headers.get("X-Message-Type").isDefined
 
     val xCorrelationId = headers.get("X-Correlation-ID").isDefined
 

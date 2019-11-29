@@ -29,7 +29,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
   val validHeaders: Seq[(String, String)] = Seq(
     ("Content-Type", "application/xml"),
     ("Accept", "application/xml"),
-    ("MessageCode", "IO007"),
+    ("X-Message-Type", "IO007"),
     ("X-Correlation-ID", "1234567890"),
     ("X-Forwarded-Host", "mdtp")
   )
@@ -75,7 +75,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val invalidHeaders: Seq[(String, String)] = Seq(
         ("Content-Type", "application/json"),
         ("Accept", "application/xml"),
-        ("MessageCode", "IO007"),
+        ("X-Message-Type", "IO007"),
         ("X-Correlation-ID", "1234567890"),
         ("X-Forwarded-Host", "mdtp")
       )
@@ -94,7 +94,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
         .withTextBody(xml.toString())
         .withHeaders(
           ("Accept", "application/xml"),
-          ("MessageCode", "IO007"),
+          ("X-Message-Type", "IO007"),
           ("X-Correlation-ID", "1234567890"),
           ("X-Forwarded-Host", "mdtp"))
 
@@ -123,7 +123,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val invalidHeaders: Seq[(String, String)] = Seq(
         ("Content-Type", "application/xml"),
         ("Accept", "application/xml"),
-        ("MessageCode", "IO007"),
+        ("X-Message-Type", "IO007"),
         ("X-Forwarded-Host", "mdtp")
       )
 
@@ -138,7 +138,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val invalidHeaders: Seq[(String, String)] = Seq(
         ("Content-Type", "application/xml"),
         ("Accept", "application/xml"),
-        ("MessageCode", "IO007"),
+        ("X-Message-Type", "IO007"),
         ("X-Correlation-ID", "1234567890")
       )
 
