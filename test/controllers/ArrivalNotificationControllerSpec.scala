@@ -16,11 +16,14 @@
 
 package controllers
 
-import org.scalatest.{FreeSpec, MustMatchers, OptionValues}
+import org.scalatest.FreeSpec
+import org.scalatest.MustMatchers
+import org.scalatest.OptionValues
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.mvc.AnyContentAsXml
 import play.api.test.Helpers._
-import play.api.test.{FakeHeaders, FakeRequest}
+import play.api.test.FakeHeaders
+import play.api.test.FakeRequest
 
 import scala.xml.NodeSeq
 
@@ -34,17 +37,15 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     ("X-Forwarded-Host", "mdtp")
   )
 
-  private def fakePostRequest(content: NodeSeq, headers: Seq[(String, String)]): FakeRequest[AnyContentAsXml] = {
+  private def fakePostRequest(content: NodeSeq, headers: Seq[(String, String)]): FakeRequest[AnyContentAsXml] =
     FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(headers), AnyContentAsXml(content))
-  }
 
-  private def buildXml(mrn: String): NodeSeq = {
+  private def buildXml(mrn: String): NodeSeq =
     <CC007A>
       <HEAHEA>
         <DocNumHEA5>{mrn}</DocNumHEA5>
       </HEAHEA>
     </CC007A>
-  }
 
   private val invalidXml: NodeSeq = {
     <CC007A>
@@ -56,7 +57,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
 
     "OK for valid input" in {
 
-      val xml = buildXml("19GB00000000000001")
+      val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, validHeaders)).value
 
       status(result) mustEqual OK
@@ -65,7 +66,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     "must return status bad request when there is no data" in {
 
       val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
-      val result = route(app, request).value
+      val result  = route(app, request).value
 
       status(result) mustEqual BAD_REQUEST
     }
@@ -80,7 +81,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
         ("X-Forwarded-Host", "mdtp")
       )
 
-      val xml = buildXml("19GB00000000000001")
+      val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
       status(result) mustEqual BAD_REQUEST
@@ -90,13 +91,10 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
 
       val xml = buildXml("19GB00000000000001")
 
-      def postRequest = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
-        .withTextBody(xml.toString())
-        .withHeaders(
-          ("Accept", "application/xml"),
-          ("X-Message-Type", "IO007"),
-          ("X-Correlation-ID", "1234567890"),
-          ("X-Forwarded-Host", "mdtp"))
+      def postRequest =
+        FakeRequest(POST, routes.ArrivalNotificationController.post().url)
+          .withTextBody(xml.toString())
+          .withHeaders(("Accept", "application/xml"), ("X-Message-Type", "IO007"), ("X-Correlation-ID", "1234567890"), ("X-Forwarded-Host", "mdtp"))
 
       val result = route(app, postRequest).value
 
@@ -112,7 +110,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
         ("X-Forwarded-Host", "mdtp")
       )
 
-      val xml = buildXml("19GB00000000000001")
+      val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
       status(result) mustEqual BAD_REQUEST
@@ -127,7 +125,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
         ("X-Forwarded-Host", "mdtp")
       )
 
-      val xml = buildXml("19GB00000000000001")
+      val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
       status(result) mustEqual BAD_REQUEST
@@ -142,7 +140,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
         ("X-Correlation-ID", "1234567890")
       )
 
-      val xml = buildXml("19GB00000000000001")
+      val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
       status(result) mustEqual BAD_REQUEST
