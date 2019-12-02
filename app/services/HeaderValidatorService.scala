@@ -16,11 +16,13 @@
 
 package services
 
-import com.google.inject.{ImplementedBy, Singleton}
+import com.google.inject.ImplementedBy
+import com.google.inject.Singleton
 import play.api.mvc.Headers
 
 @Singleton
 class HeaderValidatorServiceImpl extends HeaderValidatorService {
+
   def validate(headers: Headers): Boolean = {
 
     val contentType = headers.get("Content-Type").isDefined
@@ -40,5 +42,3 @@ class HeaderValidatorServiceImpl extends HeaderValidatorService {
 trait HeaderValidatorService {
   def validate(headers: Headers): Boolean
 }
-
-
