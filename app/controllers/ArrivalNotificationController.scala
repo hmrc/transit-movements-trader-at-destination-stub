@@ -32,7 +32,6 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
           case Some(xml) => Ok
           case _         => BadRequest
         }
-      } else
-        BadRequest
+      } else BadRequest
   }
 }

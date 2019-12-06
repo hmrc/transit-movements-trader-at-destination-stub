@@ -40,12 +40,13 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
   private def fakePostRequest(content: NodeSeq, headers: Seq[(String, String)]): FakeRequest[AnyContentAsXml] =
     FakeRequest(POST, routes.ArrivalNotificationController.post().url, FakeHeaders(headers), AnyContentAsXml(content))
 
-  private def buildXml(mrn: String): NodeSeq =
-    <CC007A>
-      <HEAHEA>
-        <DocNumHEA5>{mrn}</DocNumHEA5>
-      </HEAHEA>
-    </CC007A>
+  private def buildXml(mrn: String): NodeSeq = <CC007A>
+    <HEAHEA>
+      <DocNumHEA5>
+        {mrn}
+      </DocNumHEA5>
+    </HEAHEA>
+  </CC007A>
 
   private val invalidXml: NodeSeq = {
     <CC007A>
@@ -54,9 +55,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
   }
 
   "post must return" - {
-
     "OK for valid input" in {
-
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, validHeaders)).value
 
@@ -64,7 +63,6 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     }
 
     "must return status bad request when there is no data" in {
-
       val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
       val result  = route(app, request).value
 
@@ -72,7 +70,6 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     }
 
     "BAD_REQUEST when Content-Type is invalid" in {
-
       val invalidHeaders: Seq[(String, String)] = Seq(
         ("Content-Type", "application/json"),
         ("Accept", "application/xml"),
@@ -88,7 +85,6 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     }
 
     "BAD_REQUEST when Content-Type is missing" in {
-
       val xml = buildXml("19GB00000000000001")
 
       def postRequest =
@@ -102,13 +98,8 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     }
 
     "BAD_REQUEST when MessageCode is missing" in {
-
-      val invalidHeaders: Seq[(String, String)] = Seq(
-        ("Content-Type", "application/xml"),
-        ("Accept", "application/xml"),
-        ("X-Correlation-ID", "1234567890"),
-        ("X-Forwarded-Host", "mdtp")
-      )
+      val invalidHeaders: Seq[(String, String)] =
+        Seq(("Content-Type", "application/xml"), ("Accept", "application/xml"), ("X-Correlation-ID", "1234567890"), ("X-Forwarded-Host", "mdtp"))
 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
@@ -117,13 +108,8 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     }
 
     "BAD_REQUEST when X-Correlation-ID is missing" in {
-
-      val invalidHeaders: Seq[(String, String)] = Seq(
-        ("Content-Type", "application/xml"),
-        ("Accept", "application/xml"),
-        ("X-Message-Type", "IO007"),
-        ("X-Forwarded-Host", "mdtp")
-      )
+      val invalidHeaders: Seq[(String, String)] =
+        Seq(("Content-Type", "application/xml"), ("Accept", "application/xml"), ("X-Message-Type", "IO007"), ("X-Forwarded-Host", "mdtp"))
 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
@@ -132,13 +118,8 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
     }
 
     "BAD_REQUEST when X-Forwarded-Host is missing" in {
-
-      val invalidHeaders: Seq[(String, String)] = Seq(
-        ("Content-Type", "application/xml"),
-        ("Accept", "application/xml"),
-        ("X-Message-Type", "IO007"),
-        ("X-Correlation-ID", "1234567890")
-      )
+      val invalidHeaders: Seq[(String, String)] =
+        Seq(("Content-Type", "application/xml"), ("Accept", "application/xml"), ("X-Message-Type", "IO007"), ("X-Correlation-ID", "1234567890"))
 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
