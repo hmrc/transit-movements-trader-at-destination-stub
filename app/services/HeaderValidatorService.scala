@@ -20,7 +20,8 @@ import com.google.inject.ImplementedBy
 import com.google.inject.Singleton
 import play.api.mvc.Headers
 
-@Singleton class HeaderValidatorServiceImpl extends HeaderValidatorService {
+@Singleton
+class HeaderValidatorServiceImpl extends HeaderValidatorService {
 
   def validate(headers: Headers): Boolean = {
 
@@ -37,6 +38,7 @@ import play.api.mvc.Headers
 
 }
 
-@ImplementedBy(classOf[HeaderValidatorServiceImpl]) trait HeaderValidatorService {
+@ImplementedBy(classOf[HeaderValidatorServiceImpl])
+trait HeaderValidatorService {
   def validate(headers: Headers): Boolean
 }
