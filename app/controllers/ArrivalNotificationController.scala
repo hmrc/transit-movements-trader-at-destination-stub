@@ -17,6 +17,7 @@
 package controllers
 
 import javax.inject.Inject
+import play.api.Logger
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
@@ -30,9 +31,15 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
       if (headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
           case Some(xml) => Ok
-          case _         => BadRequest
+          case e => {
+            Logger.warn(s"FAILED VALIDATING XML $e")
+            BadRequest
+          }
         }
-      } else
+      } else {
+        Logger.warn("FAILED VALIDATING headers")
         BadRequest
+      }
+
   }
 }
