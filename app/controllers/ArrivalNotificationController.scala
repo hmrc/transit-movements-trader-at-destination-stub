@@ -36,12 +36,12 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
           }
           case e => {
             Logger.warn(s"FAILED VALIDATING XML $e")
-            BadRequest
+            ImATeapot
           }
         }
       } else {
         Logger.warn("FAILED VALIDATING headers")
-        BadRequest
+        ImATeapot
       }
 
   }
