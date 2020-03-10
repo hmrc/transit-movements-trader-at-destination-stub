@@ -30,7 +30,10 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
     implicit request =>
       if (headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
-          case Some(xml) => Ok
+          case Some(xml) => {
+            Logger.warn(s"validated XML $xml")
+            Ok
+          }
           case e => {
             Logger.warn(s"FAILED VALIDATING XML $e")
             BadRequest
