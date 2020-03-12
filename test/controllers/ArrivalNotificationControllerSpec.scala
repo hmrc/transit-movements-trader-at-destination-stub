@@ -62,7 +62,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val request = FakeRequest(POST, routes.ArrivalNotificationController.post().url)
       val result  = route(app, request).value
 
-      status(result) mustEqual IM_A_TEAPOT
+      status(result) mustEqual BAD_REQUEST
     }
 
     "BAD_REQUEST when Content-Type is missing" in {
@@ -76,7 +76,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
 
       val result = route(app, postRequest).value
 
-      status(result) mustEqual IM_A_TEAPOT
+      status(result) mustEqual BAD_REQUEST
     }
 
     "BAD_REQUEST when MessageCode is missing" in {
@@ -91,7 +91,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
-      status(result) mustEqual IM_A_TEAPOT
+      status(result) mustEqual BAD_REQUEST
     }
 
     "BAD_REQUEST when X-Correlation-ID is missing" in {
@@ -106,7 +106,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
-      status(result) mustEqual IM_A_TEAPOT
+      status(result) mustEqual BAD_REQUEST
     }
 
     "BAD_REQUEST when X-Forwarded-Host is missing" in {
@@ -121,7 +121,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, headers = invalidHeaders)).value
 
-      status(result) mustEqual IM_A_TEAPOT
+      status(result) mustEqual BAD_REQUEST
     }
 
   }
