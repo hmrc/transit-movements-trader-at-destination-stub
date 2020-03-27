@@ -1,5 +1,5 @@
 # Add all the application routes to the app.routes file
-->         /common-transit-convention-trader-at-destination              app.Routes
+->         /transit-movements-trader-at-destination/movements              app.Routes
 ->         /                          health.Routes
 
 GET        /admin/metrics             com.kenshoo.play.metrics.MetricsController.metrics
