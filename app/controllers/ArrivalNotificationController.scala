@@ -33,7 +33,7 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
           case Some(xml) => {
             Logger.warn(s"validated XML $xml")
             NoContent
-              .withHeaders("Location" -> s"/arrivals/5")
+              .withHeaders("Location" -> s"/arrivals/1/messages/2")
           }
           case e => {
             Logger.warn(s"FAILED VALIDATING XML $e")
