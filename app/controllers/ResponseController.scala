@@ -23,9 +23,14 @@ import play.api.mvc.ControllerComponents
 import services.HeaderValidatorService
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
+import scala.concurrent.Future
+
 class ResponseController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
   def post(): Action[AnyContent] = ???
 
-  def onPageLoad(): Action[AnyContent] = ???
+  def onPageLoad(): Action[AnyContent] = Action.async {
+    implicit request =>
+      Future.successful(Ok)
+  }
 }
