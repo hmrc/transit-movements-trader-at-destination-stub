@@ -32,7 +32,29 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
         request.body.asXml match {
           case Some(xml) => {
             Logger.warn(s"validated XML $xml")
-            Ok
+            NoContent
+              .withHeaders("Location" -> s"/arrivals/5")
+          }
+          case e => {
+            Logger.warn(s"FAILED VALIDATING XML $e")
+            ImATeapot
+          }
+        }
+      } else {
+        Logger.warn("FAILED VALIDATING headers")
+        ImATeapot
+      }
+
+  }
+
+  def put(arrivalId: String): Action[AnyContent] = Action {
+    implicit request =>
+      if (headerValidatorService.validate(request.headers)) {
+        request.body.asXml match {
+          case Some(xml) => {
+            Logger.warn(s"validated XML $xml")
+            NoContent
+              .withHeaders("Location" -> s"/arrivals/$arrivalId/messages/5")
           }
           case e => {
             Logger.warn(s"FAILED VALIDATING XML $e")
