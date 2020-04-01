@@ -18,7 +18,9 @@ package controllers
 
 import javax.inject.Inject
 import play.api.i18n.I18nSupport
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import play.api.mvc.Action
+import play.api.mvc.AnyContent
+import play.api.mvc.ControllerComponents
 import renderer.Renderer
 import uk.gov.hmrc.nunjucks.NunjucksSupport
 import uk.gov.hmrc.play.bootstrap.controller.BackendController

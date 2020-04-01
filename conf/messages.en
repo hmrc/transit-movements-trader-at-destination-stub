@@ -12,7 +12,7 @@ site.yes = Yes
 site.continue = Continue
 site.confirmAndSend = Confirm and send
 site.acceptAndSend = Accept and Send
-site.service_name = Common Transit Convention for traders
+site.service_name = Response stub
 site.textarea.char_limit = (Limit is {0} characters)
 site.title.suffix = - Common Transit Convention for traders - GOV.UK
 
