@@ -14,11 +14,10 @@
  * limitations under the License.
  *@
 
-@(form: Form[ResponseForm.ResponseModel])(implicit request: MessagesRequestHeader)
+@(form: Form[_])(implicit request: Request[_], messages: Messages)
 
-
-@if(form.hasGlobalErrors) {
-    @form.globalErrors.map { error: FormError =>
+@if(form.hasErrors) {
+    @form.errors.map { error: FormError =>
         <div>
             @error.key: @error.message
         </div>
@@ -26,11 +25,27 @@
 }
 
 @helper.form(routes.ResponseController.post()) {
-    @helper.CSRF.formField
+<p class="alert__message">Specify the Movement reference number (MRN) and status  </p>
 
-    @helper.inputText(form("mrn"))
+<div class="form-group" style="text-align: right">
+    <table class="">
+        <tr>
+            <th>Movement Reference Number</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="mrn" maxlength="30" size="50">
+            </td>
+           <td>
+                <select name="status">
+                    <option value="1">Goods Released</option>
+                    <option value="2">Goods Rejected</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
 
-    @helper.inputText(form("status"))
-
-    <button>Submit</button>
+<p><input class="button" type="submit" value="Submit"></p>
 }

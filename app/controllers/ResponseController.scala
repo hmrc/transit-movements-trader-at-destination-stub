@@ -26,7 +26,17 @@ import scala.concurrent.Future
 
 class ResponseController @Inject()(cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
 
-  def post(): Action[AnyContent] = ???
+  def post(): Action[AnyContent] = Action.async {
+    implicit request =>
+      ResponseForm.form
+        .bindFromRequest()
+        .fold(
+          hasErrors => Future.successful(BadRequest(views.html.response(hasErrors))),
+          value => {
+            Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+          }
+        )
+  }
 
   def onPageLoad(): Action[AnyContent] = Action.async {
     implicit request =>

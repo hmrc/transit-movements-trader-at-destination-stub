@@ -25,8 +25,8 @@ object ResponseForm {
 
   val form = Form(
     mapping(
-      "mrn"    -> text,
-      "status" -> text
+      "mrn"    -> nonEmptyText,
+      "status" -> nonEmptyText
     )(ResponseModel.apply)(ResponseModel.unapply)
   )
 }
