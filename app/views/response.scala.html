@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,24 +12,25 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package controllers
+@(form: Form[ResponseForm.ResponseModel])(implicit request: MessagesRequestHeader)
 
-import javax.inject.Inject
-import play.api.mvc.Action
-import play.api.mvc.AnyContent
-import play.api.mvc.MessagesAbstractController
-import play.api.mvc.MessagesControllerComponents
 
-import scala.concurrent.Future
+@if(form.hasGlobalErrors) {
+    @form.globalErrors.map { error: FormError =>
+        <div>
+            @error.key: @error.message
+        </div>
+    }
+}
 
-class ResponseController @Inject()(cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
+@helper.form(routes.ResponseController.post()) {
+    @helper.CSRF.formField
 
-  def post(): Action[AnyContent] = ???
+    @helper.inputText(form("mrn"))
 
-  def onPageLoad(): Action[AnyContent] = Action.async {
-    implicit request =>
-      Future.successful(Ok(views.html.response(ResponseForm.form)))
-  }
+    @helper.inputText(form("status"))
+
+    <button>Submit</button>
 }

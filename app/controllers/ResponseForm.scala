@@ -16,20 +16,17 @@
 
 package controllers
 
-import javax.inject.Inject
-import play.api.mvc.Action
-import play.api.mvc.AnyContent
-import play.api.mvc.MessagesAbstractController
-import play.api.mvc.MessagesControllerComponents
+object ResponseForm {
 
-import scala.concurrent.Future
+  import play.api.data.Forms._
+  import play.api.data.Form
 
-class ResponseController @Inject()(cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
+  case class ResponseModel(mrn: String, status: String)
 
-  def post(): Action[AnyContent] = ???
-
-  def onPageLoad(): Action[AnyContent] = Action.async {
-    implicit request =>
-      Future.successful(Ok(views.html.response(ResponseForm.form)))
-  }
+  val form = Form(
+    mapping(
+      "mrn"    -> text,
+      "status" -> text
+    )(ResponseModel.apply)(ResponseModel.unapply)
+  )
 }

@@ -41,6 +41,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
       val result = route(app, FakeRequest(GET, routes.ResponseController.onPageLoad().url)).value
 
       status(result) mustBe OK
+      contentAsString(result) mustBe "test"
     }
 
   }
