@@ -16,24 +16,23 @@
 
 package controllers
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import play.api.i18n.I18nSupport
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
-import renderer.Renderer
-import uk.gov.hmrc.nunjucks.NunjucksSupport
-import uk.gov.hmrc.play.bootstrap.controller.BackendController
+import play.api.i18n.Lang
+import play.api.i18n.MessagesApi
+import play.api.mvc._
+import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 
-import scala.concurrent.ExecutionContext
+class LanguageSwitchController @Inject()(implicit override val messagesApi: MessagesApi, val controllerComponents: MessagesControllerComponents)
+    extends FrontendBaseController
+    with I18nSupport {
 
-class ResponseController @Inject()(cc: ControllerComponents, renderer: Renderer)(implicit ec: ExecutionContext)
-    extends BackendController(cc)
-    with I18nSupport
-    with NunjucksSupport {
-
-  def post(): Action[AnyContent] = ???
-
-  def onPageLoad(): Action[AnyContent] = Action.async {
+  def switchToLanguage(language: String): Action[AnyContent] = Action {
     implicit request =>
-      renderer.render("response.njk").map(Ok(_))
+      val lang = Lang.defaultLang
+
+      val redirectURL = request.headers.get(REFERER).getOrElse("")
+
+      Redirect(redirectURL).withLang(lang)
   }
 }
