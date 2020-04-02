@@ -24,9 +24,9 @@ import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 @Singleton
 class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
 
-  val authBaseUrl: String = servicesConfig.baseUrl("auth")
-  lazy val destinationUrl: String = config.get[Service]("microservice.services.destination").baseUrl
+  val authBaseUrl: String    = servicesConfig.baseUrl("auth")
+  lazy val routerUrl: String = config.get[Service]("microservice.services.router").baseUrl
 
   val auditingEnabled: Boolean = config.get[Boolean]("auditing.enabled")
-  val graphiteHost: String = config.get[String]("microservice.metrics.graphite.host")
+  val graphiteHost: String     = config.get[String]("microservice.metrics.graphite.host")
 }
