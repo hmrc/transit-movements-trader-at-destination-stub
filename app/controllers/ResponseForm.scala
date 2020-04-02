@@ -21,12 +21,13 @@ object ResponseForm {
   import play.api.data.Forms._
   import play.api.data.Form
 
-  case class ResponseModel(mrn: String, status: String)
+  case class ResponseModel(mrn: String, arrivalId: String, status: String)
 
   val form = Form(
     mapping(
-      "mrn"    -> nonEmptyText,
-      "status" -> nonEmptyText
+      "mrn"       -> nonEmptyText,
+      "arrivalId" -> nonEmptyText,
+      "status"    -> nonEmptyText
     )(ResponseModel.apply)(ResponseModel.unapply)
   )
 }
