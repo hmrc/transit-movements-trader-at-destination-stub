@@ -47,12 +47,6 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       </HEAHEA>
     </CC007A>
 
-  private val invalidXml: NodeSeq = {
-    <CC007A>
-      <DocNumHEA5>19IT02110010007827</DocNumHEA5>
-    </CC007A>
-  }
-
   "post must return" - {
 
     "OK for valid input" in {
@@ -60,7 +54,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, validHeaders)).value
 
-      status(result) mustEqual OK
+      status(result) mustEqual NO_CONTENT
     }
 
     "must return status bad request when there is no data" in {

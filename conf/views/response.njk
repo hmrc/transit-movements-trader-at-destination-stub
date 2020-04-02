@@ -1,5 +1,8 @@
 {% extends "includes/layout.njk" %}
 
+{% from "govuk/components/input/macro.njk"         import govukInput %}
+{% from "govuk/components/button/macro.njk"        import govukButton %}
+
 {% block mainContent %}
 
   <div class="govuk-main-wrapper">
@@ -8,6 +11,30 @@
 
         <h1 class="govuk-heading-xl">Send a response</h1>
 
+                <form action="???" method="post">
+
+                  {{ govukInput({
+                    classes: "govuk-input--width-10",
+                    hint: {
+                      text: messages('placeOfNotification.hintText')
+                    },
+                    label: {
+                      text: messages('placeOfNotification.title'),
+                      isPageHeading: true,
+                      classes: "govuk-label--xl"
+                    },
+                    id: "value",
+                    name: "value",
+                    value: form.value.value,
+                    errorMessage: form.value.error
+                  }) }}
+
+                  {{ govukButton({
+                    text: messages("site.continue"),
+                    attributes: {id:"submit"}
+                  }) }}
+
+       </form>
       </div>
     </div>
   </div>
