@@ -1,4 +1,6 @@
 # microservice specific routes
 POST                    /message-notification               controllers.ArrivalNotificationController.post
+PUT                     /movements/arrivals/:arrivalId                 controllers.ArrivalNotificationController.put(arrivalId: String)
+
 GET                     /response                           controllers.ResponseController.onPageLoad
 POST                    /response                           controllers.ResponseController.post
