@@ -60,7 +60,7 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       val xml    = buildXml("19GB00000000000001")
       val result = route(app, fakePostRequest(xml, validHeaders)).value
 
-      status(result) mustEqual OK
+      status(result) mustEqual ACCEPTED
     }
 
     "must return status bad request when there is no data" in {
