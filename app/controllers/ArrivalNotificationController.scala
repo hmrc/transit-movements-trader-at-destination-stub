@@ -32,7 +32,7 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
         request.body.asXml match {
           case Some(xml) => {
             Logger.warn(s"validated XML $xml")
-            NoContent
+            Accepted
               .withHeaders("Location" -> s"/arrivals/5")
           }
           case e => {
