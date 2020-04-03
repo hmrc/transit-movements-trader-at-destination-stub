@@ -2,6 +2,7 @@
 
 {% from "govuk/components/input/macro.njk"         import govukInput %}
 {% from "govuk/components/button/macro.njk"        import govukButton %}
+{% from "govuk/components/select/macro.njk"        import govukSelect %}
 
 {% block mainContent %}
 
@@ -11,29 +12,48 @@
 
         <h1 class="govuk-heading-xl">Send a response</h1>
 
-                <form action="???" method="post">
+                <form action="{{ routes.controllers.ResponseController.post().url }}" method="post">
 
-                  {{ govukInput({
+                    {{ govukInput({
                     classes: "govuk-input--width-10",
-                    hint: {
-                      text: messages('placeOfNotification.hintText')
-                    },
                     label: {
-                      text: messages('placeOfNotification.title'),
-                      isPageHeading: true,
-                      classes: "govuk-label--xl"
+                        text: "Movement Reference Number",
+                        isPageHeading: false
                     },
-                    id: "value",
-                    name: "value",
-                    value: form.value.value,
-                    errorMessage: form.value.error
-                  }) }}
+                    id: "movementReferenceNumber",
+                    name: "movementReferenceNumber",
+                    value: form.movementReferenceNumber.value,
+                    errorMessage: form.movementReferenceNumber.error
+                    }) }}
 
-                  {{ govukButton({
-                    text: messages("site.continue"),
-                    attributes: {id:"submit"}
-                  }) }}
+                    {{ govukInput({
+                      classes: "govuk-input--width-10",
+                      label: {
+                        text: "Arrival Id",
+                        isPageHeading: false
+                      },
+                      id: "arrivalId",
+                      name: "arrivalId",
+                      value: form.arrivalId.value,
+                      errorMessage: form.arrivalId.error
+                    }) }}
 
+                    {{ govukSelect({
+                      classes: "govuk-input--width-20",
+                      label: {
+                        text: "Status",
+                        isPageHeading: false
+                      },
+                      id: "status",
+                      name: "status",
+                      errorMessage: form.status.error,
+                      items: status
+                    }) }}
+
+                    {{ govukButton({
+                      text: messages("site.continue"),
+                      attributes: {id:"submit"}
+                    }) }}
        </form>
       </div>
     </div>

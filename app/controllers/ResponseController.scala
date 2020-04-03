@@ -18,15 +18,21 @@ package controllers
 
 import connectors.DestinationConnector
 import javax.inject.Inject
+import play.api.libs.json.JsObject
+import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.MessagesAbstractController
 import play.api.mvc.MessagesControllerComponents
+import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
 
+import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
-class ResponseController @Inject()(cc: MessagesControllerComponents, destinationConnector: DestinationConnector) extends MessagesAbstractController(cc) {
+class ResponseController @Inject()(cc: MessagesControllerComponents, destinationConnector: DestinationConnector, renderer: Renderer)(
+  implicit ec: ExecutionContext)
+    extends MessagesAbstractController(cc) {
 
   private val goodsReleasedXml = <CC025A><SynIdeMES1>UNOC</SynIdeMES1>
     <SynVerNumMES2>3</SynVerNumMES2>
@@ -69,7 +75,23 @@ class ResponseController @Inject()(cc: MessagesControllerComponents, destination
 
   def onPageLoad(): Action[AnyContent] = Action.async {
     implicit request =>
-      Future.successful(Ok(views.html.response(ResponseForm.form)))
+      val status: JsObject =
+        Json.obj(
+          "status" -> Json.arr(
+            Json.obj(
+              "text"     -> "Goods Released",
+              "value"    -> "1",
+              "selected" -> true
+            ),
+            Json.obj(
+              "text"     -> "Goods Rejected",
+              "value"    -> "2",
+              "selected" -> false
+            )
+          )
+        )
+
+      renderer.render("response.njk", status).map(Ok(_))
   }
 
 }

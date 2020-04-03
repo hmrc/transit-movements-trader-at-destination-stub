@@ -25,9 +25,9 @@ object ResponseForm {
 
   val form = Form(
     mapping(
-      "mrn"       -> nonEmptyText,
-      "arrivalId" -> nonEmptyText,
-      "status"    -> nonEmptyText
+      "movementReferenceNumber" -> nonEmptyText,
+      "arrivalId"               -> nonEmptyText,
+      "status"                  -> nonEmptyText
     )(ResponseModel.apply)(ResponseModel.unapply)
   )
 }
