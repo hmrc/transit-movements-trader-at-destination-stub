@@ -38,7 +38,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
     "post" in {
 
       val mockDestinationConnector = mock[DestinationConnector]
-      when(mockDestinationConnector.goodsReleased(any(), any())(any())).thenReturn(Future.successful(HttpResponse(OK)))
+      when(mockDestinationConnector.goodsReleased(any(), any(), any())(any())).thenReturn(Future.successful(HttpResponse(OK)))
       val result = route(app,
                          FakeRequest(POST, routes.ResponseController.post().url)
                            .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "1")).value

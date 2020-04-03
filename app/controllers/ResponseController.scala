@@ -79,7 +79,7 @@ class ResponseController @Inject()(
             println(s"************* ArrivalId ${value.arrivalId} ************")
             println(s"************* Version ${value.version} *************")
             println(s"************* messageType ${value.messageType} *************")
-            destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId)
+            destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId, value.version)
             Future.successful(Redirect(routes.ResponseController.onPageLoad()))
           }
         )
