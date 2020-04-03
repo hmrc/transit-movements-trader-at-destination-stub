@@ -22,12 +22,7 @@ import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 import play.api.libs.json._
-import play.api.mvc.Action
-import play.api.mvc.AnyContent
-import play.api.mvc.MessagesAbstractController
-import play.api.mvc.MessagesControllerComponents
-import play.api.mvc.MessagesRequest
-import play.api.mvc.Request
+import play.api.mvc._
 import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.viewmodels.NunjucksSupport
@@ -75,15 +70,15 @@ class ResponseController @Inject()(
 
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
-      implicit val hc = HeaderCarrier()
+      implicit val hc: HeaderCarrier = HeaderCarrier()
       form
         .bindFromRequest()
         .fold(
           hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
           (value: ResponseModel) => {
-            println(s"\n\n\n ArrivalId ${value.arrivalId} \n\n\n")
-            println(s"\n\n\n Version ${value.version} \n\n\n")
-            println(s"\n\n\n messageType ${value.messageType} \n\n\n")
+            println(s"************* ArrivalId ${value.arrivalId} ************")
+            println(s"************* Version ${value.version} *************")
+            println(s"************* messageType ${value.messageType} *************")
             destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId)
             Future.successful(Redirect(routes.ResponseController.onPageLoad()))
           }
@@ -95,7 +90,7 @@ class ResponseController @Inject()(
       renderer.render("response.njk", json(form)).map(Ok(_))
   }
 
-  def json(form: Form[ResponseModel])(implicit request: MessagesRequest[AnyContent]) =
+  def json(form: Form[ResponseModel])(implicit request: MessagesRequest[AnyContent]): JsObject =
     Json.obj(
       "form" -> form,
       "messageType" -> Json.arr(

@@ -16,23 +16,34 @@
 
 package controllers
 
+import connectors.DestinationConnector
 import org.scalatest.FreeSpec
 import org.scalatest.MustMatchers
+import org.mockito.Matchers.any
+import org.mockito.Mockito.when
 import org.scalatest.OptionValues
+import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.test.FakeRequest
 import play.api.test.Helpers.POST
 import play.api.test.Helpers.route
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.HttpResponse
 
-class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with OptionValues {
+import scala.concurrent.Future
+
+class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
 
   "Response Controller tests" - {
-    "post" ignore {
+    "post" in {
 
-      val result = route(app, FakeRequest(POST, routes.ResponseController.post().url)).value
+      val mockDestinationConnector = mock[DestinationConnector]
+      when(mockDestinationConnector.goodsReleased(any(), any())(any())).thenReturn(Future.successful(HttpResponse(OK)))
+      val result = route(app,
+                         FakeRequest(POST, routes.ResponseController.post().url)
+                           .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "1")).value
 
-      status(result) mustBe OK
+      status(result) mustBe SEE_OTHER
 
     }
 
@@ -41,7 +52,6 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
       val result = route(app, FakeRequest(GET, routes.ResponseController.onPageLoad().url)).value
 
       status(result) mustBe OK
-      contentAsString(result) mustBe "test"
     }
 
   }
