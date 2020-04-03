@@ -15,18 +15,6 @@
                 <form action="{{ routes.controllers.ResponseController.post().url }}" method="post">
 
                     {{ govukInput({
-                    classes: "govuk-input--width-10",
-                    label: {
-                        text: "Movement Reference Number",
-                        isPageHeading: false
-                    },
-                    id: "movementReferenceNumber",
-                    name: "movementReferenceNumber",
-                    value: form.movementReferenceNumber.value,
-                    errorMessage: form.movementReferenceNumber.error
-                    }) }}
-
-                    {{ govukInput({
                       classes: "govuk-input--width-10",
                       label: {
                         text: "Arrival Id",
@@ -38,16 +26,29 @@
                       errorMessage: form.arrivalId.error
                     }) }}
 
+                    {{ govukInput({
+                    classes: "govuk-input--width-10",
+                    label: {
+                        text: "Version",
+                        isPageHeading: false
+                    },
+                        id: "version",
+                        name: "version",
+                        value: form.version.value,
+                        errorMessage: form.version.error
+                    }) }}
+
+
                     {{ govukSelect({
                       classes: "govuk-input--width-20",
                       label: {
-                        text: "Status",
+                        text: "Message type",
                         isPageHeading: false
                       },
-                      id: "status",
-                      name: "status",
-                      errorMessage: form.status.error,
-                      items: status
+                      id: "messageType",
+                      name: "messageType",
+                      errorMessage: form.messageType.error,
+                      items: messageType
                     }) }}
 
                     {{ govukButton({

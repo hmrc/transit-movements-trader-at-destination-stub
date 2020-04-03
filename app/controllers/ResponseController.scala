@@ -80,7 +80,10 @@ class ResponseController @Inject()(
         .bindFromRequest()
         .fold(
           hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
-          value => {
+          (value: ResponseModel) => {
+            println(s"\n\n\n ArrivalId ${value.arrivalId} \n\n\n")
+            println(s"\n\n\n Version ${value.version} \n\n\n")
+            println(s"\n\n\n messageType ${value.messageType} \n\n\n")
             destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId)
             Future.successful(Redirect(routes.ResponseController.onPageLoad()))
           }
@@ -95,7 +98,7 @@ class ResponseController @Inject()(
   def json(form: Form[ResponseModel])(implicit request: MessagesRequest[AnyContent]) =
     Json.obj(
       "form" -> form,
-      "status" -> Json.arr(
+      "messageType" -> Json.arr(
         Json.obj(
           "text"     -> "Goods Released",
           "value"    -> "1",

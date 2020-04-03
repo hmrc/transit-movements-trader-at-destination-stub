@@ -28,14 +28,14 @@ class ResponseForm @Inject() extends Mappings {
   def apply(): Form[ResponseModel] =
     Form(
       mapping(
-        "movementReferenceNumber" -> text("required"),
-        "arrivalId"               -> text("required"),
-        "status"                  -> text("required")
+        "arrivalId"   -> text("required"),
+        "version"     -> text("required"),
+        "messageType" -> text("required")
       )(ResponseModel.apply)(ResponseModel.unapply)
     )
 }
 
-case class ResponseModel(mrn: String, arrivalId: String, status: String)
+case class ResponseModel(arrivalId: String, version: String, messageType: String)
 
 object ResponseModel {
   implicit val format: OFormat[ResponseModel] = Json.format[ResponseModel]
