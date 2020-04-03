@@ -32,7 +32,7 @@ class DestinationConnector @Inject()(val config: AppConfig, val http: HttpClient
 
     val serviceUrl = s"${config.routerUrl}/messages"
 
-    val headers = Seq(("Content-Type", "application/xml"), ("X-Message-Type", "IE025"), ("X-Message-Sender", s"MDTP-$arrivalId-1"))
+    val headers = Seq(("Content-Type", "application/xml"), ("X-Message-Sender", s"MDTP-$arrivalId-1"))
 
     http.POSTString[HttpResponse](serviceUrl, goodsReleasedXml.toString(), headers)
   }
