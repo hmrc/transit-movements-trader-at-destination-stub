@@ -47,12 +47,6 @@ class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with 
       </HEAHEA>
     </CC007A>
 
-  private val invalidXml: NodeSeq = {
-    <CC007A>
-      <DocNumHEA5>19IT02110010007827</DocNumHEA5>
-    </CC007A>
-  }
-
   "post must return" - {
 
     "OK for valid input" in {
