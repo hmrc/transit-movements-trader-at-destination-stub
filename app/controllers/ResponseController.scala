@@ -18,21 +18,35 @@ package controllers
 
 import connectors.DestinationConnector
 import javax.inject.Inject
-import play.api.libs.json.JsObject
-import play.api.libs.json.Json
+import play.api.data.Form
+import play.api.i18n.I18nSupport
+import play.api.i18n.MessagesApi
+import play.api.libs.json._
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.MessagesAbstractController
 import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.MessagesRequest
+import play.api.mvc.Request
 import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.viewmodels.NunjucksSupport
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
-class ResponseController @Inject()(cc: MessagesControllerComponents, destinationConnector: DestinationConnector, renderer: Renderer)(
-  implicit ec: ExecutionContext)
-    extends MessagesAbstractController(cc) {
+class ResponseController @Inject()(
+  override val messagesApi: MessagesApi,
+  cc: MessagesControllerComponents,
+  destinationConnector: DestinationConnector,
+  formProvider: ResponseForm,
+  renderer: Renderer
+)(implicit ec: ExecutionContext)
+    extends MessagesAbstractController(cc)
+    with I18nSupport
+    with NunjucksSupport {
+
+  private val form: Form[ResponseModel] = formProvider()
 
   private val goodsReleasedXml = <CC025A><SynIdeMES1>UNOC</SynIdeMES1>
     <SynVerNumMES2>3</SynVerNumMES2>
@@ -62,10 +76,10 @@ class ResponseController @Inject()(cc: MessagesControllerComponents, destination
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
       implicit val hc = HeaderCarrier()
-      ResponseForm.form
+      form
         .bindFromRequest()
         .fold(
-          hasErrors => Future.successful(BadRequest(views.html.response(hasErrors))),
+          hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
           value => {
             destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId)
             Future.successful(Redirect(routes.ResponseController.onPageLoad()))
@@ -75,23 +89,24 @@ class ResponseController @Inject()(cc: MessagesControllerComponents, destination
 
   def onPageLoad(): Action[AnyContent] = Action.async {
     implicit request =>
-      val status: JsObject =
-        Json.obj(
-          "status" -> Json.arr(
-            Json.obj(
-              "text"     -> "Goods Released",
-              "value"    -> "1",
-              "selected" -> true
-            ),
-            Json.obj(
-              "text"     -> "Goods Rejected",
-              "value"    -> "2",
-              "selected" -> false
-            )
-          )
-        )
-
-      renderer.render("response.njk", status).map(Ok(_))
+      renderer.render("response.njk", json(form)).map(Ok(_))
   }
+
+  def json(form: Form[ResponseModel])(implicit request: MessagesRequest[AnyContent]) =
+    Json.obj(
+      "form" -> form,
+      "status" -> Json.arr(
+        Json.obj(
+          "text"     -> "Goods Released",
+          "value"    -> "1",
+          "selected" -> true
+        ),
+        Json.obj(
+          "text"     -> "Goods Rejected",
+          "value"    -> "2",
+          "selected" -> false
+        )
+      )
+    )
 
 }

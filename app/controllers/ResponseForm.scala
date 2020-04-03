@@ -16,18 +16,27 @@
 
 package controllers
 
-object ResponseForm {
+import com.google.inject.Inject
+import forms.mappings.Mappings
+import play.api.data.Form
+import play.api.data.Forms._
+import play.api.libs.json.Json
+import play.api.libs.json.OFormat
 
-  import play.api.data.Forms._
-  import play.api.data.Form
+class ResponseForm @Inject() extends Mappings {
 
-  case class ResponseModel(mrn: String, arrivalId: String, status: String)
+  def apply(): Form[ResponseModel] =
+    Form(
+      mapping(
+        "movementReferenceNumber" -> text("required"),
+        "arrivalId"               -> text("required"),
+        "status"                  -> text("required")
+      )(ResponseModel.apply)(ResponseModel.unapply)
+    )
+}
 
-  val form = Form(
-    mapping(
-      "movementReferenceNumber" -> nonEmptyText,
-      "arrivalId"               -> nonEmptyText,
-      "status"                  -> nonEmptyText
-    )(ResponseModel.apply)(ResponseModel.unapply)
-  )
+case class ResponseModel(mrn: String, arrivalId: String, status: String)
+
+object ResponseModel {
+  implicit val format: OFormat[ResponseModel] = Json.format[ResponseModel]
 }
