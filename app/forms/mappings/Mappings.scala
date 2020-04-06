@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package config
+package forms.mappings
 
-import javax.inject.Inject
-import javax.inject.Singleton
-import play.api.Configuration
-import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+import play.api.data.FieldMapping
+import play.api.data.Forms.of
 
-@Singleton
-class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
+trait Mappings extends Formatters with Constraints {
 
-  val authBaseUrl: String    = servicesConfig.baseUrl("auth")
-  lazy val routerUrl: String = config.get[Service]("microservice.services.router").baseUrl
-
-  val auditingEnabled: Boolean = config.get[Boolean]("auditing.enabled")
-  val graphiteHost: String     = config.get[String]("microservice.metrics.graphite.host")
+  protected def text(errorKey: String = "error.required"): FieldMapping[String] =
+    of(stringFormatter(errorKey))
 }
