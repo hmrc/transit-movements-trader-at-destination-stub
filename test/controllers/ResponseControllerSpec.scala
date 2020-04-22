@@ -29,22 +29,38 @@ import play.api.test.Helpers.POST
 import play.api.test.Helpers.route
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.HttpResponse
+import org.mockito.Matchers.{eq => eqTo, _}
 
 import scala.concurrent.Future
 
 class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
 
   "Response Controller tests" - {
-    "post" in {
+    "post" - {
 
-      val mockDestinationConnector = mock[DestinationConnector]
-      when(mockDestinationConnector.goodsReleased(any(), any(), any())(any())).thenReturn(Future.successful(HttpResponse(OK)))
-      val result = route(app,
-                         FakeRequest(POST, routes.ResponseController.post().url)
-                           .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "1")).value
+      "should post goods released message" in {
 
-      status(result) mustBe SEE_OTHER
+        val mockDestinationConnector = mock[DestinationConnector]
+        when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE025"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
+        val result = route(app,
+                           FakeRequest(POST, routes.ResponseController.post().url)
+                             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "1")).value
 
+        status(result) mustBe SEE_OTHER
+
+      }
+
+      "should post unloading permission message" in {
+
+        val mockDestinationConnector = mock[DestinationConnector]
+        when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE043"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
+        val result = route(app,
+                           FakeRequest(POST, routes.ResponseController.post().url)
+                             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "3")).value
+
+        status(result) mustBe SEE_OTHER
+
+      }
     }
 
     "onPageLoad" in {

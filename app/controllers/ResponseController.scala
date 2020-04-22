@@ -68,7 +68,7 @@ class ResponseController @Inject()(
     </CUSOFFPREOFFRES>
   </CC025A>
 
-  private val unloadingPermissionWithSealsXml    = <frank></frank>
+  private val unloadingPermissionWithSealsXml = <frank></frank>
 
   private val unloadingPermissionWithoutSealsXml = <frank></frank>
 
@@ -87,11 +87,12 @@ class ResponseController @Inject()(
             println(s"************* messageType ${value.messageType} *************")
             value.messageType match {
               //todo: match on the value.messageType selected to send either goods released or permission to unload
-              case ("1" || "2") =>
-                destinationConnector.sendMessage(goodsReleasedXml, value.arrivalId, value.version)
+              //  case ("1" || "2") =>
+              case x if (x == "1" || x == "2") =>
+                destinationConnector.sendMessage(goodsReleasedXml, value.arrivalId, value.version, "IE025")
                 Future.successful(Redirect(routes.ResponseController.onPageLoad()))
               case "3" =>
-                destinationConnector.sendMessage(unloadingPermissionWithSealsXml, value.arrivalId, value.version)
+                destinationConnector.sendMessage(unloadingPermissionWithSealsXml, value.arrivalId, value.version, "IE043")
                 Future.successful(Redirect(routes.ResponseController.onPageLoad()))
 
               case _ =>

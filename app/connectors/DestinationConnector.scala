@@ -28,11 +28,11 @@ import scala.xml.Node
 
 class DestinationConnector @Inject()(val config: AppConfig, val http: HttpClient)(implicit ec: ExecutionContext) {
 
-  def sendMessage(xml: Node, arrivalId: String, version: String)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
+  def sendMessage(xml: Node, arrivalId: String, version: String, xMessageType: String)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
 
     val serviceUrl = s"${config.routerUrl}/messages"
 
-    val headers = Seq(("Content-Type", "application/xml"), ("X-Message-Sender", s"MDTP-$arrivalId-$version"))
+    val headers = Seq(("Content-Type", "application/xml"), ("X-Message-Sender", s"MDTP-$arrivalId-$version"), ("X-Message-Type", xMessageType))
 
     http.POSTString[HttpResponse](serviceUrl, xml.toString(), headers)
   }
