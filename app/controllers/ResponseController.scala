@@ -21,6 +21,7 @@ import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
+import play.api.libs.json.Json
 import play.api.libs.json._
 import play.api.mvc._
 import renderer.Renderer
@@ -94,6 +95,9 @@ class ResponseController @Inject()(
               case "3" =>
                 destinationConnector.sendMessage(unloadingPermissionWithSealsXml, value.arrivalId, value.version, "IE043")
                 Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+              case "4" =>
+                destinationConnector.sendMessage(unloadingPermissionWithoutSealsXml, value.arrivalId, value.version, "IE043")
+                Future.successful(Redirect(routes.ResponseController.onPageLoad()))
 
               case _ =>
                 ??? //todo: error out
@@ -124,6 +128,11 @@ class ResponseController @Inject()(
         Json.obj(
           "text"     -> "Unloading Persmission with seals",
           "value"    -> "3",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Unloading Persmission without seals",
+          "value"    -> "4",
           "selected" -> false
         )
         //todo: add in objects for permission to unload options

@@ -17,23 +17,30 @@
 package controllers
 
 import connectors.DestinationConnector
+import org.mockito.Matchers.any
+import org.mockito.Matchers.{eq => eqTo}
+import org.mockito.Mockito.when
+import org.mockito.Mockito._
 import org.scalatest.FreeSpec
 import org.scalatest.MustMatchers
-import org.mockito.Matchers.any
-import org.mockito.Mockito.when
 import org.scalatest.OptionValues
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.Configuration
+import play.api.inject.bind
+import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.FakeRequest
 import play.api.test.Helpers.POST
 import play.api.test.Helpers.route
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.HttpResponse
-import org.mockito.Matchers.{eq => eqTo, _}
 
 import scala.concurrent.Future
 
 class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
+
+  protected def applicationBuilder: GuiceApplicationBuilder =
+    new GuiceApplicationBuilder().configure(Configuration("metrics.enabled" -> "false"))
 
   "Response Controller tests" - {
     "post" - {
@@ -42,18 +49,21 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE025"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
-        val result = route(app,
+
+        val application = applicationBuilder.overrides(bind[DestinationConnector].toInstance(mockDestinationConnector)).build()
+
+        val result = route(application,
                            FakeRequest(POST, routes.ResponseController.post().url)
                              .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "1")).value
 
         status(result) mustBe SEE_OTHER
 
+        verify(mockDestinationConnector, times(1)).sendMessage(any(), any(), any(), any())(any())
+
       }
 
       "should post unloading permission message" in {
 
-        val mockDestinationConnector = mock[DestinationConnector]
-        when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE043"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
         val result = route(app,
                            FakeRequest(POST, routes.ResponseController.post().url)
                              .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "3")).value
