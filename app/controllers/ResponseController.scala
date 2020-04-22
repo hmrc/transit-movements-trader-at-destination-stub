@@ -68,6 +68,12 @@ class ResponseController @Inject()(
     </CUSOFFPREOFFRES>
   </CC025A>
 
+  private val unloadingPermissionWithSealsXml    = <frank></frank>
+
+  private val unloadingPermissionWithoutSealsXml = <frank></frank>
+
+  //todo: add xml for message with seals and without
+
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
       implicit val hc: HeaderCarrier = HeaderCarrier()
@@ -79,8 +85,18 @@ class ResponseController @Inject()(
             println(s"************* ArrivalId ${value.arrivalId} ************")
             println(s"************* Version ${value.version} *************")
             println(s"************* messageType ${value.messageType} *************")
-            destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId, value.version)
-            Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+            value.messageType match {
+              //todo: match on the value.messageType selected to send either goods released or permission to unload
+              case ("1" || "2") =>
+                destinationConnector.sendMessage(goodsReleasedXml, value.arrivalId, value.version)
+                Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+              case "3" =>
+                destinationConnector.sendMessage(unloadingPermissionWithSealsXml, value.arrivalId, value.version)
+                Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+
+              case _ =>
+                ??? //todo: error out
+            }
           }
         )
   }
@@ -103,7 +119,13 @@ class ResponseController @Inject()(
           "text"     -> "Goods Rejected",
           "value"    -> "2",
           "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Unloading Persmission with seals",
+          "value"    -> "3",
+          "selected" -> false
         )
+        //todo: add in objects for permission to unload options
       )
     )
 
