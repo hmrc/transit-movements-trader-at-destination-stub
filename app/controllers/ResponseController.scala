@@ -153,6 +153,7 @@ class ResponseController @Inject()(
     </GOOITEGDS>
   </CC043A>
 
+  //todo: Move XML outside of this file so we can share with the test and tidy up the controller
   private val unloadingPermissionWithoutSealsXml = <CC043A><SynIdeMES1>UNOC</SynIdeMES1>
     <SynVerNumMES2>3</SynVerNumMES2>
     <MesSenMES3>NTA.GB</MesSenMES3>
@@ -220,8 +221,6 @@ class ResponseController @Inject()(
     </GOOITEGDS>
   </CC043A>
 
-  //todo: add xml for message without seals
-
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
       implicit val hc: HeaderCarrier = HeaderCarrier()
@@ -230,12 +229,7 @@ class ResponseController @Inject()(
         .fold(
           hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
           (value: ResponseModel) => {
-            println(s"************* ArrivalId ${value.arrivalId} ************")
-            println(s"************* Version ${value.version} *************")
-            println(s"************* messageType ${value.messageType} *************")
             value.messageType match {
-              //todo: match on the value.messageType selected to send either goods released or permission to unload
-              //  case ("1" || "2") =>
               case x if (x == "1" || x == "2") =>
                 destinationConnector.sendMessage(goodsReleasedXml, value.arrivalId, value.version, "IE025")
                 Future.successful(Redirect(routes.ResponseController.onPageLoad()))
@@ -245,7 +239,6 @@ class ResponseController @Inject()(
               case "4" =>
                 destinationConnector.sendMessage(unloadingPermissionWithoutSealsXml, value.arrivalId, value.version, "IE043")
                 Future.successful(Redirect(routes.ResponseController.onPageLoad()))
-
               case _ =>
                 ??? //todo: error out
             }
