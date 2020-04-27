@@ -71,7 +71,6 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
         val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
 
         verify(mockDestinationConnector, times(1)).sendMessage(xmlCaptor.capture(), any(), any(), any())(any())
-        println(s"\n\n${xmlCaptor.getValue.getClass}\n\n")
         xmlCaptor.getValue mustBe goodsReleasedXml
         application.stop()
       }
