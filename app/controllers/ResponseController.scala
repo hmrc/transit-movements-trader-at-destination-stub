@@ -28,6 +28,7 @@ import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.viewmodels.NunjucksSupport
 
+import scala.xml.{Elem, XML => xmlFile}
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
@@ -44,30 +45,7 @@ class ResponseController @Inject()(
 
   private val form: Form[ResponseModel] = formProvider()
 
-  private val goodsReleasedXml = <CC025A><SynIdeMES1>UNOC</SynIdeMES1>
-    <SynVerNumMES2>3</SynVerNumMES2>
-    <MesSenMES3>NTA.GB</MesSenMES3>
-    <MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6>
-    <DatOfPreMES9>20190912</DatOfPreMES9>
-    <TimOfPreMES10>1510</TimOfPreMES10>
-    <IntConRefMES11>70390912151020</IntConRefMES11>
-    <AppRefMES14>NCTS</AppRefMES14>
-    <TesIndMES18>0</TesIndMES18>
-    <MesIdeMES19>70390912151020</MesIdeMES19>
-    <MesTypMES20>GB025A</MesTypMES20>
-    <HEAHEA><DocNumHEA5>19IT02110010007827</DocNumHEA5>
-      <GooRelDatHEA176>20190912</GooRelDatHEA176>
-    </HEAHEA>
-    <TRADESTRD><NamTRD7>The Luggage Carriers</NamTRD7>
-      <StrAndNumTRD22>225 Suedopolish Yard,</StrAndNumTRD22>
-      <PosCodTRD23>SS8 2BB</PosCodTRD23>
-      <CitTRD24>,</CitTRD24>
-      <CouTRD25>GB</CouTRD25>
-      <TINTRD59>GB163910077000</TINTRD59>
-    </TRADESTRD>
-    <CUSOFFPREOFFRES><RefNumRES1>GB000060</RefNumRES1>
-    </CUSOFFPREOFFRES>
-  </CC025A>
+  private val goodsReleasedXml: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
 
   private val unloadingPermissionWithSealsXml = <CC043A><SynIdeMES1>UNOC</SynIdeMES1>
     <SynVerNumMES2>3</SynVerNumMES2>

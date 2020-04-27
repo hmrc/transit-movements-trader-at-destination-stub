@@ -37,6 +37,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.http.HttpResponse
 
 import scala.concurrent.Future
+import scala.xml.Elem
 import scala.xml.Node
 
 class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
@@ -44,7 +45,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
   protected def applicationBuilder: GuiceApplicationBuilder =
     new GuiceApplicationBuilder().configure(Configuration("metrics.enabled" -> "false"))
 
-  private val goodsReleaseXml: Node = <CC025A><SynIdeMES1>UNOC</SynIdeMES1>
+  private val goodsReleaseXml: Elem = <CC025A><SynIdeMES1>UNOC</SynIdeMES1>
     <SynVerNumMES2>3</SynVerNumMES2>
     <MesSenMES3>NTA.GB</MesSenMES3>
     <MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6>
