@@ -81,4 +81,27 @@
             <SenQuaSD23>1</SenQuaSD23>
         </SGICODSD2>
     </GOOITEGDS>
+    <GOOITEGDS><IteNumGDS7>2</IteNumGDS7>
+        <GooDesGDS23>Vases</GooDesGDS23>
+        <GroMasGDS46>10000</GroMasGDS46>
+        <NetMasGDS48>9999</NetMasGDS48>
+        <PRODOCDC2><DocTypDC21>280</DocTypDC21>
+            <DocRefDC23>Ref.</DocRefDC23>
+        </PRODOCDC2>
+        <CONNR2>
+            <ConNumNR21>container 3</ConNumNR21>
+        </CONNR2>
+        <CONNR2>
+            <ConNumNR21>container 4</ConNumNR21>
+        </CONNR2>
+        <PACGS2>
+            <MarNumOfPacGS21>Ref.</MarNumOfPacGS21>
+            <KinOfPacGS23>BX</KinOfPacGS23>
+            <NumOfPacGS24>10</NumOfPacGS24>
+        </PACGS2>
+        <SGICODSD2>
+            <SenGooCodSD22>1</SenGooCodSD22>
+            <SenQuaSD23>1</SenQuaSD23>
+        </SGICODSD2>
+    </GOOITEGDS>
 </CC043A>
