@@ -59,13 +59,13 @@ class ResponseController @Inject()(
           hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
           (value: ResponseModel) => {
             val xmlToSend = value.messageType match {
-              case x if x == "goodsReleased" || x == "goodsRejected" => goodsReleasedXml
-              case "unloadingPermissionWithSeals"                    => unloadingPermissionWithSealsXml
-              case "unloadingPermissionWithoutSeals"                 => unloadingPermissionWithoutSealsXml
+              case "goodsReleased"                   => (goodsReleasedXml, "IE025")
+              case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
+              case "unloadingPermissionWithoutSeals" => (unloadingPermissionWithoutSealsXml, "IE043")
               case _ =>
                 ??? //todo: error out
             }
-            destinationConnector.sendMessage(xmlToSend, value.arrivalId, value.version, "IE043")
+            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2)
             Future.successful(Redirect(routes.ResponseController.onPageLoad()))
           }
         )
@@ -85,11 +85,12 @@ class ResponseController @Inject()(
           "value"    -> "goodsReleased",
           "selected" -> true
         ),
-        Json.obj(
+        //todo: add in goods rejected CTCTRADERS-423
+        /*Json.obj(
           "text"     -> "Goods Rejected",
           "value"    -> "goodsRejected",
           "selected" -> false
-        ),
+        ),*/
         Json.obj(
           "text"     -> "Unloading Permission with seals",
           "value"    -> "unloadingPermissionWithSeals",
