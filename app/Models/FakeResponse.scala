@@ -14,29 +14,13 @@
  * limitations under the License.
  */
 
-package controllers
+package Models
 
-import com.google.inject.Inject
-import forms.mappings.Mappings
-import play.api.data.Form
-import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.libs.json.OFormat
 
-class ResponseForm @Inject() extends Mappings {
+case class FakeResponse(arrivalId: String, version: String, messageType: String)
 
-  def apply(): Form[ResponseModel] =
-    Form(
-      mapping(
-        "arrivalId"   -> text("required"),
-        "version"     -> text("required"),
-        "messageType" -> text("required")
-      )(ResponseModel.apply)(ResponseModel.unapply)
-    )
-}
-
-case class ResponseModel(arrivalId: String, version: String, messageType: String)
-
-object ResponseModel {
-  implicit val format: OFormat[ResponseModel] = Json.format[ResponseModel]
+object FakeResponse {
+  implicit val format: OFormat[FakeResponse] = Json.format[FakeResponse]
 }

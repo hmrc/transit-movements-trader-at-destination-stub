@@ -41,7 +41,7 @@ import scala.xml.Elem
 import scala.xml.Node
 import scala.xml.XML
 
-class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
+class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
 
   protected def applicationBuilder: GuiceApplicationBuilder =
     new GuiceApplicationBuilder().configure(Configuration("metrics.enabled" -> "false"))
@@ -62,7 +62,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
 
         val result = route(
           application,
-          FakeRequest(POST, routes.ResponseController.post().url)
+          FakeRequest(POST, routes.FakeResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "goodsReleased")
         ).value
 
@@ -84,7 +84,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
 
         val result = route(
           application,
-          FakeRequest(POST, routes.ResponseController.post().url)
+          FakeRequest(POST, routes.FakeResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "unloadingPermissionWithSeals")
         ).value
 
@@ -106,7 +106,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
 
         val result = route(
           application,
-          FakeRequest(POST, routes.ResponseController.post().url)
+          FakeRequest(POST, routes.FakeResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "unloadingPermissionWithoutSeals")
         ).value
 
@@ -122,7 +122,7 @@ class ResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with Must
 
     "onPageLoad" in {
 
-      val result = route(app, FakeRequest(GET, routes.ResponseController.onPageLoad().url)).value
+      val result = route(app, FakeRequest(GET, routes.FakeResponseController.onPageLoad().url)).value
 
       status(result) mustBe OK
     }

@@ -1,10 +1,10 @@
 # microservice specific routes
 
-GET        /assets/*file                                     controllers.Assets.versioned(path="/public", file: Asset)
-GET        /language/:lang                                   controllers.LanguageSwitchController.switchToLanguage(lang: String)
+GET                     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)
+GET                     /language/:lang                         controllers.LanguageSwitchController.switchToLanguage(lang: String)
 
-POST                    /message-notification               controllers.ArrivalNotificationController.post
-PUT                     /movements/arrivals/:arrivalId                 controllers.ArrivalNotificationController.put(arrivalId: String)
+POST                    /message-notification                   controllers.ArrivalNotificationController.post
+PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalNotificationController.put(arrivalId: String)
 
-GET                     /response                           controllers.ResponseController.onPageLoad
-POST                    /response                           controllers.ResponseController.post
+GET                     /fake-response                          controllers.FakeResponseController.onPageLoad
+POST                    /fake-response                          controllers.FakeResponseController.post

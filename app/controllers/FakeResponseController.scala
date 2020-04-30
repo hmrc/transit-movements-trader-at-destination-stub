@@ -16,7 +16,9 @@
 
 package controllers
 
+import Models.FakeResponse
 import connectors.DestinationConnector
+import forms.FakeResponseForm
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.I18nSupport
@@ -28,23 +30,23 @@ import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.viewmodels.NunjucksSupport
 
-import scala.xml.Elem
-import scala.xml.{XML => xmlFile}
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
+import scala.xml.Elem
+import scala.xml.{XML => xmlFile}
 
-class ResponseController @Inject()(
+class FakeResponseController @Inject()(
   override val messagesApi: MessagesApi,
   cc: MessagesControllerComponents,
   destinationConnector: DestinationConnector,
-  formProvider: ResponseForm,
+  formProvider: FakeResponseForm,
   renderer: Renderer
 )(implicit ec: ExecutionContext)
     extends MessagesAbstractController(cc)
     with I18nSupport
     with NunjucksSupport {
 
-  private val form: Form[ResponseModel] = formProvider()
+  private val form: Form[FakeResponse] = formProvider()
 
   private val goodsReleasedXml: Elem                   = xmlFile.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
   private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
@@ -56,8 +58,8 @@ class ResponseController @Inject()(
       form
         .bindFromRequest()
         .fold(
-          hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
-          (value: ResponseModel) => {
+          hasErrors => renderer.render("fakeResponse.njk", json(hasErrors)).map(BadRequest(_)),
+          (value: FakeResponse) => {
             val xmlToSend = value.messageType match {
               case "goodsReleased"                   => (goodsReleasedXml, "IE025")
               case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
@@ -66,17 +68,17 @@ class ResponseController @Inject()(
                 ??? //todo: error out
             }
             destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2)
-            Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+            Future.successful(Redirect(routes.FakeResponseController.onPageLoad()))
           }
         )
   }
 
   def onPageLoad(): Action[AnyContent] = Action.async {
     implicit request =>
-      renderer.render("response.njk", json(form)).map(Ok(_))
+      renderer.render("fakeResponse.njk", json(form)).map(Ok(_))
   }
 
-  def json(form: Form[ResponseModel])(implicit request: MessagesRequest[AnyContent]): JsObject =
+  def json(form: Form[FakeResponse])(implicit request: MessagesRequest[AnyContent]): JsObject =
     Json.obj(
       "form" -> form,
       "messageType" -> Json.arr(
