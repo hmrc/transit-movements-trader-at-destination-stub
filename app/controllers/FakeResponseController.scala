@@ -51,9 +51,9 @@ class FakeResponseController @Inject()(
   private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
   private val unloadingPermissionWithoutSealsXml: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
 
-  private val rejectionErrorInvalidMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
-  private val rejectionErrorDuplicateMrn: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorDuplicateMrn.xml"))
-  private val rejectionErrorUnknownMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorUnknownMrn.xml"))
+  private val rejectionErrorInvalidMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorInvalidMrn.xml"))
+  private val rejectionErrorDuplicateMrn: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorDuplicateMrn.xml"))
+  private val rejectionErrorUnknownMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorUnknownMrn.xml"))
 
   def post(): Action[AnyContent] = Action.async {
     implicit request =>

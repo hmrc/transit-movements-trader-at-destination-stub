@@ -123,7 +123,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
       "should post rejection error with invalid MRN code" in {
 
-        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
+        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorInvalidMrn.xml"))
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE008"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
@@ -147,7 +147,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
       "should post rejection error with unknown MRN code" in {
 
-        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorUnknownMrn.xml"))
+        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorUnknownMrn.xml"))
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE008"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
@@ -171,7 +171,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
       "should post rejection error with duplicate MRN code" in {
 
-        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorDuplicateMrn.xml"))
+        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorDuplicateMrn.xml"))
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE008"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
