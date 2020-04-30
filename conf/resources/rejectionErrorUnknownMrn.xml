@@ -1,0 +1,23 @@
+<CC008A>
+    <SynIdeMES1>UNOC</SynIdeMES1>
+    <SynVerNumMES2>3</SynVerNumMES2>
+    <MesSenMES3>NTA.GB</MesSenMES3>
+    <MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6>
+    <DatOfPreMES9>20191018</DatOfPreMES9>
+    <TimOfPreMES10>1525</TimOfPreMES10>
+    <IntConRefMES11>81391018152535</IntConRefMES11>
+    <AppRefMES14>NCTS</AppRefMES14>
+    <TesIndMES18>0</TesIndMES18>
+    <MesIdeMES19>81391018152535</MesIdeMES19>
+    <MesTypMES20>GB008A</MesTypMES20>
+    <HEAHEA>
+        <DocNumHEA5>19IT021300100075E9</DocNumHEA5>
+        <ArrRejDatHEA142>20191018</ArrRejDatHEA142>
+        <ArrRejReaHEA242>Invalid IE007 Message</ArrRejReaHEA242>
+    </HEAHEA>
+    <FUNERRER1>
+        <ErrTypER11>90</ErrTypER11>
+        <ErrPoiER12>Unknown MRN</ErrPoiER12>
+        <OriAttValER14>19IT02110010007827</OriAttValER14>
+    </FUNERRER1>
+</CC008A>

@@ -51,7 +51,9 @@ class FakeResponseController @Inject()(
   private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
   private val unloadingPermissionWithoutSealsXml: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
 
-  private val rejectionErrorInvalidMrn: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
+  private val rejectionErrorInvalidMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
+  private val rejectionErrorDuplicateMrn: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorDuplicateMrn.xml"))
+  private val rejectionErrorUnknownMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorUnknownMrn.xml"))
 
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
@@ -66,6 +68,8 @@ class FakeResponseController @Inject()(
               case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
               case "unloadingPermissionWithoutSeals" => (unloadingPermissionWithoutSealsXml, "IE043")
               case "rejectionErrorInvalidMrn"        => (rejectionErrorInvalidMrn, "IE008")
+              case "rejectionErrorDuplicateMrn"      => (rejectionErrorDuplicateMrn, "IE008")
+              case "rejectionErrorUnknownMrn"        => (rejectionErrorUnknownMrn, "IE008")
             }
             destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2).flatMap {
               _ =>
@@ -102,6 +106,16 @@ class FakeResponseController @Inject()(
         Json.obj(
           "text"     -> "Rejection Error invalid MRN (IE008)",
           "value"    -> "rejectionErrorInvalidMrn",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Rejection Error duplicate MRN (IE008)",
+          "value"    -> "rejectionErrorDuplicateMrn",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Rejection Error unknown MRN (IE008)",
+          "value"    -> "rejectionErrorUnknownMrn",
           "selected" -> false
         )
       )

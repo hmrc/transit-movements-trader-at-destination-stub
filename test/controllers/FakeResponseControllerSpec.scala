@@ -121,7 +121,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
       }
 
-      "should post rejection error with MRN code" in {
+      "should post rejection error with invalid MRN code" in {
 
         val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
 
@@ -134,6 +134,54 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
           application,
           FakeRequest(POST, routes.FakeResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "rejectionErrorInvalidMrn")
+        ).value
+
+        status(result) mustBe OK
+
+        val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
+        verify(mockDestinationConnector, times(1)).sendMessage(xmlCaptor.capture(), any(), any(), any())(any())
+        xmlCaptor.getValue mustBe rejectionErrorMrn
+        application.stop()
+
+      }
+
+      "should post rejection error with unknown MRN code" in {
+
+        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorUnknownMrn.xml"))
+
+        val mockDestinationConnector = mock[DestinationConnector]
+        when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE008"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
+
+        val application = applicationBuilder.overrides(bind[DestinationConnector].toInstance(mockDestinationConnector)).build()
+
+        val result = route(
+          application,
+          FakeRequest(POST, routes.FakeResponseController.post().url)
+            .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "rejectionErrorUnknownMrn")
+        ).value
+
+        status(result) mustBe OK
+
+        val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
+        verify(mockDestinationConnector, times(1)).sendMessage(xmlCaptor.capture(), any(), any(), any())(any())
+        xmlCaptor.getValue mustBe rejectionErrorMrn
+        application.stop()
+
+      }
+
+      "should post rejection error with duplicate MRN code" in {
+
+        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorDuplicateMrn.xml"))
+
+        val mockDestinationConnector = mock[DestinationConnector]
+        when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE008"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
+
+        val application = applicationBuilder.overrides(bind[DestinationConnector].toInstance(mockDestinationConnector)).build()
+
+        val result = route(
+          application,
+          FakeRequest(POST, routes.FakeResponseController.post().url)
+            .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "rejectionErrorDuplicateMrn")
         ).value
 
         status(result) mustBe OK
