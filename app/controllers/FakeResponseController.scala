@@ -16,10 +16,10 @@
 
 package controllers
 
-import models.FakeResponse
 import connectors.DestinationConnector
 import forms.FakeResponseForm
 import javax.inject.Inject
+import models.FakeResponse
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
@@ -31,7 +31,6 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.viewmodels.NunjucksSupport
 
 import scala.concurrent.ExecutionContext
-import scala.concurrent.Future
 import scala.xml.Elem
 import scala.xml.{XML => xmlFile}
 
@@ -52,6 +51,8 @@ class FakeResponseController @Inject()(
   private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
   private val unloadingPermissionWithoutSealsXml: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
 
+  private val rejectionErrorInvalidMrn: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
+
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
       implicit val hc: HeaderCarrier = HeaderCarrier()
@@ -64,6 +65,7 @@ class FakeResponseController @Inject()(
               case "goodsReleased"                   => (goodsReleasedXml, "IE025")
               case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
               case "unloadingPermissionWithoutSeals" => (unloadingPermissionWithoutSealsXml, "IE043")
+              case "rejectionErrorInvalidMrn"        => (rejectionErrorInvalidMrn, "IE008")
             }
             destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2).flatMap {
               _ =>
@@ -83,24 +85,23 @@ class FakeResponseController @Inject()(
       "form" -> form,
       "messageType" -> Json.arr(
         Json.obj(
-          "text"     -> "Goods Released",
+          "text"     -> "Goods Released (IE025)",
           "value"    -> "goodsReleased",
           "selected" -> true
         ),
-        //todo: add in goods rejected CTCTRADERS-423
-        /*Json.obj(
-          "text"     -> "Goods Rejected",
-          "value"    -> "goodsRejected",
-          "selected" -> false
-        ),*/
         Json.obj(
-          "text"     -> "Unloading Permission with seals",
+          "text"     -> "Unloading Permission with seals (IE043)",
           "value"    -> "unloadingPermissionWithSeals",
           "selected" -> false
         ),
         Json.obj(
-          "text"     -> "Unloading Permission without seals",
+          "text"     -> "Unloading Permission without seals (IE043)",
           "value"    -> "unloadingPermissionWithoutSeals",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Rejection Error invalid MRN (IE008)",
+          "value"    -> "rejectionErrorInvalidMrn",
           "selected" -> false
         )
       )
