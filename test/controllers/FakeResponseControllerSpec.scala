@@ -46,14 +46,12 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
   protected def applicationBuilder: GuiceApplicationBuilder =
     new GuiceApplicationBuilder().configure(Configuration("metrics.enabled" -> "false"))
 
-  private val goodsReleasedXml: Elem                   = XML.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
-  private val unloadingPermissionWithSeals: Elem       = XML.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
-  private val unloadingPermissionWithoutSealsXml: Elem = XML.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
-
   "Response Controller tests" - {
     "post" - {
 
       "should post goods released message" in {
+
+        val goodsReleasedXml: Elem = XML.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE025"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
@@ -66,7 +64,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "goodsReleased")
         ).value
 
-        status(result) mustBe SEE_OTHER
+        status(result) mustBe OK
 
         val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
 
@@ -76,6 +74,8 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
       }
 
       "should post unloading permission with seals message" in {
+
+        val unloadingPermissionWithSeals: Elem = XML.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE043"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
@@ -88,7 +88,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "unloadingPermissionWithSeals")
         ).value
 
-        status(result) mustBe SEE_OTHER
+        status(result) mustBe OK
 
         val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
         verify(mockDestinationConnector, times(1)).sendMessage(xmlCaptor.capture(), any(), any(), any())(any())
@@ -98,6 +98,8 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
       }
 
       "should post unloading permission without seals message" in {
+
+        val unloadingPermissionWithoutSealsXml: Elem = XML.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
 
         val mockDestinationConnector = mock[DestinationConnector]
         when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE043"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
@@ -110,11 +112,35 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
             .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "unloadingPermissionWithoutSeals")
         ).value
 
-        status(result) mustBe SEE_OTHER
+        status(result) mustBe OK
 
         val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
         verify(mockDestinationConnector, times(1)).sendMessage(xmlCaptor.capture(), any(), any(), any())(any())
         xmlCaptor.getValue mustBe unloadingPermissionWithoutSealsXml
+        application.stop()
+
+      }
+
+      "should post rejection error with MRN code" in {
+
+        val rejectionErrorMrn: Elem = XML.load(getClass.getResourceAsStream("/resources/rejectionErrorInvalidMrn.xml"))
+
+        val mockDestinationConnector = mock[DestinationConnector]
+        when(mockDestinationConnector.sendMessage(any(), any(), any(), eqTo("IE008"))(any())).thenReturn(Future.successful(HttpResponse(OK)))
+
+        val application = applicationBuilder.overrides(bind[DestinationConnector].toInstance(mockDestinationConnector)).build()
+
+        val result = route(
+          application,
+          FakeRequest(POST, routes.FakeResponseController.post().url)
+            .withFormUrlEncodedBody("arrivalId" -> "12", "version" -> "1", "messageType" -> "rejectionErrorInvalidMrn")
+        ).value
+
+        status(result) mustBe OK
+
+        val xmlCaptor = ArgumentCaptor.forClass(classOf[Node])
+        verify(mockDestinationConnector, times(1)).sendMessage(xmlCaptor.capture(), any(), any(), any())(any())
+        xmlCaptor.getValue mustBe rejectionErrorMrn
         application.stop()
 
       }

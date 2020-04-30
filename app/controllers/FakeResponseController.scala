@@ -16,7 +16,7 @@
 
 package controllers
 
-import Models.FakeResponse
+import models.FakeResponse
 import connectors.DestinationConnector
 import forms.FakeResponseForm
 import javax.inject.Inject
@@ -64,11 +64,11 @@ class FakeResponseController @Inject()(
               case "goodsReleased"                   => (goodsReleasedXml, "IE025")
               case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
               case "unloadingPermissionWithoutSeals" => (unloadingPermissionWithoutSealsXml, "IE043")
-              case _ =>
-                ??? //todo: error out
             }
-            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2)
-            Future.successful(Redirect(routes.FakeResponseController.onPageLoad()))
+            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2).flatMap {
+              _ =>
+                renderer.render("fakeResponse.njk", json(form)).map(Ok(_))
+            }
           }
         )
   }

@@ -16,7 +16,7 @@
 
 package forms
 
-import Models.FakeResponse
+import models.FakeResponse
 import com.google.inject.Inject
 import forms.mappings.Mappings
 import play.api.data.Form
