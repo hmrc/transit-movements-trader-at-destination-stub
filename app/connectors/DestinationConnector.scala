@@ -21,20 +21,19 @@ import javax.inject.Inject
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.HttpResponse
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
-
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import scala.xml.Node
 
 class DestinationConnector @Inject()(val config: AppConfig, val http: HttpClient)(implicit ec: ExecutionContext) {
 
-  def goodsReleased(goodsReleasedXml: Node, arrivalId: String, version: String)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
+  def sendMessage(xml: Node, arrivalId: String, version: String, xMessageType: String)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
 
     val serviceUrl = s"${config.routerUrl}/messages"
 
-    val headers = Seq(("Content-Type", "application/xml"), ("X-Message-Sender", s"MDTP-$arrivalId-$version"))
+    val headers = Seq(("Content-Type", "application/xml"), ("X-Message-Sender", s"MDTP-$arrivalId-$version"), ("X-Message-Type", xMessageType))
 
-    http.POSTString[HttpResponse](serviceUrl, goodsReleasedXml.toString(), headers)
+    http.POSTString[HttpResponse](serviceUrl, xml.toString(), headers)
   }
 
 }

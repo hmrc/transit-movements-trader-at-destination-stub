@@ -21,12 +21,15 @@ import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
+import play.api.libs.json.Json
 import play.api.libs.json._
 import play.api.mvc._
 import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.viewmodels.NunjucksSupport
 
+import scala.xml.Elem
+import scala.xml.{XML => xmlFile}
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
@@ -43,30 +46,9 @@ class ResponseController @Inject()(
 
   private val form: Form[ResponseModel] = formProvider()
 
-  private val goodsReleasedXml = <CC025A><SynIdeMES1>UNOC</SynIdeMES1>
-    <SynVerNumMES2>3</SynVerNumMES2>
-    <MesSenMES3>NTA.GB</MesSenMES3>
-    <MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6>
-    <DatOfPreMES9>20190912</DatOfPreMES9>
-    <TimOfPreMES10>1510</TimOfPreMES10>
-    <IntConRefMES11>70390912151020</IntConRefMES11>
-    <AppRefMES14>NCTS</AppRefMES14>
-    <TesIndMES18>0</TesIndMES18>
-    <MesIdeMES19>70390912151020</MesIdeMES19>
-    <MesTypMES20>GB025A</MesTypMES20>
-    <HEAHEA><DocNumHEA5>19IT02110010007827</DocNumHEA5>
-      <GooRelDatHEA176>20190912</GooRelDatHEA176>
-    </HEAHEA>
-    <TRADESTRD><NamTRD7>The Luggage Carriers</NamTRD7>
-      <StrAndNumTRD22>225 Suedopolish Yard,</StrAndNumTRD22>
-      <PosCodTRD23>SS8 2BB</PosCodTRD23>
-      <CitTRD24>,</CitTRD24>
-      <CouTRD25>GB</CouTRD25>
-      <TINTRD59>GB163910077000</TINTRD59>
-    </TRADESTRD>
-    <CUSOFFPREOFFRES><RefNumRES1>GB000060</RefNumRES1>
-    </CUSOFFPREOFFRES>
-  </CC025A>
+  private val goodsReleasedXml: Elem                   = xmlFile.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
+  private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
+  private val unloadingPermissionWithoutSealsXml: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
 
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
@@ -76,10 +58,14 @@ class ResponseController @Inject()(
         .fold(
           hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
           (value: ResponseModel) => {
-            println(s"************* ArrivalId ${value.arrivalId} ************")
-            println(s"************* Version ${value.version} *************")
-            println(s"************* messageType ${value.messageType} *************")
-            destinationConnector.goodsReleased(goodsReleasedXml, value.arrivalId, value.version)
+            val xmlToSend = value.messageType match {
+              case "goodsReleased"                   => (goodsReleasedXml, "IE025")
+              case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
+              case "unloadingPermissionWithoutSeals" => (unloadingPermissionWithoutSealsXml, "IE043")
+              case _ =>
+                ??? //todo: error out
+            }
+            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2)
             Future.successful(Redirect(routes.ResponseController.onPageLoad()))
           }
         )
@@ -96,15 +82,25 @@ class ResponseController @Inject()(
       "messageType" -> Json.arr(
         Json.obj(
           "text"     -> "Goods Released",
-          "value"    -> "1",
+          "value"    -> "goodsReleased",
           "selected" -> true
         ),
-        Json.obj(
+        //todo: add in goods rejected CTCTRADERS-423
+        /*Json.obj(
           "text"     -> "Goods Rejected",
-          "value"    -> "2",
+          "value"    -> "goodsRejected",
+          "selected" -> false
+        ),*/
+        Json.obj(
+          "text"     -> "Unloading Permission with seals",
+          "value"    -> "unloadingPermissionWithSeals",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Unloading Permission without seals",
+          "value"    -> "unloadingPermissionWithoutSeals",
           "selected" -> false
         )
       )
     )
-
 }
