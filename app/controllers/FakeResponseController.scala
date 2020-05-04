@@ -71,7 +71,7 @@ class FakeResponseController @Inject()(
               case "rejectionErrorDuplicateMrn"      => (rejectionErrorDuplicateMrn, "IE008")
               case "rejectionErrorUnknownMrn"        => (rejectionErrorUnknownMrn, "IE008")
             }
-            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2).flatMap {
+            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.correlationId, xmlToSend._2).flatMap {
               _ =>
                 renderer.render("fakeResponse.njk", json(form)).map(Ok(_))
             }

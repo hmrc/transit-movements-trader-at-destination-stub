@@ -19,7 +19,7 @@ package models
 import play.api.libs.json.Json
 import play.api.libs.json.OFormat
 
-case class FakeResponse(arrivalId: String, version: String, messageType: String)
+case class FakeResponse(arrivalId: String, correlationId: String, messageType: String)
 
 object FakeResponse {
   implicit val format: OFormat[FakeResponse] = Json.format[FakeResponse]
