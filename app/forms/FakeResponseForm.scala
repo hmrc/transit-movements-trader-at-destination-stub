@@ -27,9 +27,9 @@ class FakeResponseForm @Inject() extends Mappings {
   def apply(): Form[FakeResponse] =
     Form(
       mapping(
-        "arrivalId"     -> text("required"),
-        "correlationId" -> text("required"),
-        "messageType"   -> text("required")
+        "arrivalId"            -> text("required"),
+        "messageCorrelationId" -> text("required"),
+        "messageType"          -> text("required")
       )(FakeResponse.apply)(FakeResponse.unapply)
     )
 }
