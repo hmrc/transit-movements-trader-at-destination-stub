@@ -41,12 +41,12 @@ import scala.xml.Elem
 import scala.xml.Node
 import scala.xml.XML
 
-class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
+class EISResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with MustMatchers with MockitoSugar with OptionValues {
 
   protected def applicationBuilder: GuiceApplicationBuilder =
     new GuiceApplicationBuilder().configure(Configuration("metrics.enabled" -> "false"))
 
-  "Response Controller tests" - {
+  "EISResponse Controller tests" - {
     "post" - {
 
       "should post goods released message" in {
@@ -60,7 +60,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
         val result = route(
           application,
-          FakeRequest(POST, routes.FakeResponseController.post().url)
+          FakeRequest(POST, routes.EISResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "messageCorrelationId" -> "1", "messageType" -> "goodsReleased")
         ).value
 
@@ -84,7 +84,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
         val result = route(
           application,
-          FakeRequest(POST, routes.FakeResponseController.post().url)
+          FakeRequest(POST, routes.EISResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "messageCorrelationId" -> "1", "messageType" -> "unloadingPermissionWithSeals")
         ).value
 
@@ -108,7 +108,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
         val result = route(
           application,
-          FakeRequest(POST, routes.FakeResponseController.post().url)
+          FakeRequest(POST, routes.EISResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "messageCorrelationId" -> "1", "messageType" -> "unloadingPermissionWithoutSeals")
         ).value
 
@@ -132,7 +132,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
         val result = route(
           application,
-          FakeRequest(POST, routes.FakeResponseController.post().url)
+          FakeRequest(POST, routes.EISResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "messageCorrelationId" -> "1", "messageType" -> "rejectionErrorInvalidMrn")
         ).value
 
@@ -156,7 +156,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
         val result = route(
           application,
-          FakeRequest(POST, routes.FakeResponseController.post().url)
+          FakeRequest(POST, routes.EISResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "messageCorrelationId" -> "1", "messageType" -> "rejectionErrorUnknownMrn")
         ).value
 
@@ -180,7 +180,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
         val result = route(
           application,
-          FakeRequest(POST, routes.FakeResponseController.post().url)
+          FakeRequest(POST, routes.EISResponseController.post().url)
             .withFormUrlEncodedBody("arrivalId" -> "12", "messageCorrelationId" -> "1", "messageType" -> "rejectionErrorDuplicateMrn")
         ).value
 
@@ -196,7 +196,7 @@ class FakeResponseControllerSpec extends FreeSpec with GuiceOneAppPerSuite with 
 
     "onPageLoad" in {
 
-      val result = route(app, FakeRequest(GET, routes.FakeResponseController.onPageLoad().url)).value
+      val result = route(app, FakeRequest(GET, routes.EISResponseController.onPageLoad().url)).value
 
       status(result) mustBe OK
     }

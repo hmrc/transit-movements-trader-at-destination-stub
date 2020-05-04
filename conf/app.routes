@@ -5,5 +5,5 @@ GET                     /assets/*file                           controllers.Asse
 POST                    /message-notification                   controllers.ArrivalNotificationController.post
 PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalNotificationController.put(arrivalId: String)
 
-GET                     /fake-response                          controllers.FakeResponseController.onPageLoad
-POST                    /fake-response                          controllers.FakeResponseController.post
+GET                     /eis-response                          controllers.EISResponseController.onPageLoad
+POST                    /eis-response                          controllers.EISResponseController.post

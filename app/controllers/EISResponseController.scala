@@ -34,7 +34,7 @@ import scala.concurrent.ExecutionContext
 import scala.xml.Elem
 import scala.xml.{XML => xmlFile}
 
-class FakeResponseController @Inject()(
+class EISResponseController @Inject()(
   override val messagesApi: MessagesApi,
   cc: MessagesControllerComponents,
   destinationConnector: DestinationConnector,
@@ -61,7 +61,7 @@ class FakeResponseController @Inject()(
       form
         .bindFromRequest()
         .fold(
-          hasErrors => renderer.render("fakeResponse.njk", json(hasErrors)).map(BadRequest(_)),
+          hasErrors => renderer.render("eisResponse.njk", json(hasErrors)).map(BadRequest(_)),
           (value: FakeResponse) => {
             val xmlToSend = value.messageType match {
               case "goodsReleased"                   => (goodsReleasedXml, "IE025")
@@ -73,7 +73,7 @@ class FakeResponseController @Inject()(
             }
             destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.messageCorrelationId, xmlToSend._2).flatMap {
               _ =>
-                renderer.render("fakeResponse.njk", json(form)).map(Ok(_))
+                renderer.render("eisResponse.njk", json(form)).map(Ok(_))
             }
           }
         )
@@ -81,7 +81,7 @@ class FakeResponseController @Inject()(
 
   def onPageLoad(): Action[AnyContent] = Action.async {
     implicit request =>
-      renderer.render("fakeResponse.njk", json(form)).map(Ok(_))
+      renderer.render("eisResponse.njk", json(form)).map(Ok(_))
   }
 
   def json(form: Form[FakeResponse])(implicit request: MessagesRequest[AnyContent]): JsObject =
