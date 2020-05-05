@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package forms
+package models
 
-import models.FakeResponse
-import com.google.inject.Inject
-import forms.mappings.Mappings
-import play.api.data.Form
-import play.api.data.Forms._
+import play.api.libs.json.Json
+import play.api.libs.json.OFormat
 
-class FakeResponseForm @Inject() extends Mappings {
+case class EISResponse(arrivalId: String, messageCorrelationId: String, messageType: String)
 
-  def apply(): Form[FakeResponse] =
-    Form(
-      mapping(
-        "arrivalId"            -> text("required"),
-        "messageCorrelationId" -> text("required"),
-        "messageType"          -> text("required")
-      )(FakeResponse.apply)(FakeResponse.unapply)
-    )
+object EISResponse {
+  implicit val format: OFormat[EISResponse] = Json.format[EISResponse]
 }

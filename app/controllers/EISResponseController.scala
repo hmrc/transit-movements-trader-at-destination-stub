@@ -17,9 +17,9 @@
 package controllers
 
 import connectors.DestinationConnector
-import forms.FakeResponseForm
+import forms.EISResponseForm
 import javax.inject.Inject
-import models.FakeResponse
+import models.EISResponse
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
@@ -38,14 +38,14 @@ class EISResponseController @Inject()(
   override val messagesApi: MessagesApi,
   cc: MessagesControllerComponents,
   destinationConnector: DestinationConnector,
-  formProvider: FakeResponseForm,
+  formProvider: EISResponseForm,
   renderer: Renderer
 )(implicit ec: ExecutionContext)
     extends MessagesAbstractController(cc)
     with I18nSupport
     with NunjucksSupport {
 
-  private val form: Form[FakeResponse] = formProvider()
+  private val form: Form[EISResponse] = formProvider()
 
   private val goodsReleasedXml: Elem                   = xmlFile.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
   private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
@@ -62,7 +62,7 @@ class EISResponseController @Inject()(
         .bindFromRequest()
         .fold(
           hasErrors => renderer.render("eisResponse.njk", json(hasErrors)).map(BadRequest(_)),
-          (value: FakeResponse) => {
+          (value: EISResponse) => {
             val xmlToSend = value.messageType match {
               case "goodsReleased"                   => (goodsReleasedXml, "IE025")
               case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
@@ -84,7 +84,7 @@ class EISResponseController @Inject()(
       renderer.render("eisResponse.njk", json(form)).map(Ok(_))
   }
 
-  def json(form: Form[FakeResponse])(implicit request: MessagesRequest[AnyContent]): JsObject =
+  def json(form: Form[EISResponse])(implicit request: MessagesRequest[AnyContent]): JsObject =
     Json.obj(
       "form" -> form,
       "messageType" -> Json.arr(
