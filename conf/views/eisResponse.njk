@@ -12,7 +12,7 @@
 
         <h1 class="govuk-heading-xl">Send a response</h1>
 
-                <form action="{{ routes.controllers.ResponseController.post().url }}" method="post">
+                <form action="{{ routes.controllers.EISResponseController.post().url }}" method="post">
 
                     {{ govukInput({
                       classes: "govuk-input--width-10",
@@ -29,13 +29,13 @@
                     {{ govukInput({
                     classes: "govuk-input--width-10",
                     label: {
-                        text: "Version",
+                        text: "Message Correlation Id",
                         isPageHeading: false
                     },
-                        id: "version",
-                        name: "version",
-                        value: form.version.value,
-                        errorMessage: form.version.error
+                        id: "messageCorrelationId",
+                        name: "messageCorrelationId",
+                        value: form.messageCorrelationId.value,
+                        errorMessage: form.messageCorrelationId.error
                     }) }}
 
 

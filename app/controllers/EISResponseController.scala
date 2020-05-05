@@ -17,7 +17,9 @@
 package controllers
 
 import connectors.DestinationConnector
+import forms.EISResponseForm
 import javax.inject.Inject
+import models.EISResponse
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
@@ -28,27 +30,30 @@ import renderer.Renderer
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.viewmodels.NunjucksSupport
 
+import scala.concurrent.ExecutionContext
 import scala.xml.Elem
 import scala.xml.{XML => xmlFile}
-import scala.concurrent.ExecutionContext
-import scala.concurrent.Future
 
-class ResponseController @Inject()(
+class EISResponseController @Inject()(
   override val messagesApi: MessagesApi,
   cc: MessagesControllerComponents,
   destinationConnector: DestinationConnector,
-  formProvider: ResponseForm,
+  formProvider: EISResponseForm,
   renderer: Renderer
 )(implicit ec: ExecutionContext)
     extends MessagesAbstractController(cc)
     with I18nSupport
     with NunjucksSupport {
 
-  private val form: Form[ResponseModel] = formProvider()
+  private val form: Form[EISResponse] = formProvider()
 
   private val goodsReleasedXml: Elem                   = xmlFile.load(getClass.getResourceAsStream("/resources/goodsReleased.xml"))
   private val unloadingPermissionWithSealsXml: Elem    = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithSeals.xml"))
   private val unloadingPermissionWithoutSealsXml: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/unloadingPermissionWithoutSeals.xml"))
+
+  private val rejectionErrorInvalidMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorInvalidMrn.xml"))
+  private val rejectionErrorDuplicateMrn: Elem = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorDuplicateMrn.xml"))
+  private val rejectionErrorUnknownMrn: Elem   = xmlFile.load(getClass.getResourceAsStream("/resources/rejectionXml/rejectionErrorUnknownMrn.xml"))
 
   def post(): Action[AnyContent] = Action.async {
     implicit request =>
@@ -56,49 +61,61 @@ class ResponseController @Inject()(
       form
         .bindFromRequest()
         .fold(
-          hasErrors => renderer.render("response.njk", json(hasErrors)).map(BadRequest(_)),
-          (value: ResponseModel) => {
+          hasErrors => renderer.render("eisResponse.njk", json(hasErrors)).map(BadRequest(_)),
+          (value: EISResponse) => {
             val xmlToSend = value.messageType match {
               case "goodsReleased"                   => (goodsReleasedXml, "IE025")
               case "unloadingPermissionWithSeals"    => (unloadingPermissionWithSealsXml, "IE043")
               case "unloadingPermissionWithoutSeals" => (unloadingPermissionWithoutSealsXml, "IE043")
-              case _ =>
-                ??? //todo: error out
+              case "rejectionErrorInvalidMrn"        => (rejectionErrorInvalidMrn, "IE008")
+              case "rejectionErrorDuplicateMrn"      => (rejectionErrorDuplicateMrn, "IE008")
+              case "rejectionErrorUnknownMrn"        => (rejectionErrorUnknownMrn, "IE008")
             }
-            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.version, xmlToSend._2)
-            Future.successful(Redirect(routes.ResponseController.onPageLoad()))
+            destinationConnector.sendMessage(xmlToSend._1, value.arrivalId, value.messageCorrelationId, xmlToSend._2).flatMap {
+              _ =>
+                renderer.render("eisResponse.njk", json(form)).map(Ok(_))
+            }
           }
         )
   }
 
   def onPageLoad(): Action[AnyContent] = Action.async {
     implicit request =>
-      renderer.render("response.njk", json(form)).map(Ok(_))
+      renderer.render("eisResponse.njk", json(form)).map(Ok(_))
   }
 
-  def json(form: Form[ResponseModel])(implicit request: MessagesRequest[AnyContent]): JsObject =
+  def json(form: Form[EISResponse])(implicit request: MessagesRequest[AnyContent]): JsObject =
     Json.obj(
       "form" -> form,
       "messageType" -> Json.arr(
         Json.obj(
-          "text"     -> "Goods Released",
+          "text"     -> "Goods Released (IE025)",
           "value"    -> "goodsReleased",
           "selected" -> true
         ),
-        //todo: add in goods rejected CTCTRADERS-423
-        /*Json.obj(
-          "text"     -> "Goods Rejected",
-          "value"    -> "goodsRejected",
-          "selected" -> false
-        ),*/
         Json.obj(
-          "text"     -> "Unloading Permission with seals",
+          "text"     -> "Unloading Permission with seals (IE043)",
           "value"    -> "unloadingPermissionWithSeals",
           "selected" -> false
         ),
         Json.obj(
-          "text"     -> "Unloading Permission without seals",
+          "text"     -> "Unloading Permission without seals (IE043)",
           "value"    -> "unloadingPermissionWithoutSeals",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Rejection Error invalid MRN (IE008)",
+          "value"    -> "rejectionErrorInvalidMrn",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Rejection Error duplicate MRN (IE008)",
+          "value"    -> "rejectionErrorDuplicateMrn",
+          "selected" -> false
+        ),
+        Json.obj(
+          "text"     -> "Rejection Error unknown MRN (IE008)",
+          "value"    -> "rejectionErrorUnknownMrn",
           "selected" -> false
         )
       )
