@@ -30,15 +30,13 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
     implicit request =>
       if (headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
-          case Some(xml) => {
+          case Some(xml) =>
             Logger.warn(s"validated XML $xml")
             Accepted
               .withHeaders("Location" -> s"/arrivals/5")
-          }
-          case e => {
+          case e =>
             Logger.warn(s"FAILED VALIDATING XML $e")
             BadRequest
-          }
         }
       } else {
         Logger.warn("FAILED VALIDATING headers")
@@ -51,15 +49,13 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
     implicit request =>
       if (headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
-          case Some(xml) => {
+          case Some(xml) =>
             Logger.warn(s"validated XML $xml")
             NoContent
               .withHeaders("Location" -> s"/arrivals/$arrivalId/messages/5")
-          }
-          case e => {
+          case e =>
             Logger.warn(s"FAILED VALIDATING XML $e")
             BadRequest
-          }
         }
       } else {
         Logger.warn("FAILED VALIDATING headers")
