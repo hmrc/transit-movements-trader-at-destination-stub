@@ -34,11 +34,6 @@ class HeaderValidatorServiceImpl extends HeaderValidatorService {
 
     val xForwardedHost = headers.get("X-Forwarded-Host").isDefined
 
-    Logger.warn(s"CTC STUB Content-Type ${headers.get("Content-Type")}")
-    Logger.warn(s"CTC STUB X-Message-Type ${headers.get("X-Message-Type")}")
-    Logger.warn(s"CTC STUB X-Correlation-ID ${headers.get("X-Correlation-ID")}")
-    Logger.warn(s"CTC STUB X-Forwarded-Host ${headers.get("X-Forwarded-Host")}")
-
     contentType && messageCode && xCorrelationId && xForwardedHost
   }
 
