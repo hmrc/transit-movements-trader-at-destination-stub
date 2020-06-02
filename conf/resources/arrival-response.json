@@ -2,7 +2,7 @@
   [
     {
       "arrivalId": 1,
-      "movementReferenceNumber": "19IT02110010007827",
+      "movementReferenceNumber": "19IT02110010007826",
       "eoriNumber": "A2100005",
       "status": "ArrivalSubmitted",
       "created": "2020-05-29T08:20:00.000Z",
@@ -20,7 +20,7 @@
     },
     {
       "arrivalId": 2,
-      "movementReferenceNumber": "19IT02110010007828",
+      "movementReferenceNumber": "19IT02110010007827",
       "eoriNumber": "A2100005",
       "status": "UnloadingPermission",
       "created": "2020-05-30T08:20:00.000Z",
