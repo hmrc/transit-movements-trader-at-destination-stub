@@ -2,3 +2,7 @@
 
 POST                    /message-notification                   controllers.ArrivalNotificationController.post
 PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalNotificationController.put(arrivalId: String)
+
+
+# Get all movements
+GET                     /movements/arrivals                     controllers.ArrivalsController.get
