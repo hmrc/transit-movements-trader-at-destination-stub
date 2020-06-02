@@ -15,6 +15,7 @@
  */
 
 package controllers
+
 import com.google.inject.Inject
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
@@ -23,12 +24,11 @@ import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 import scala.io.Source
 
-class ArrivalsController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class UnloadingPermissionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
-  def get: Action[AnyContent] = Action {
+  def get(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
-      //TODO: Update arrival-response.json so all status variations can be shown (ideally across multiple days)
-      val json = Source.fromFile("conf/resources/arrival-response.json").getLines.mkString
+      val json = Source.fromFile("conf/resources/unloading-response.json").getLines.mkString
       Ok(json).as("application/json")
   }
 

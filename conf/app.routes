@@ -9,3 +9,9 @@ GET                     /movements/arrivals                     controllers.Arri
 
 # Get unloading remarks
 GET                     /:arrivalId                             controllers.UnloadingController.get(arrivalId: String)
+
+GET                     /movements/arrivals                         controllers.ArrivalsController.get
+
+# Get unloading permission
+GET                     /movements/arrivals/:arrivalId/messages/    controllers.UnloadingPermissionController.get(arrivalId: Int)
+
