@@ -24,13 +24,20 @@ import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 import scala.io.Source
 
-class UnloadingPermissionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class ArrivalRejectionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
-  def get(arrivalId: Int): Action[AnyContent] = Action {
+  def getSummary(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case 2 => Source.fromFile("conf/resources/unloading-response-with-seals.json").getLines.mkString
-        case 5 => Source.fromFile("conf/resources/unloading-response-without-seals.json").getLines.mkString
+        case 3 => Source.fromFile("conf/resources/arrival-summary.json").getLines.mkString
+      }
+      Ok(json).as("application/json")
+  }
+
+  def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
+    implicit request =>
+      val json = arrivalId match {
+        case 3 => Source.fromFile("conf/resources/arrival-rejection-duplicate.json").getLines.mkString
       }
       Ok(json).as("application/json")
   }

@@ -24,15 +24,11 @@ import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 import scala.io.Source
 
-class UnloadingPermissionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class UnloadingRemarksController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
-  def get(arrivalId: Int): Action[AnyContent] = Action {
+  def post(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
-      val json = arrivalId match {
-        case 2 => Source.fromFile("conf/resources/unloading-response-with-seals.json").getLines.mkString
-        case 5 => Source.fromFile("conf/resources/unloading-response-without-seals.json").getLines.mkString
-      }
-      Ok(json).as("application/json")
+      Accepted
   }
 
 }
