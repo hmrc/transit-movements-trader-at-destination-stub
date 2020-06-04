@@ -36,9 +36,8 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents) extends Bac
 
   def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
     implicit request =>
-      val json = arrivalId match {
-        case 3 => Source.fromFile("conf/resources/arrival-rejection-duplicate.json").getLines.mkString
-      }
+      val json = Source.fromFile("conf/resources/arrival-rejection-duplicate.json").getLines.mkString
+
       Ok(json).as("application/json")
   }
 

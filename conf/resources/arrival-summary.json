@@ -1,9 +1,8 @@
 {
   "arrivalId": 3,
-  "messages": [
+  "messages":
     {
       "IE007": "/transit-movements-trader-at-destination/movements/arrivals/3/messages/1",
       "IE008": "/transit-movements-trader-at-destination/movements/arrivals/3/messages/2"
     }
-  ]
 }

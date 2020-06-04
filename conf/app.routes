@@ -11,7 +11,8 @@ GET                     /movements/arrivals                     controllers.Arri
 GET                     /movements/arrivals/:arrivalId/messages/    controllers.UnloadingPermissionController.get(arrivalId: Int)
 POST                    /movements/arrivals/:arrivalId/messages/    controllers.UnloadingRemarksController.post(arrivalId: Int)
 
-# Get rejection
+# Get messages summary
 GET                     /movements/arrivals/:arrivalId/messages/summary       controllers.ArrivalRejectionController.getSummary(arrivalId: Int)
-GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
 
+# Get rejection has been moved into prod.routes
+# GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
