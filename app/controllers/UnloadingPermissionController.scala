@@ -26,11 +26,14 @@ import scala.io.Source
 
 class UnloadingPermissionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
+  private val WithSeals: Int    = 2
+  private val WithoutSeals: Int = 5
+
   def get(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case 2 => Source.fromFile("conf/resources/unloading-response-with-seals.json").getLines.mkString
-        case 5 => Source.fromFile("conf/resources/unloading-response-without-seals.json").getLines.mkString
+        case WithSeals    => Source.fromFile("conf/resources/unloading-response-with-seals.json").getLines.mkString
+        case WithoutSeals => Source.fromFile("conf/resources/unloading-response-without-seals.json").getLines.mkString
       }
       Ok(json).as("application/json")
   }

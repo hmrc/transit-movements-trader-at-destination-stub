@@ -3,7 +3,6 @@
 POST                    /message-notification                   controllers.ArrivalNotificationController.post
 PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalNotificationController.put(arrivalId: String)
 
-
 # Get all movements
 GET                     /movements/arrivals                     controllers.ArrivalsController.get
 POST                    /movements/arrivals                     controllers.ArrivalsController.post
@@ -15,5 +14,5 @@ POST                    /movements/arrivals/:arrivalId/messages/    controllers.
 # Get messages summary
 GET                     /movements/arrivals/:arrivalId/messages/summary       controllers.ArrivalRejectionController.getSummary(arrivalId: Int)
 
-# Get rejection has been moved into prod.routes
-# GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
+# Get specific message
+GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)

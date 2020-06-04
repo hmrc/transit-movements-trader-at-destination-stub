@@ -27,8 +27,8 @@ class ArrivalsController @Inject()(cc: ControllerComponents) extends BackendCont
 
   def get: Action[AnyContent] = Action {
     implicit request =>
-      //TODO: Update arrival-response.json so all status variations can be shown (ideally across multiple days)
       val json = Source.fromFile("conf/resources/arrival-response.json").getLines.mkString
+
       Ok(json).as("application/json")
   }
 

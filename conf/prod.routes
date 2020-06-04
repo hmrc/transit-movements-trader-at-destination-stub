@@ -1,9 +1,6 @@
 # Add all the application routes to the app.routes file
 ->         /common-transit-convention-trader-at-destination              app.Routes
+
 ->         /                          health.Routes
-
-
-# TODO: Don't like having a different base url for calling rejections
-GET        /transit-movements-trader-at-destination/movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
 
 GET        /admin/metrics             com.kenshoo.play.metrics.MetricsController.metrics
