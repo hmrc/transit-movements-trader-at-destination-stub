@@ -32,4 +32,9 @@ class ArrivalsController @Inject()(cc: ControllerComponents) extends BackendCont
       Ok(json).as("application/json")
   }
 
+  def post: Action[AnyContent] = Action {
+    implicit request =>
+      Accepted
+  }
+
 }

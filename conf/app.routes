@@ -6,6 +6,7 @@ PUT                     /movements/arrivals/:arrivalId          controllers.Arri
 
 # Get all movements
 GET                     /movements/arrivals                     controllers.ArrivalsController.get
+POST                    /movements/arrivals                     controllers.ArrivalsController.post
 
 # Get unloading permission
 GET                     /movements/arrivals/:arrivalId/messages/    controllers.UnloadingPermissionController.get(arrivalId: Int)
