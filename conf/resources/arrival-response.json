@@ -144,6 +144,30 @@
         }
       ],
       "nextMessageCorrelationId" : 4
+    },
+    {
+      "arrivalId" : 7,
+      "movementReferenceNumber" : "99IT9876AB88901209",
+      "eoriNumber" : "A2100005",
+      "status" : "ArrivalRejected",
+      "created" : "2020-06-05T15:01:00.000Z",
+      "updated" : "2020-06-05T15:02:00.000Z",
+      "messages" : [
+        {
+          "dateTime" : "2020-06-05T15:01:00.000Z",
+          "messageType" : "IE007",
+          "message" : "<CC007A><SynIdeMES1>UNOC</SynIdeMES1><SynVerNumMES2>3</SynVerNumMES2><MesSenMES3>LOCAL-12345</MesSenMES3><MesRecMES6>NCTS</MesRecMES6><DatOfPreMES9>20200601</DatOfPreMES9><TimOfPreMES10>1501</TimOfPreMES10><IntConRefMES11>AF202005043</IntConRefMES11><AppRefMES14>NCTS</AppRefMES14><TesIndMES18>0</TesIndMES18><MesIdeMES19>1</MesIdeMES19><MesTypMES20>GB007A</MesTypMES20><HEAHEA><DocNumHEA5>99IT9876AB88901209</DocNumHEA5><CusSubPlaHEA66>qwerty</CusSubPlaHEA66><ArrNotPlaHEA60>NW16XE</ArrNotPlaHEA60><ArrNotPlaHEA60LNG>EN</ArrNotPlaHEA60LNG><ArrAgrLocCodHEA62>GB005010</ArrAgrLocCodHEA62><ArrAgrLocOfGooHEA63>Appledore</ArrAgrLocOfGooHEA63><ArrAgrLocOfGooHEA63LNG>EN</ArrAgrLocOfGooHEA63LNG><SimProFlaHEA132>0</SimProFlaHEA132><ArrNotDatHEA141>20200504</ArrNotDatHEA141></HEAHEA><TRADESTRD><NamTRD7>name</NamTRD7><StrAndNumTRD22>Baker street</StrAndNumTRD22><PosCodTRD23>NW16XE</PosCodTRD23><CitTRD24>London</CitTRD24><CouTRD25>GB</CouTRD25><NADLNGRD>EN</NADLNGRD><TINTRD59>EORI number</TINTRD59></TRADESTRD><CUSOFFPREOFFRES><RefNumRES1>GB005010</RefNumRES1></CUSOFFPREOFFRES></CC007A>",
+          "status" : "SubmissionSucceeded",
+          "messageCorrelationId" : 1
+        },
+        {
+          "dateTime" : "2020-06-05T15:02:00.000Z",
+          "messageType" : "IE008",
+          "message" : "<CC008A><SynIdeMES1>UNOC</SynIdeMES1> <SynVerNumMES2>3</SynVerNumMES2> <MesSenMES3>NTA.GB</MesSenMES3> <MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6> <DatOfPreMES9>20191004</DatOfPreMES9> <TimOfPreMES10>0953</TimOfPreMES10> <IntConRefMES11>22391004095311</IntConRefMES11> <AppRefMES14>NCTS</AppRefMES14> <TesIndMES18>0</TesIndMES18> <MesIdeMES19>22391004095311</MesIdeMES19> <MesTypMES20>GB008A</MesTypMES20> <HEAHEA><DocNumHEA5>19IT02110010007A33</DocNumHEA5> <ArrRejDatHEA142>20191004</ArrRejDatHEA142> <ArrRejReaHEA242>Invalid IE007 Message</ArrRejReaHEA242> </HEAHEA> <FUNERRER1><ErrTypER11>12</ErrTypER11> <ErrPoiER12>SHP.Endorsement date</ErrPoiER12> <OriAttValER14>20190910</OriAttValER14> </FUNERRER1> <FUNERRER1><ErrTypER11>12</ErrTypER11> <ErrPoiER12>INC.Endorsement date</ErrPoiER12> <OriAttValER14>20190910</OriAttValER14> </FUNERRER1> </CC008A>",
+          "messageCorrelationId" : 2
+        }
+      ],
+      "nextMessageCorrelationId" : 3
     }
   ]
 }

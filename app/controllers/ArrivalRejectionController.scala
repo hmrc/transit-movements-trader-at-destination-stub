@@ -27,19 +27,23 @@ import scala.io.Source
 class ArrivalRejectionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
   private val DuplicateMRN: Int = 3
+  private val GenericMRN: Int   = 7
 
   def getSummary(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case DuplicateMRN => Source.fromFile("conf/resources/arrival-summary.json").getLines.mkString
+        case DuplicateMRN => Source.fromFile("conf/resources/arrival-summary-duplicate.json").getLines.mkString
+        case GenericMRN   => Source.fromFile("conf/resources/arrival-summary-generic.json").getLines.mkString
       }
       Ok(json).as("application/json")
   }
 
   def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
     implicit request =>
-      val json = Source.fromFile("conf/resources/arrival-rejection-duplicate.json").getLines.mkString
-
+      val json = arrivalId match {
+        case DuplicateMRN => Source.fromFile("conf/resources/arrival-rejection-duplicate.json").getLines.mkString
+        case GenericMRN   => Source.fromFile("conf/resources/arrival-rejection-generic.json").getLines.mkString
+      }
       Ok(json).as("application/json")
   }
 

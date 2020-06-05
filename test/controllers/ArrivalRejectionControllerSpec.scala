@@ -44,7 +44,7 @@ class ArrivalRejectionControllerSpec extends FreeSpec with MustMatchers with Gui
 
       "return rejected arrivals" in {
 
-        val request = FakeRequest(GET, routes.ArrivalRejectionController.get(1, 1).url)
+        val request = FakeRequest(GET, routes.ArrivalRejectionController.get(3, 1).url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK
