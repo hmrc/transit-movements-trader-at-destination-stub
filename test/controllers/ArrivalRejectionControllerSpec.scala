@@ -31,7 +31,7 @@ class ArrivalRejectionControllerSpec extends FreeSpec with MustMatchers with Gui
 
       "return arrivals summary" in {
 
-        val request = FakeRequest(GET, routes.ArrivalRejectionController.getSummary(1).url)
+        val request = FakeRequest(GET, routes.ArrivalRejectionController.getSummary(3).url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK

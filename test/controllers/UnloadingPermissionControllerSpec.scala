@@ -29,9 +29,9 @@ class UnloadingPermissionControllerSpec extends FreeSpec with MustMatchers with 
 
     "GET" - {
 
-      "return unloading permission" in {
+      "return unloading permission with seals" in {
 
-        val request = FakeRequest(GET, routes.UnloadingPermissionController.get(1).url)
+        val request = FakeRequest(GET, routes.UnloadingPermissionController.get(2).url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK
