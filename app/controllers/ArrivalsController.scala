@@ -20,14 +20,13 @@ import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
+import utils.JsonUtils
 
-import scala.io.Source
-
-class ArrivalsController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class ArrivalsController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
 
   def get: Action[AnyContent] = Action {
     implicit request =>
-      val json = Source.fromFile("conf/resources/arrival-response.json").getLines.mkString
+      val json = jsonUtils.readJsonFromFile("conf/resources/arrival-response.json")
 
       Ok(json).as("application/json")
   }

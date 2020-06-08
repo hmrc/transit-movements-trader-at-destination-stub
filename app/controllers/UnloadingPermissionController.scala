@@ -21,10 +21,9 @@ import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
+import utils.JsonUtils
 
-import scala.io.Source
-
-class UnloadingPermissionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class UnloadingPermissionController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
 
   private val WithSeals: Int    = 2
   private val WithoutSeals: Int = 5
@@ -32,8 +31,8 @@ class UnloadingPermissionController @Inject()(cc: ControllerComponents) extends 
   def get(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case WithSeals    => Source.fromFile("conf/resources/unloading-response-with-seals.json").getLines.mkString
-        case WithoutSeals => Source.fromFile("conf/resources/unloading-response-without-seals.json").getLines.mkString
+        case WithSeals    => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
+        case WithoutSeals => jsonUtils.readJsonFromFile("conf/resources/unloading-response-without-seals.json")
       }
       Ok(json).as("application/json")
   }
