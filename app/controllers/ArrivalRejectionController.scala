@@ -21,10 +21,9 @@ import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
+import utils.JsonUtils
 
-import scala.io.Source
-
-class ArrivalRejectionController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
+class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
 
   private val DuplicateMRN: Int = 3
   private val GenericMRN: Int   = 7
@@ -32,8 +31,8 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents) extends Bac
   def getSummary(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case DuplicateMRN => Source.fromFile("conf/resources/arrival-summary-duplicate.json").getLines.mkString
-        case GenericMRN   => Source.fromFile("conf/resources/arrival-summary-generic.json").getLines.mkString
+        case DuplicateMRN => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-duplicate.json")
+        case GenericMRN   => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-generic.json")
       }
       Ok(json).as("application/json")
   }
@@ -41,8 +40,8 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents) extends Bac
   def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case DuplicateMRN => Source.fromFile("conf/resources/arrival-rejection-duplicate.json").getLines.mkString
-        case GenericMRN   => Source.fromFile("conf/resources/arrival-rejection-generic.json").getLines.mkString
+        case DuplicateMRN => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
+        case GenericMRN   => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
       }
       Ok(json).as("application/json")
   }
