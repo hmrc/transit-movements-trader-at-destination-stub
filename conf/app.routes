@@ -2,3 +2,17 @@
 
 POST                    /message-notification                   controllers.ArrivalNotificationController.post
 PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalNotificationController.put(arrivalId: String)
+
+# Get all movements
+GET                     /movements/arrivals                     controllers.ArrivalsController.get
+POST                    /movements/arrivals                     controllers.ArrivalsController.post
+
+# Get unloading permission
+GET                     /movements/arrivals/:arrivalId/messages/    controllers.UnloadingPermissionController.get(arrivalId: Int)
+POST                    /movements/arrivals/:arrivalId/messages/    controllers.UnloadingRemarksController.post(arrivalId: Int)
+
+# Get messages summary
+GET                     /movements/arrivals/:arrivalId/messages/summary       controllers.ArrivalRejectionController.getSummary(arrivalId: Int)
+
+# Get specific message
+GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
