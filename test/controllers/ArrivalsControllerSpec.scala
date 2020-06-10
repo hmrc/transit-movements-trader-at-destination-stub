@@ -51,6 +51,18 @@ class ArrivalsControllerSpec extends FreeSpec with MustMatchers with GuiceOneApp
 
     }
 
+    "PUT" - {
+
+      "update arrival" in {
+
+        val request = FakeRequest(PUT, routes.ArrivalsController.put(3).url)
+        val result  = route(app, request).value
+
+        status(result) mustEqual ACCEPTED
+      }
+
+    }
+
   }
 
 }
