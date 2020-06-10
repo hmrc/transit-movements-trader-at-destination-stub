@@ -1,11 +1,11 @@
 # microservice specific routes
 
 POST                    /message-notification                   controllers.ArrivalNotificationController.post
-PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalNotificationController.put(arrivalId: String)
 
 # Get all movements
 GET                     /movements/arrivals                     controllers.ArrivalsController.get
 POST                    /movements/arrivals                     controllers.ArrivalsController.post
+PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalsController.put(arrivalId: Int)
 
 # Get unloading permission
 GET                     /movements/arrivals/:arrivalId/messages/    controllers.UnloadingPermissionController.get(arrivalId: Int)

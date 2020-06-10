@@ -36,4 +36,9 @@ class ArrivalsController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtil
       Accepted
   }
 
+  def put(arrivalId: Int): Action[AnyContent] = Action {
+    implicit request =>
+      Accepted
+  }
+
 }
