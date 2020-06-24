@@ -27,6 +27,9 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
 
   private val DuplicateMRN: Int = 3
   private val GenericMRN: Int   = 7
+  private val DuplicateMRNMessageId: Int   = 2
+  private val GenericMRNMessageId: Int   = 2
+  private val ArrivalNotificationMessageId: Int   = 1
 
   def getSummary(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
@@ -39,9 +42,10 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
 
   def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
     implicit request =>
-      val json = arrivalId match {
-        case DuplicateMRN => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
-        case GenericMRN   => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
+      val json = (arrivalId, messageId) match {
+        case (DuplicateMRN, DuplicateMRNMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
+        case (GenericMRN, GenericMRNMessageId)   => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
+        case (_, ArrivalNotificationMessageId)   => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
       }
       Ok(json).as("application/json")
   }
