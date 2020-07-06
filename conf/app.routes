@@ -16,3 +16,4 @@ GET                     /movements/arrivals/:arrivalId/messages/summary       co
 
 # Get specific message
 GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
+
