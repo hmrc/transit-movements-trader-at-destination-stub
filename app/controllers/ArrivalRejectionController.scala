@@ -25,11 +25,11 @@ import utils.JsonUtils
 
 class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
 
-  private val ArrivalNotificationMessageId: Int  = 1
-  private val DuplicateMRN: Int                  = 3
-  private val DuplicateMRNMessageId: Int         = 2
-  private val GenericMRN: Int                    = 7
-  private val GenericArrivalMessageId: Int       = 2
+  private val ArrivalNotificationMessageId: Int = 1
+  private val DuplicateMRN: Int                 = 3
+  private val DuplicateMRNMessageId: Int        = 2
+  private val GenericMRN: Int                   = 7
+  private val GenericArrivalMessageId: Int      = 2
 
   private val UnloadingRemarksRejectionArrivalId = 8
   private val UnloadingPermissionMessageId: Int  = 1
@@ -49,12 +49,14 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
   def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = (arrivalId, messageId) match {
-        case (DuplicateMRN, DuplicateMRNMessageId)                              => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
-        case (GenericMRN, GenericArrivalMessageId)                              => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
-        case (UnloadingRemarksRejectionArrivalId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
-        case (UnloadingRemarksRejectionArrivalId, UnloadingRemarksMessageId)    => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
-        case (UnloadingRemarksRejectionArrivalId, UnloadingRejectionMessageId)  => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-generic.json")
-        case (_, ArrivalNotificationMessageId)                                  => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
+        case (DuplicateMRN, DuplicateMRNMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
+        case (GenericMRN, GenericArrivalMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
+        case (UnloadingRemarksRejectionArrivalId, UnloadingPermissionMessageId) =>
+          jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
+        case (UnloadingRemarksRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
+        case (UnloadingRemarksRejectionArrivalId, UnloadingRejectionMessageId) =>
+          jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-generic.json")
+        case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
       }
       Ok(json).as("application/json")
   }
