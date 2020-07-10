@@ -22,6 +22,7 @@ import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.MessagesControllerComponents
+import play.twirl.api.Html
 import renderer.Renderer
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import services.MrnGeneratorService._
@@ -35,6 +36,10 @@ class MrnGeneratorController @Inject()(renderer: Renderer, val controllerCompone
     implicit request =>
       val generatedMrn = MovementReferenceNumber(randomNumericString(2), randomAlphaString(2), randomAlphaNumericString(13))
       val json         = Json.obj("generatedMrn" -> generatedMrn)
-      renderer.render("generatedMrn.njk", json).map(Ok(_))
+      renderer
+        .render("generatedMrn.njk", json)
+        .map((x: Html) => {
+          Ok(x)
+        })
   }
 }
