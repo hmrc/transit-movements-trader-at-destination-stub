@@ -16,8 +16,6 @@
 
 package controllers
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
 import org.scalatest.OptionValues
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.mvc.AnyContentAsXml
@@ -27,7 +25,10 @@ import play.api.test.FakeRequest
 
 import scala.xml.NodeSeq
 
-class ArrivalNotificationControllerSpec extends FreeSpec with MustMatchers with GuiceOneAppPerSuite with OptionValues {
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
+
+class ArrivalNotificationControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppPerSuite with OptionValues {
 
   val validHeaders: Seq[(String, String)] = Seq(
     ("Content-Type", "application/xml"),
