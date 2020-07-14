@@ -7,7 +7,7 @@ We have designed the test data to allow us to access the service with data in a 
 
 ## Stub data
 
-> Note - If you have the services running locally pointing at the stub, you can use this table interactively.
+> Note - If you have the services running locally pointing at the stub, you can use this table interactively.   
 > http://localhost:9485/manage-transit-movements/
 
 
@@ -27,7 +27,7 @@ This command starts the service, through service manager: `sm --start TRANSIT_MO
 
 For more details of how to [start the wholestack for the front-end](https://github.com/hmrc/manage-transit-movements-frontend).
 
-If you want to start the [whole stack for the API](https://github.com/hmrc/common-transit-convention-traders).
+If you want to start the [whole stack for the API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/common-transit-convention-traders/1.0).
 
 ## Helpful information
 
