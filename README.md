@@ -7,8 +7,7 @@ We have designed the test data to allow us to access the service with data in a 
 
 ## Stub data
 
-> Note - If you have the services running locally pointing at the stub, you can use this table interactively.   
-> http://localhost:9485/manage-transit-movements/
+If you have the services running locally, can access the une user interface at `localhost:9485/manage-transit-movements/`
 
 
 | MRN                | Status                        | Action                                                                                                            | Notes                          |
