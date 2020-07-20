@@ -30,8 +30,8 @@ class UnloadingPermissionController @Inject()(cc: ControllerComponents, jsonUtil
   def get(arrivalId: Int): Action[AnyContent] = Action {
     implicit request =>
       val json = arrivalId match {
-        case _            => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
         case WithoutSeals => jsonUtils.readJsonFromFile("conf/resources/unloading-response-without-seals.json")
+        case _            => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
       }
       Ok(json).as("application/json")
   }
