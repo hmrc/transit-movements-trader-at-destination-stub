@@ -1,15 +1,18 @@
 # microservice specific routes
 
-POST                    /message-notification                   controllers.ArrivalNotificationController.post
+# To provide assets for views in repo
+GET                     /assets/*file                                         controllers.Assets.versioned(path="/public", file: Asset)
+
+POST                    /message-notification                                 controllers.ArrivalNotificationController.post
 
 # Get all movements
-GET                     /movements/arrivals                     controllers.ArrivalsController.get
-POST                    /movements/arrivals                     controllers.ArrivalsController.post
-PUT                     /movements/arrivals/:arrivalId          controllers.ArrivalsController.put(arrivalId: Int)
+GET                     /movements/arrivals                                   controllers.ArrivalsController.get
+POST                    /movements/arrivals                                   controllers.ArrivalsController.post
+PUT                     /movements/arrivals/:arrivalId                        controllers.ArrivalsController.put(arrivalId: Int)
 
 # Get unloading permission
-GET                     /movements/arrivals/:arrivalId/messages/    controllers.UnloadingPermissionController.get(arrivalId: Int)
-POST                    /movements/arrivals/:arrivalId/messages/    controllers.UnloadingRemarksController.post(arrivalId: Int)
+GET                     /movements/arrivals/:arrivalId/messages/              controllers.UnloadingPermissionController.get(arrivalId: Int)
+POST                    /movements/arrivals/:arrivalId/messages/              controllers.UnloadingRemarksController.post(arrivalId: Int)
 
 # Get messages summary
 GET                     /movements/arrivals/:arrivalId/messages/summary       controllers.ArrivalRejectionController.getSummary(arrivalId: Int)
@@ -17,3 +20,5 @@ GET                     /movements/arrivals/:arrivalId/messages/summary       co
 # Get specific message
 GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
 
+# Get random MRN
+GET                     /generate-mrn                                         controllers.MrnGeneratorController.onPageLoad()

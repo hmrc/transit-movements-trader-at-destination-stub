@@ -1,0 +1,11 @@
+$govuk-assets-path: "/common-transit-convention-unloading-arrival/assets/lib/govuk-frontend/govuk/assets/";
+
+@import "lib/govuk-frontend/govuk/all";
+@import "partials/language-toggles";
+@import "partials/page-heading";
+@import "partials/header";
+@import "partials/shame";
+
+.govuk-summary-list__actions-list-item {
+    display: inline-block;
+}

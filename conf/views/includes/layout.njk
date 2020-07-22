@@ -1,0 +1,52 @@
+{% extends "govuk/template.njk" %}
+{% from "macros/headingCaption.njk"               import headingCaption %}
+{% from "macros/hmrc-header/macro.njk"            import hmrcHeader %}
+{%- set assetPath = "/assets/lib/govuk-frontend/govuk/assets" -%}
+{%- set htmlLang = request.language -%}
+
+{% block head %}
+  {% block pageHead %}{% endblock %}
+  {% include "includes/head.njk" %}
+{% endblock %}
+
+{% block header %}
+  {% macro phaseBanner() %}
+      {{ messages("phaseBanner.1") }} <a class="govuk-link" href="{{ config.betaFeedbackUnauthenticatedUrl }}">{{ messages("phaseBanner.2") }}</a> {{ messages("phaseBanner.3") }}
+  {% endmacro %}
+
+  {{ hmrcHeader({
+    homepageUrl: "/common-transit-convention-unloading-arrival",
+    serviceName: messages("site.service_name"),
+    serviceUrl: "/common-transit-convention-unloading-arrival",
+    containerClasses: "govuk-width-container",
+    assetsPath: "/assets",
+    phaseBanner: {
+      show: true,
+      text: 'alpha',
+      html: phaseBanner()
+    },
+    languageToggle: {
+      inBody: true
+    },
+    signOutHref: config.signOutUrl
+  }) }}
+
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+  {% block mainContent %}{% endblock %}
+{% endblock %}
+
+{% block bodyEnd %}
+  {% block scripts %}
+    {% block pageScripts %}{% endblock %}
+    {% include "includes/scripts.njk" %}
+  {% endblock %}
+{% endblock %}
+
+{#{% block footer %}
+  {% include "includes/footer.njk" %}
+{% endblock %}#}
