@@ -8,9 +8,8 @@ lazy val microservice = Project(appName, file("."))
   .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory)
   .disablePlugins(JUnitXmlReportPlugin)
   .settings(
-    majorVersion := 0,
-    libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test,
-    scalafmtOnCompile in ThisBuild := true
+    majorVersion                     := 0,
+    libraryDependencies              ++= AppDependencies.compile ++ AppDependencies.test
   )
   .settings(publishingSettings: _*)
   .settings(resolvers += Resolver.jcenterRepo)
@@ -28,10 +27,11 @@ lazy val microservice = Project(appName, file("."))
     retrieveManaged := true,
     evictionWarningOptions in update :=
       EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
-    Concat.groups := Seq(
-      "javascripts/application. js" -> group(Seq("lib/govuk-frontend/govuk/all.js", "javascripts/ctc.js"))
-    ),
-    uglifyCompressOptions := Seq("unused=false", "dead_code=false"),
-    pipelineStages in Assets := Seq(concat, uglify),
+//    Concat.groups := Seq(
+//      "javascripts/application. js" -> group(Seq("lib/govuk-frontend/govuk/all.js", "javascripts/ctc.js"))
+//    ),
+//    uglifyCompressOptions := Seq("unused=false", "dead_code=false"),
+//    pipelineStages in Assets := Seq(concat, uglify),
     useSuperShell in ThisBuild := false
   )
+  .settings(scalaVersion := "2.12.11")

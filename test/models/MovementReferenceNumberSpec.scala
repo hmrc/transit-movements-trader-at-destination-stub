@@ -17,20 +17,18 @@
 package models
 
 import org.scalacheck.Arbitrary.arbitrary
-import org.scalacheck.Arbitrary
 import org.scalacheck.Gen
 import org.scalatest.EitherValues
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
 import org.scalatest.OptionValues
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.libs.json.JsString
-import play.api.libs.json.JsSuccess
 import play.api.libs.json.Json
 import play.api.mvc.PathBindable
 import generators.Generators
 
-class MovementReferenceNumberSpec extends FreeSpec with MustMatchers with ScalaCheckPropertyChecks with Generators with EitherValues with OptionValues {
+class MovementReferenceNumberSpec extends AnyFreeSpec with Matchers with ScalaCheckPropertyChecks with Generators with EitherValues with OptionValues {
 
   "a Movement Reference Number" - {
 

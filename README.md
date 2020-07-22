@@ -1,14 +1,13 @@
 
-# transit-movements-trader-at-destination-stub
+# Transit movements: Trader at destination stub
 
-The stub data in this repo has been configured to allow us to test the CTC frontend micro-services without the dependency of integrating with the backend.
+The stub data in this repository has been configured to allow us to test the Common Transit Convention (CTC)Traders front-end micro-services without having to integrate with an NCTS instance.
 
-The test data has been designed in a way that allows us to access the service with data in a predefined state, described below:
+We have designed the test data to allow us to access the service with data in a predefined state which is described below:
 
 ## Stub data
 
-> Note - If you have the services running locally pointing at the stub you may use this table interactively.
-> http://localhost:9485/manage-transit-movements/
+If you have the services running locally, can access the user interface at `localhost:9485/manage-transit-movements/`
 
 
 | MRN                | Status                        | Action                                                                                                            | Notes                          |
@@ -23,11 +22,21 @@ The test data has been designed in a way that allows us to access the service wi
 
 ## Starting services using stub
 
-The command below starts the `CTC_TRADERS_ARRIVAL` service manager profile, overriding the interface with the backend for the listed micro-services, to use the stub:
+This command starts the service, through service manager: `sm --start TRANSIT_MOVEMENTS_TRADER_AT_DESTINATION_STUB`
 
-- DECLARE_TRANSIT_MOVEMENT_UNLOADING_FRONTEND
-- MANAGE_TRANSIT_MOVEMENTS_FRONTEND
-- DECLARE_TRANSIT_MOVEMENT_ARRIVAL_FRONTEND
+For more details of how to [start the wholestack for the front-end](https://github.com/hmrc/manage-transit-movements-frontend).
 
+If you want to start the [whole stack for the API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/common-transit-convention-traders/1.0).
 
-`sm --start CTC_TRADERS_ARRIVAL --appendArgs '{"DECLARE_TRANSIT_MOVEMENT_UNLOADING_FRONTEND":["-Dmicroservice.services.arrivals-backend.port=9481", "-Dmicroservice.services.arrivals-backend.uri=/common-transit-convention-trader-at-destination"], "MANAGE_TRANSIT_MOVEMENTS_FRONTEND":["-Dmicroservice.services.destination.port=9481", "-Dmicroservice.services.destination.startUrl=common-transit-convention-trader-at-destination"], "DECLARE_TRANSIT_MOVEMENT_ARRIVAL_FRONTEND":["-Dmicroservice.services.destination.port=9481","-Dmicroservice.services.destination.startUrl=common-transit-convention-trader-at-destination"]}' -f`
+## Helpful information
+
+Guides for the related public Common Transit Convention Traders API are on the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation/docs/using-the-hub)
+
+## Reporting Issues
+
+If you have any issues relating to the Common Transit Convention Traders API, please raise them through our [public API](https://github.com/hmrc/common-transit-convention-traders#reporting-issues).
+
+## License
+
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
+

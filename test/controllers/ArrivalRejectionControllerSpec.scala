@@ -16,14 +16,15 @@
 
 package controllers
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
 import org.scalatest.OptionValues
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 
-class ArrivalRejectionControllerSpec extends FreeSpec with MustMatchers with GuiceOneAppPerSuite with OptionValues {
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
+
+class ArrivalRejectionControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppPerSuite with OptionValues {
 
   "ArrivalRejectionControllerSpec" - {
 
