@@ -32,6 +32,8 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
   private val GenericArrivalMessageId: Int      = 2
 
   private val UnloadingRemarksRejectionArrivalId = 8
+  private val UnloadingRemarksDateRejectionArrivalId = 9
+  private val UnloadingRemarksMultipleRejectionArrivalId = 10
   private val UnloadingPermissionMessageId: Int  = 1
   private val UnloadingRemarksMessageId: Int     = 2
   private val UnloadingRejectionMessageId: Int   = 3
@@ -42,6 +44,8 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
         case DuplicateMRN                       => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-duplicate.json")
         case GenericMRN                         => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-generic.json")
         case UnloadingRemarksRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-generic.json")
+        case UnloadingRemarksDateRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-date-error.json")
+        case UnloadingRemarksMultipleRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-multiple-error.json")
       }
       Ok(json).as("application/json")
   }
@@ -56,6 +60,12 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
         case (UnloadingRemarksRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksRejectionArrivalId, UnloadingRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-generic.json")
+        case (UnloadingRemarksDateRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
+        case (UnloadingRemarksDateRejectionArrivalId, UnloadingRejectionMessageId) =>
+          jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-date-error.json")
+        case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
+        case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRejectionMessageId) =>
+          jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-multiple-error.json")
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
       }
       Ok(json).as("application/json")
