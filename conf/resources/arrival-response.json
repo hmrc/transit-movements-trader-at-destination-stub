@@ -209,7 +209,7 @@
     },
     {
       "arrivalId" : 9,
-      "movementReferenceNumber" : "66KYNS1Y465HIJK3M7",
+      "movementReferenceNumber" : "35YJ28Z73FNSUQK6M9",
       "eoriNumber" : "A2100005",
       "status" : "UnloadingRemarksRejected",
       "created" : "2020-06-01T15:27:00.000Z",
@@ -248,7 +248,7 @@
   ,
     {
       "arrivalId" : 10,
-      "movementReferenceNumber" : "66KYNS1Y465HIJK3M7",
+      "movementReferenceNumber" : "31KYA7YO4FVSIJK911",
       "eoriNumber" : "A2100005",
       "status" : "UnloadingRemarksRejected",
       "created" : "2020-06-01T15:27:00.000Z",
