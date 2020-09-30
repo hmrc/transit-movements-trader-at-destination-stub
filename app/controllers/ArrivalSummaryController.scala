@@ -49,6 +49,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case UnloadingRemarksMultipleRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-multiple-error.json")
         case UnloadingRemarksMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
         case UnloadingRemarksNoSealsMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-no-seals.json")
+        case _ => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
       }
       Ok(json).as("application/json")
   }
