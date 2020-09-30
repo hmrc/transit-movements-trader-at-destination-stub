@@ -67,6 +67,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case (UnloadingRemarksDateRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksDateRejectionArrivalId, UnloadingRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-date-error.json")
+        case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals-single.json")
         case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-multiple-error.json")
