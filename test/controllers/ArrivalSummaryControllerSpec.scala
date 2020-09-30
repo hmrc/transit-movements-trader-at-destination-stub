@@ -24,15 +24,15 @@ import play.api.test.Helpers._
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
 
-class ArrivalRejectionControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppPerSuite with OptionValues {
+class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppPerSuite with OptionValues {
 
-  "ArrivalRejectionControllerSpec" - {
+  "ArrivalSummaryControllerSpec" - {
 
     "GET Summary" - {
 
       "return arrivals summary" in {
 
-        val request = FakeRequest(GET, routes.ArrivalRejectionController.getSummary(3).url)
+        val request = FakeRequest(GET, routes.ArrivalSummaryController.getSummary(3).url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK
@@ -45,7 +45,7 @@ class ArrivalRejectionControllerSpec extends AnyFreeSpec with Matchers with Guic
 
       "return rejected arrivals" in {
 
-        val request = FakeRequest(GET, routes.ArrivalRejectionController.get(3, 1).url)
+        val request = FakeRequest(GET, routes.ArrivalSummaryController.get(3, 1).url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK
