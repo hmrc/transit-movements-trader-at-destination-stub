@@ -15,10 +15,10 @@ GET                     /movements/arrivals/:arrivalId/messages/              co
 POST                    /movements/arrivals/:arrivalId/messages/              controllers.UnloadingRemarksController.post(arrivalId: Int)
 
 # Get messages summary
-GET                     /movements/arrivals/:arrivalId/messages/summary       controllers.ArrivalRejectionController.getSummary(arrivalId: Int)
+GET                     /movements/arrivals/:arrivalId/messages/summary       controllers.ArrivalSummaryController.getSummary(arrivalId: Int)
 
 # Get specific message
-GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalRejectionController.get(arrivalId: Int, messageId: Int)
+GET                     /movements/arrivals/:arrivalId/messages/:messageId    controllers.ArrivalSummaryController.get(arrivalId: Int, messageId: Int)
 
 # Get random MRN
 GET                     /generate-mrn                                         controllers.MrnGeneratorController.onPageLoad()

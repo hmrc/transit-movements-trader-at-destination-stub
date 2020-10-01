@@ -23,7 +23,7 @@ import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 import utils.JsonUtils
 
-class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
+class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
 
   private val ArrivalNotificationMessageId: Int = 1
   private val DuplicateMRN: Int                 = 3
@@ -36,6 +36,7 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
   private val UnloadingRemarksMultipleRejectionArrivalId = 10
   private val UnloadingPermissionMessageId: Int  = 1
   private val UnloadingRemarksMessageId: Int     = 2
+  private val UnloadingRemarksNoSealsMessageId: Int     = 5
   private val UnloadingRejectionMessageId: Int   = 3
 
   def getSummary(arrivalId: Int): Action[AnyContent] = Action {
@@ -46,6 +47,9 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
         case UnloadingRemarksRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-generic.json")
         case UnloadingRemarksDateRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-date-error.json")
         case UnloadingRemarksMultipleRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-multiple-error.json")
+        case UnloadingRemarksMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
+        case UnloadingRemarksNoSealsMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-no-seals.json")
+        case _ => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
       }
       Ok(json).as("application/json")
   }
@@ -63,9 +67,12 @@ class ArrivalRejectionController @Inject()(cc: ControllerComponents, jsonUtils: 
         case (UnloadingRemarksDateRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksDateRejectionArrivalId, UnloadingRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-date-error.json")
+        case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals-single.json")
         case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-multiple-error.json")
+        case (UnloadingRemarksMessageId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals-single.json")
+        case (UnloadingRemarksNoSealsMessageId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-no-seals-single.json")
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
       }
       Ok(json).as("application/json")
