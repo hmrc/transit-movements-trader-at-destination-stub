@@ -35,7 +35,7 @@ class ArrivalNotificationControllerSpec extends AnyFreeSpec with Matchers with G
     ("Accept", "application/xml"),
     ("X-Message-Type", "IO007"),
     ("X-Correlation-ID", "1234567890"),
-    ("X-Forwarded-Host", "mdtp")
+    ("CustomProcessHost", "Digital")
   )
 
   private def fakePostRequest(content: NodeSeq, headers: Seq[(String, String)]): FakeRequest[AnyContentAsXml] =
@@ -73,7 +73,7 @@ class ArrivalNotificationControllerSpec extends AnyFreeSpec with Matchers with G
       def postRequest =
         FakeRequest(POST, routes.ArrivalNotificationController.post().url)
           .withTextBody(xml.toString())
-          .withHeaders(("Accept", "application/xml"), ("X-Message-Type", "IO007"), ("X-Correlation-ID", "1234567890"), ("X-Forwarded-Host", "mdtp"))
+          .withHeaders(("Accept", "application/xml"), ("X-Message-Type", "IO007"), ("X-Correlation-ID", "1234567890"), ("CustomProcessHost", "Digital"))
 
       val result = route(app, postRequest).value
 
@@ -86,7 +86,7 @@ class ArrivalNotificationControllerSpec extends AnyFreeSpec with Matchers with G
         ("Content-Type", "application/xml"),
         ("Accept", "application/xml"),
         ("X-Correlation-ID", "1234567890"),
-        ("X-Forwarded-Host", "mdtp")
+        ("CustomProcessHost", "Digital")
       )
 
       val xml    = buildXml("19GB00000000000001")
@@ -101,7 +101,7 @@ class ArrivalNotificationControllerSpec extends AnyFreeSpec with Matchers with G
         ("Content-Type", "application/xml"),
         ("Accept", "application/xml"),
         ("X-Message-Type", "IO007"),
-        ("X-Forwarded-Host", "mdtp")
+        ("CustomProcessHost", "Digital")
       )
 
       val xml    = buildXml("19GB00000000000001")
@@ -110,7 +110,7 @@ class ArrivalNotificationControllerSpec extends AnyFreeSpec with Matchers with G
       status(result) mustEqual BAD_REQUEST
     }
 
-    "BAD_REQUEST when X-Forwarded-Host is missing" in {
+    "BAD_REQUEST when CustomProcessHost is missing" in {
 
       val invalidHeaders: Seq[(String, String)] = Seq(
         ("Content-Type", "application/xml"),
