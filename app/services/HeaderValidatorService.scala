@@ -32,9 +32,9 @@ class HeaderValidatorServiceImpl extends HeaderValidatorService {
 
     val xCorrelationId = headers.get("X-Correlation-ID").isDefined
 
-    val xForwardedHost = headers.get("X-Forwarded-Host").isDefined
+    val customProcessHost = headers.get("CustomProcessHost").isDefined
 
-    contentType && messageCode && xCorrelationId && xForwardedHost
+    contentType && messageCode && xCorrelationId && customProcessHost
   }
 
 }
