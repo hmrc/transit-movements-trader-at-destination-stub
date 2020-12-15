@@ -22,3 +22,5 @@ GET                     /movements/arrivals/:arrivalId/messages/:messageId    co
 
 # Get random MRN
 GET                     /generate-mrn                                         controllers.MrnGeneratorController.onPageLoad()
+
+GET                     /customs-offices                                      controllers.CustomsOfficesController.get
