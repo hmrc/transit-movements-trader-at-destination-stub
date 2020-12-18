@@ -11,7 +11,7 @@ POST                    /movements/arrivals                                   co
 PUT                     /movements/arrivals/:arrivalId                        controllers.ArrivalsController.put(arrivalId: Int)
 
 # Get unloading permission
-GET                     /movements/arrivals/:arrivalId/messages/              controllers.UnloadingPermissionController.get(arrivalId: Int)
+GET                     /movements/arrivals/:arrivalId/unloading-permission   controllers.UnloadingPermissionController.get(arrivalId: Int)
 POST                    /movements/arrivals/:arrivalId/messages/              controllers.UnloadingRemarksController.post(arrivalId: Int)
 
 # Get messages summary
