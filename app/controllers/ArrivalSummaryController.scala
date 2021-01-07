@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 HM Revenue & Customs
+ * Copyright 2021 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,8 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
   private val DuplicateMRNMessageId: Int        = 2
   private val GenericMRN: Int                   = 7
   private val GenericArrivalMessageId: Int      = 2
+  private val NonFunctionalArrivalId: Int       = 11
+  private val NonFunctionalMessageId: Int       = 2
 
   private val UnloadingRemarksRejectionArrivalId = 8
   private val UnloadingRemarksDateRejectionArrivalId = 9
@@ -44,6 +46,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
       val json = arrivalId match {
         case DuplicateMRN                       => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-duplicate.json")
         case GenericMRN                         => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-generic.json")
+        case NonFunctionalArrivalId             => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-non-functional.json")
         case UnloadingRemarksRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-generic.json")
         case UnloadingRemarksDateRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-date-error.json")
         case UnloadingRemarksMultipleRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-multiple-error.json")
@@ -59,6 +62,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
       val json = (arrivalId, messageId) match {
         case (DuplicateMRN, DuplicateMRNMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
         case (GenericMRN, GenericArrivalMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
+        case (NonFunctionalArrivalId, NonFunctionalMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-non-functional.json")
         case (UnloadingRemarksRejectionArrivalId, UnloadingPermissionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
         case (UnloadingRemarksRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
