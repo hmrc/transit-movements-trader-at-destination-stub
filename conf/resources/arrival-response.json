@@ -283,6 +283,30 @@
         }
       ],
       "nextMessageCorrelationId" : 4
+    },
+    {
+      "arrivalId" : 11,
+      "movementReferenceNumber" : "74WWQIVU856KEG5U37",
+      "eoriNumber" : "A2100005",
+      "status" : "ArrivalRejected",
+      "created" : "2021-01-01T12:27:00.000Z",
+      "updated" : "2021-01-01T15:56:00.000Z",
+      "messages" : [
+        {
+          "dateTime" : "2021-01-01T12:27:00.000Z",
+          "messageType" : "IE007",
+          "message" : "<CC007A>\n   <SynIdeMES1>UNOC</SynIdeMES1>\n   <SynVerNumMES2>3</SynVerNumMES2>\n   <MesSenMES3>LOCAL-12345</MesSenMES3>\n   <MesRecMES6>NCTS</MesRecMES6>\n   <DatOfPreMES9>20200601</DatOfPreMES9>\n   <TimOfPreMES10>1527</TimOfPreMES10>\n   <IntConRefMES11>AF202005043</IntConRefMES11>\n   <AppRefMES14>NCTS</AppRefMES14>\n   <TesIndMES18>0</TesIndMES18>\n   <MesIdeMES19>1</MesIdeMES19>\n   <MesTypMES20>GB007A</MesTypMES20>\n   <HEAHEA>\n      \\n\n      <DocNumHEA5>74WWQIVU856KEG5U37</DocNumHEA5>\n      \\n\n      <CusSubPlaHEA66>qwerty</CusSubPlaHEA66>\n      \\n\n      <ArrNotPlaHEA60>NW16XE</ArrNotPlaHEA60>\n      \\n\n      <ArrNotPlaHEA60LNG>EN</ArrNotPlaHEA60LNG>\n      \\n\n      <ArrAgrLocCodHEA62>GB005010</ArrAgrLocCodHEA62>\n      \\n\n      <ArrAgrLocOfGooHEA63>Appledore</ArrAgrLocOfGooHEA63>\n      \\n\n      <ArrAgrLocOfGooHEA63LNG>EN</ArrAgrLocOfGooHEA63LNG>\n      \\n          \\n\n      <SimProFlaHEA132>0</SimProFlaHEA132>\n      \\n\n      <ArrNotDatHEA141>20200504</ArrNotDatHEA141>\n      \\n\n   </HEAHEA>\n   <TRADESTRD>\n      \\n\n      <NamTRD7>name</NamTRD7>\n      <StrAndNumTRD22>Baker street</StrAndNumTRD22>\n      <PosCodTRD23>NW16XE</PosCodTRD23>\n      <CitTRD24>London</CitTRD24>\n      <CouTRD25>GB</CouTRD25>\n      <NADLNGRD>EN</NADLNGRD>\n      <TINTRD59>EORI number</TINTRD59>\n      \\n\n   </TRADESTRD>\n   <CUSOFFPREOFFRES>\n      \\n\n      <RefNumRES1>GB005010</RefNumRES1>\n      \\n\n   </CUSOFFPREOFFRES>\n</CC007A>",
+          "status" : "SubmissionSucceeded",
+          "messageCorrelationId" : 1
+        },
+        {
+          "dateTime" : "2021-01-01T15:56:00.000Z",
+          "messageType" : "IE008",
+          "message" : "<CC008A><SynIdeMES1>UNOC</SynIdeMES1><SynVerNumMES2>3</SynVerNumMES2><MesSenMES3>NTA.GB</MesSenMES3><MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6><DatOfPreMES9>20191004</DatOfPreMES9><TimOfPreMES10>0953</TimOfPreMES10><IntConRefMES11>22391004095311</IntConRefMES11><AppRefMES14>NCTS</AppRefMES14><TesIndMES18>0</TesIndMES18><MesIdeMES19>22391004095311</MesIdeMES19><MesTypMES20>GB008A</MesTypMES20><HEAHEA><DocNumHEA5>74WWQIVU856KEG5U37</DocNumHEA5><ArrRejDatHEA142>20191004</ArrRejDatHEA142><ArrRejReaHEA242>Invalid IE007 Message</ArrRejReaHEA242></HEAHEA></CC008A>",
+          "messageCorrelationId" : 2
+        }
+      ],
+      "nextMessageCorrelationId" : 3
     }
   ]
 }
