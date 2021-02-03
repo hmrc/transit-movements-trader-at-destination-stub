@@ -1,0 +1,6 @@
+{
+  "dateTime" : "2020-06-01T15:02:00.000Z",
+  "messageType" : "IE917",
+  "message" :"<CC917A><SynIdeMES1>UNOC</SynIdeMES1>\n\n<SynVerNumMES2>3</SynVerNumMES2>\n\n<MesSenMES3>NCTS</MesSenMES3>\n\n<MesRecMES6>MDTP-000000000000000000000000246-01</MesRecMES6>\n\n<DatOfPreMES9>20210119</DatOfPreMES9>\n\n<TimOfPreMES10>0948</TimOfPreMES10>\n\n<IntConRefMES11>EC210119094804</IntConRefMES11>\n\n<MesIdeMES19>1</MesIdeMES19>\n\n<MesTypMES20>GB917A</MesTypMES20>\n\n<HEAHEA><OriMesIdeMES22>AF202101191</OriMesIdeMES22>\n\n<DocNumHEA5>99IT9876AB88901209</DocNumHEA5>\n\n</HEAHEA>\n\n<FUNERRER1><ErrTypER11>12</ErrTypER11>\n\n<ErrPoiER12>TRD[1].TIN</ErrPoiER12>\n\n<ErrReaER13>UTF8 ENCODING</ErrReaER13>\n\n</FUNERRER1>\n\n</CC917A>",
+  "messageCorrelationId" : 12
+}

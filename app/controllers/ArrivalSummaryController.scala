@@ -32,6 +32,9 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
   private val GenericArrivalMessageId: Int      = 2
   private val NonFunctionalArrivalId: Int       = 11
   private val NonFunctionalMessageId: Int       = 2
+  private val XMLSubmissionNegativeAcknowledgementArrivalId: Int       = 12
+  private val MessageId1: Int       = 1
+  private val MessageId2: Int       = 2
 
   private val UnloadingRemarksRejectionArrivalId = 8
   private val UnloadingRemarksDateRejectionArrivalId = 9
@@ -52,6 +55,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case UnloadingRemarksMultipleRejectionArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-multiple-error.json")
         case UnloadingRemarksMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
         case UnloadingRemarksNoSealsMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-no-seals.json")
+        case XMLSubmissionNegativeAcknowledgementArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-no-seals.json")
         case _ => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
       }
       Ok(json).as("application/json")
@@ -77,6 +81,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-multiple-error.json")
         case (UnloadingRemarksMessageId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals-single.json")
         case (UnloadingRemarksNoSealsMessageId, UnloadingPermissionMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-response-no-seals-single.json")
+        case (XMLSubmissionNegativeAcknowledgementArrivalId, MessageId2) => jsonUtils.readJsonFromFile("conf/resources/arrival-xml-negative-acknowledgement.json")
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
       }
       Ok(json).as("application/json")
