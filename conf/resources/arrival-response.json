@@ -244,8 +244,7 @@
         }
       ],
       "nextMessageCorrelationId" : 4
-    }
-  ,
+    },
     {
       "arrivalId" : 10,
       "movementReferenceNumber" : "31KYA7YO4FVSIJK911",
@@ -312,7 +311,7 @@
       "arrivalId" : 12,
       "movementReferenceNumber" : "67QJPVXD78GHIJYQT",
       "eoriNumber" : "A2100005",
-      "status" : "ArrivalRejected",
+      "status" : "XMLSubmissionNegativeAcknowledgement",
       "created" : "2021-01-01T12:27:00.000Z",
       "updated" : "2021-01-01T15:56:00.000Z",
       "messages" : [
