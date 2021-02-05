@@ -1,0 +1,8 @@
+{
+  "arrivalId": 12,
+  "messages":
+    {
+      "IE007": "/common-transit-convention-trader-at-destination/movements/arrivals/12/messages/1",
+      "IE917": "/common-transit-convention-trader-at-destination/movements/arrivals/12/messages/2"
+    }
+}
