@@ -58,7 +58,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case UnloadingRemarksMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
         case UnloadingRemarksNoSealsMessageId => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-no-seals.json")
         case XMLSubmissionNegativeAcknowledgementArrivalId => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-xml-negative-acknowledgement.json")
-        case UnloadingXMLSubmissionNegativeAckArrivalId => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-unloading-xml-negative-acknowledgement.json")
+        case UnloadingXMLSubmissionNegativeAckArrivalId => jsonUtils.readJsonFromFile("conf/resources/unloading-summary-unloading-xml-negative-acknowledgement.json")
         case _ => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-summary-with-seals.json")
       }
       Ok(json).as("application/json")
