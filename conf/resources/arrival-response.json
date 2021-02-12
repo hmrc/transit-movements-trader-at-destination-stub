@@ -311,7 +311,7 @@
       "arrivalId" : 12,
       "movementReferenceNumber" : "67QJPVXD78GHIJYQT",
       "eoriNumber" : "A2100005",
-      "status" : "XMLSubmissionNegativeAcknowledgement",
+      "status" : "ArrivalXMLSubmissionNegativeAcknowledgement",
       "created" : "2021-01-01T12:27:00.000Z",
       "updated" : "2021-01-01T15:56:00.000Z",
       "messages" : [
@@ -330,6 +330,56 @@
         }
       ],
       "nextMessageCorrelationId" : 3
+    },
+    {
+      "arrivalId" : 13,
+      "movementReferenceNumber" : "99QJPVXD78GHIJYQT",
+      "eoriNumber" : "A2100005",
+      "status" : "UnloadingRemarksXMLSubmissionNegativeAcknowledgement",
+      "created" : "2021-02-04T12:27:00.000Z",
+      "updated" : "2021-02-04T20:56:00.000Z",
+      "messages" : [
+        {
+          "dateTime" : "2021-02-04T12:27:00.000Z",
+          "messageType" : "IE007",
+          "message" : "<CC007A>\n   <SynIdeMES1>UNOC</SynIdeMES1>\n   <SynVerNumMES2>3</SynVerNumMES2>\n   <MesSenMES3>LOCAL-12345</MesSenMES3>\n   <MesRecMES6>NCTS</MesRecMES6>\n   <DatOfPreMES9>20200601</DatOfPreMES9>\n   <TimOfPreMES10>1527</TimOfPreMES10>\n   <IntConRefMES11>AF202005043</IntConRefMES11>\n   <AppRefMES14>NCTS</AppRefMES14>\n   <TesIndMES18>0</TesIndMES18>\n   <MesIdeMES19>1</MesIdeMES19>\n   <MesTypMES20>GB007A</MesTypMES20>\n   <HEAHEA>\n      \\n\n      <DocNumHEA5>74WWQIVU856KEG5U37</DocNumHEA5>\n      \\n\n      <CusSubPlaHEA66>qwerty</CusSubPlaHEA66>\n      \\n\n      <ArrNotPlaHEA60>NW16XE</ArrNotPlaHEA60>\n      \\n\n      <ArrNotPlaHEA60LNG>EN</ArrNotPlaHEA60LNG>\n      \\n\n      <ArrAgrLocCodHEA62>GB005010</ArrAgrLocCodHEA62>\n      \\n\n      <ArrAgrLocOfGooHEA63>Appledore</ArrAgrLocOfGooHEA63>\n      \\n\n      <ArrAgrLocOfGooHEA63LNG>EN</ArrAgrLocOfGooHEA63LNG>\n      \\n          \\n\n      <SimProFlaHEA132>0</SimProFlaHEA132>\n      \\n\n      <ArrNotDatHEA141>20200504</ArrNotDatHEA141>\n      \\n\n   </HEAHEA>\n   <TRADESTRD>\n      \\n\n      <NamTRD7>name</NamTRD7>\n      <StrAndNumTRD22>Baker street</StrAndNumTRD22>\n      <PosCodTRD23>NW16XE</PosCodTRD23>\n      <CitTRD24>London</CitTRD24>\n      <CouTRD25>GB</CouTRD25>\n      <NADLNGRD>EN</NADLNGRD>\n      <TINTRD59>EORI number</TINTRD59>\n      \\n\n   </TRADESTRD>\n   <CUSOFFPREOFFRES>\n      \\n\n      <RefNumRES1>GB005010</RefNumRES1>\n      \\n\n   </CUSOFFPREOFFRES>\n</CC007A>",
+          "status" : "SubmissionSucceeded",
+          "messageCorrelationId" : 1
+        },
+        {
+          "dateTime" : "2021-02-04T15:56:00.000Z",
+          "messageType" : "IE917",
+          "message" : "<CC917A><SynIdeMES1>UNOC</SynIdeMES1>\n\n<SynVerNumMES2>3</SynVerNumMES2>\n\n<MesSenMES3>NCTS</MesSenMES3>\n\n<MesRecMES6>MDTP-000000000000000000000000246-01</MesRecMES6>\n\n<DatOfPreMES9>20210119</DatOfPreMES9>\n\n<TimOfPreMES10>0948</TimOfPreMES10>\n\n<IntConRefMES11>EC210119094804</IntConRefMES11>\n\n<MesIdeMES19>1</MesIdeMES19>\n\n<MesTypMES20>GB917A</MesTypMES20>\n\n<HEAHEA><OriMesIdeMES22>AF202101191</OriMesIdeMES22>\n\n<DocNumHEA5>99IT9876AB88901209</DocNumHEA5>\n\n</HEAHEA>\n\n<FUNERRER1><ErrTypER11>12</ErrTypER11>\n\n<ErrPoiER12>TRD[1].TIN</ErrPoiER12>\n\n<ErrReaER13>UTF8 ENCODING</ErrReaER13>\n\n</FUNERRER1>\n\n</CC917A>",
+          "messageCorrelationId" : 2
+        },
+        {
+          "dateTime" : "2021-02-41T16:27:00.000Z",
+          "messageType" : "IE007",
+          "message" : "<CC007A>\n   <SynIdeMES1>UNOC</SynIdeMES1>\n   <SynVerNumMES2>3</SynVerNumMES2>\n   <MesSenMES3>LOCAL-12345</MesSenMES3>\n   <MesRecMES6>NCTS</MesRecMES6>\n   <DatOfPreMES9>20200601</DatOfPreMES9>\n   <TimOfPreMES10>1527</TimOfPreMES10>\n   <IntConRefMES11>AF202005043</IntConRefMES11>\n   <AppRefMES14>NCTS</AppRefMES14>\n   <TesIndMES18>0</TesIndMES18>\n   <MesIdeMES19>1</MesIdeMES19>\n   <MesTypMES20>GB007A</MesTypMES20>\n   <HEAHEA>\n      \\n\n      <DocNumHEA5>74WWQIVU856KEG5U37</DocNumHEA5>\n      \\n\n      <CusSubPlaHEA66>qwerty</CusSubPlaHEA66>\n      \\n\n      <ArrNotPlaHEA60>NW16XE</ArrNotPlaHEA60>\n      \\n\n      <ArrNotPlaHEA60LNG>EN</ArrNotPlaHEA60LNG>\n      \\n\n      <ArrAgrLocCodHEA62>GB005010</ArrAgrLocCodHEA62>\n      \\n\n      <ArrAgrLocOfGooHEA63>Appledore</ArrAgrLocOfGooHEA63>\n      \\n\n      <ArrAgrLocOfGooHEA63LNG>EN</ArrAgrLocOfGooHEA63LNG>\n      \\n          \\n\n      <SimProFlaHEA132>0</SimProFlaHEA132>\n      \\n\n      <ArrNotDatHEA141>20200504</ArrNotDatHEA141>\n      \\n\n   </HEAHEA>\n   <TRADESTRD>\n      \\n\n      <NamTRD7>name</NamTRD7>\n      <StrAndNumTRD22>Baker street</StrAndNumTRD22>\n      <PosCodTRD23>NW16XE</PosCodTRD23>\n      <CitTRD24>London</CitTRD24>\n      <CouTRD25>GB</CouTRD25>\n      <NADLNGRD>EN</NADLNGRD>\n      <TINTRD59>EORI number</TINTRD59>\n      \\n\n   </TRADESTRD>\n   <CUSOFFPREOFFRES>\n      \\n\n      <RefNumRES1>GB005010</RefNumRES1>\n      \\n\n   </CUSOFFPREOFFRES>\n</CC007A>",
+          "status" : "SubmissionSucceeded",
+          "messageCorrelationId" : 3
+        },
+        {
+          "dateTime" : "2020-02-04T18:31:00.000Z",
+          "messageType" : "IE043",
+          "message" : "<CC043A><SynIdeMES1>UNOC</SynIdeMES1>\n    <SynVerNumMES2>3</SynVerNumMES2>\n    <MesSenMES3>NTA.GB</MesSenMES3>\n    <MesRecMES6>SYST17B-NCTS_EU_EXIT</MesRecMES6>\n    <DatOfPreMES9>20200601</DatOfPreMES9>\n    <TimOfPreMES10>1531</TimOfPreMES10>\n    <IntConRefMES11>66390912144854</IntConRefMES11>\n    <AppRefMES14>NCTS</AppRefMES14>\n    <TesIndMES18>0</TesIndMES18>\n    <MesIdeMES19>66390912144854</MesIdeMES19>\n    <MesTypMES20>GB043A</MesTypMES20>\n    <HEAHEA><DocNumHEA5>99IT9876AB88901209</DocNumHEA5>\n        <TypOfDecHEA24>T1</TypOfDecHEA24>\n        <CouOfDesCodHEA30>GB</CouOfDesCodHEA30>\n        <CouOfDisCodHEA55>IT</CouOfDisCodHEA55>\n        <IdeOfMeaOfTraAtDHEA78>abcd</IdeOfMeaOfTraAtDHEA78>\n        <NatOfMeaOfTraAtDHEA80>IT</NatOfMeaOfTraAtDHEA80>\n        <ConIndHEA96>0</ConIndHEA96>\n        <AccDatHEA158>20190912</AccDatHEA158>\n        <TotNumOfIteHEA305>1</TotNumOfIteHEA305>\n        <TotNumOfPacHEA306>1</TotNumOfPacHEA306>\n        <TotGroMasHEA307>1000</TotGroMasHEA307>\n    </HEAHEA>\n    <TRAPRIPC1><NamPC17>Mancini Carriers</NamPC17>\n        <StrAndNumPC122>90 Desio Way</StrAndNumPC122>\n        <PosCodPC123>MOD 5JJ</PosCodPC123>\n        <CitPC124>Modena</CitPC124>\n        <CouPC125>IT</CouPC125>\n        <TINPC159>IT444100201000</TINPC159>\n    </TRAPRIPC1>\n    <TRACONCO1><NamCO17>Mancini Carriers</NamCO17>\n        <StrAndNumCO122>90 Desio Way</StrAndNumCO122>\n        <PosCodCO123>MOD 5JJ</PosCodCO123>\n        <CitCO124>Modena</CitCO124>\n        <CouCO125>IT</CouCO125>\n        <TINCO159>IT444100201000</TINCO159>\n    </TRACONCO1>\n    <TRACONCE1><NamCE17>Mancini Carriers</NamCE17>\n        <StrAndNumCE122>90 Desio Way</StrAndNumCE122>\n        <PosCodCE123>MOD 5JJ</PosCodCE123>\n        <CitCE124>Modena</CitCE124>\n        <CouCE125>IT</CouCE125>\n        <TINCE159>IT444100201000</TINCE159>\n    </TRACONCE1>\n    <TRADESTRD><NamTRD7>The Luggage Carriers</NamTRD7>\n        <StrAndNumTRD22>225 Suedopolish Yard,</StrAndNumTRD22>\n        <PosCodTRD23>SS8 2BB</PosCodTRD23>\n        <CitTRD24>,</CitTRD24>\n        <CouTRD25>GB</CouTRD25>\n        <TINTRD59>GB163910077000</TINTRD59>\n    </TRADESTRD>\n    <CUSOFFDEPEPT><RefNumEPT1>IT021100</RefNumEPT1>\n    </CUSOFFDEPEPT>\n    <CUSOFFPREOFFRES><RefNumRES1>GB000060</RefNumRES1>\n    </CUSOFFPREOFFRES>\n    <SEAINFSLI><SeaNumSLI2>3</SeaNumSLI2>\n        <SEAIDSID><SeaIdeSID1>Seals01</SeaIdeSID1></SEAIDSID>\n        <SEAIDSID><SeaIdeSID1>Seals02</SeaIdeSID1></SEAIDSID>\n        <SEAIDSID><SeaIdeSID1>Seals03</SeaIdeSID1></SEAIDSID>\n    </SEAINFSLI>\n    <GOOITEGDS><IteNumGDS7>1</IteNumGDS7>\n        <GooDesGDS23>Flowers</GooDesGDS23>\n        <GroMasGDS46>1000</GroMasGDS46>\n        <NetMasGDS48>999</NetMasGDS48>\n        <PRODOCDC2><DocTypDC21>235</DocTypDC21>\n            <DocRefDC23>Ref.</DocRefDC23>\n        </PRODOCDC2>\n        <CONNR2>\n            <ConNumNR21>container 1</ConNumNR21>\n        </CONNR2>\n        <CONNR2>\n            <ConNumNR21>container 2</ConNumNR21>\n        </CONNR2>\n        <PACGS2>\n            <MarNumOfPacGS21>Ref.</MarNumOfPacGS21>\n            <KinOfPacGS23>BX</KinOfPacGS23>\n            <NumOfPacGS24>1</NumOfPacGS24>\n        </PACGS2>\n        <SGICODSD2>\n            <SenGooCodSD22>1</SenGooCodSD22>\n            <SenQuaSD23>1</SenQuaSD23>\n        </SGICODSD2>\n    </GOOITEGDS>\n    <GOOITEGDS><IteNumGDS7>2</IteNumGDS7>\n        <GooDesGDS23>Vases</GooDesGDS23>\n        <GroMasGDS46>10000</GroMasGDS46>\n        <NetMasGDS48>9999</NetMasGDS48>\n        <PRODOCDC2><DocTypDC21>280</DocTypDC21>\n            <DocRefDC23>Ref.</DocRefDC23>\n        </PRODOCDC2>\n        <CONNR2>\n            <ConNumNR21>container 3</ConNumNR21>\n        </CONNR2>\n        <CONNR2>\n            <ConNumNR21>container 4</ConNumNR21>\n        </CONNR2>\n        <PACGS2>\n            <MarNumOfPacGS21>Ref.</MarNumOfPacGS21>\n            <KinOfPacGS23>BX</KinOfPacGS23>\n            <NumOfPacGS24>10</NumOfPacGS24>\n        </PACGS2>\n        <SGICODSD2>\n            <SenGooCodSD22>1</SenGooCodSD22>\n            <SenQuaSD23>1</SenQuaSD23>\n        </SGICODSD2>\n    </GOOITEGDS>\n</CC043A>",
+          "messageCorrelationId" : 4
+        },
+        {
+          "dateTime" : "2020-02-04T19:56:00.000Z",
+          "messageType" : "IE044",
+          "message" : "<CC044A>\n<SynIdeMES1>UNOC</SynIdeMES1>\n<SynVerNumMES2>3</SynVerNumMES2>\n<MesSenMES3>SYST17B-NCTS_EU_EXIT</MesSenMES3>\n<MesRecMES6>NCTS</MesRecMES6>\n<DatOfPreMES9>20200603</DatOfPreMES9>\n<TimOfPreMES10>1556</TimOfPreMES10>\n<IntConRefMES11>WE190912102535</IntConRefMES11>\n<AppRefMES14>NCTS</AppRefMES14>\n<TesIndMES18>0</TesIndMES18>\n<MesIdeMES19>1</MesIdeMES19>\n<MesTypMES20>GB044A</MesTypMES20>\n<HEAHEA>\n<DocNumHEA5>19IT02110010007827</DocNumHEA5>\n<IdeOfMeaOfTraAtDHEA78>abcd</IdeOfMeaOfTraAtDHEA78>\n<IdeOfMeaOfTraAtDHEA78LNG>EN</IdeOfMeaOfTraAtDHEA78LNG>\n<NatOfMeaOfTraAtDHEA80>IT</NatOfMeaOfTraAtDHEA80>\n<TotNumOfIteHEA305>1</TotNumOfIteHEA305>\n<TotNumOfPacHEA306>1</TotNumOfPacHEA306>\n<TotGroMasHEA307>1000</TotGroMasHEA307>\n</HEAHEA>\n<TRADESTRD>\n<NamTRD7>The Luggage Carriers</NamTRD7>\n<StrAndNumTRD22>225 Suedopolish Yard,</StrAndNumTRD22>\n<CitTRD24>,</CitTRD24>\n<CouTRD25>GB</CouTRD25>\n<NADLNGRD>EN</NADLNGRD>\n<TINTRD59>GB163910077000</TINTRD59>\n</TRADESTRD>\n<CUSOFFPREOFFRES>\n<RefNumRES1>GB000060</RefNumRES1>\n</CUSOFFPREOFFRES>\n<UNLREMREM>\n<StaOfTheSeaOKREM19>1</StaOfTheSeaOKREM19>\n<UnlRemREM53 xsi:nil=\"true\"/>\n<UnlRemREM53LNG>EN</UnlRemREM53LNG>\n<ConREM65>1</ConREM65>\n<UnlComREM66>1</UnlComREM66>\n<UnlDatREM67>20190913</UnlDatREM67>\n</UNLREMREM>\n<SEAINFSLI>\n<SeaNumSLI2>1</SeaNumSLI2>\n<SEAIDSID>\n<SeaIdeSID1>Seals01</SeaIdeSID1>\n<SeaIdeSID1LNG>EN</SeaIdeSID1LNG>\n</SEAIDSID>\n</SEAINFSLI>\n</CC044A>",
+          "status" : "SubmissionSucceeded",
+          "messageCorrelationId" : 5
+        },
+        {
+          "dateTime" : "2020-02-04T15:02:00.000Z",
+          "messageType" : "IE917",
+          "message" : "<CC917A><SynIdeMES1>UNOC</SynIdeMES1>\n\n<SynVerNumMES2>3</SynVerNumMES2>\n\n<MesSenMES3>NCTS</MesSenMES3>\n\n<MesRecMES6>MDTP-000000000000000000000000246-01</MesRecMES6>\n\n<DatOfPreMES9>20210119</DatOfPreMES9>\n\n<TimOfPreMES10>0948</TimOfPreMES10>\n\n<IntConRefMES11>EC210119094804</IntConRefMES11>\n\n<MesIdeMES19>1</MesIdeMES19>\n\n<MesTypMES20>GB917A</MesTypMES20>\n\n<HEAHEA><OriMesIdeMES22>AF202101191</OriMesIdeMES22>\n\n<DocNumHEA5>99IT9876AB88901209</DocNumHEA5>\n\n</HEAHEA>\n\n<FUNERRER1><ErrTypER11>12</ErrTypER11>\n\n<ErrPoiER12>TRD[1].TIN</ErrPoiER12>\n\n<ErrReaER13>UTF8 ENCODING</ErrReaER13>\n\n<OriAttValER14>Test Data</OriAttValER14></FUNERRER1>\n\n</CC917A>",
+          "messageCorrelationId" : 6
+        }
+      ],
+      "nextMessageCorrelationId" : 7
     }
   ]
 }
