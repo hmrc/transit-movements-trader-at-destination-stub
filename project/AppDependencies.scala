@@ -6,7 +6,8 @@ import sbt._
 object AppDependencies {
 
   val compile = Seq(
-    "uk.gov.hmrc"       %% "bootstrap-play-26"             % "1.13.0",
+    "uk.gov.hmrc"       %% "bootstrap-frontend-play-27"             % "3.3.0",
+    "uk.gov.hmrc"       %% "bootstrap-backend-play-27"             % "3.3.0",
     "uk.gov.hmrc"       %% "play-nunjucks"                 % "0.23.0-play-26",
     "uk.gov.hmrc"       %% "play-nunjucks-viewmodel"       % "0.8.0-play-26",
     "org.webjars.npm"   % "govuk-frontend"                 % "3.3.0",
@@ -19,7 +20,7 @@ object AppDependencies {
     "com.typesafe.play"      %% "play-test"                % current,
     "org.pegdown"            % "pegdown"                   % "1.6.0",
     "org.jsoup"              %  "jsoup"                    % "1.10.3",
-    "org.scalatestplus.play" %% "scalatestplus-play"       % "3.1.3",
+    "org.scalatestplus.play" %% "scalatestplus-play"       % "4.0.3",
     "org.scalatestplus"      %% "mockito-3-2"              % "3.1.2.0",
     "org.scalacheck"         %% "scalacheck"               % "1.14.3",
     "org.scalatestplus"      %% "scalatestplus-scalacheck" % "3.1.0.0-RC2",
