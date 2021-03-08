@@ -17,13 +17,16 @@
 package controllers.enrolmentStore
 
 import javax.inject.Inject
-import utils.JsonUtils
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import play.api.mvc.Action
+import play.api.mvc.AnyContent
+import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
+import utils.JsonUtils
 
 import scala.concurrent.ExecutionContext
 
-class EnrolmentStoreProxyController @Inject()(val executionContext: ExecutionContext, cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
+class EnrolmentStoreProxyController @Inject()(val executionContext: ExecutionContext, cc: ControllerComponents, jsonUtils: JsonUtils)
+    extends BackendController(cc) {
 
   val basePath: String = "conf/resources/groupEnrolments"
 

@@ -30,7 +30,7 @@ class EnrolmentStoreProxyControllerSpec extends AnyFreeSpec with Matchers with G
       "return arrival submitted" in {
         val groupId = "group-with-enrolments"
         val request = FakeRequest(GET, routes.EnrolmentStoreProxyController.checkNCTSGroup(groupId).url)
-        val result = route(app, request).value
+        val result  = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"
