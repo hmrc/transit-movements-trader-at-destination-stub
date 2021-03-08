@@ -1,6 +1,9 @@
 # Add all the application routes to the app.routes file
 ->         /common-transit-convention-trader-at-destination              app.Routes
 
+# Check NCTS group
+GET        /enrolment-store-proxy/enrolment-store/groups/:groupId/enrolments    controllers.enrolmentStore.EnrolmentStoreProxyController.checkNCTSGroup(groupId: String, type: String = "principal", service: String = "HMCE-NCTS-ORG")
+
 ->         /                          health.Routes
 
 GET        /admin/metrics             com.kenshoo.play.metrics.MetricsController.metrics
