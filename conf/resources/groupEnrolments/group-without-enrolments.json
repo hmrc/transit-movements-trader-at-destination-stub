@@ -1,0 +1,20 @@
+{
+  "startRecord": 1,
+  "totalRecords": 1,
+  "enrolments": [
+    {
+      "service": "IR-CT",
+      "state": "Activated",
+      "friendlyName": "",
+      "enrolmentDate": "2021-02-11 13:18:46.395",
+      "failedActivationCount": 0,
+      "activationDate": "2021-02-11 13:19:54.599",
+      "identifiers": [
+        {
+          "key": "UTR",
+          "value": "839285640192"
+        }
+      ]
+    }
+  ]
+}
