@@ -26,7 +26,7 @@ import org.scalatest.matchers.must.Matchers
 
 class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppPerSuite with OptionValues {
 
-  private val xmlNegativeAckArrivalId = 12
+  private val xmlNegativeAckArrivalId          = 12
   private val unloadingXmlNegativeAckArrivalId = 13
 
   "ArrivalSummaryControllerSpec" - {
@@ -36,7 +36,7 @@ class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceO
       "return arrivals summary" in {
 
         val request = FakeRequest(GET, routes.ArrivalSummaryController.getSummary(3).url)
-        val result = route(app, request).value
+        val result  = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"
@@ -44,7 +44,7 @@ class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceO
 
       "return arrivals summary for xml negative acknowledgement" in {
         val request = FakeRequest(GET, routes.ArrivalSummaryController.getSummary(xmlNegativeAckArrivalId).url)
-        val result = route(app, request).value
+        val result  = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"
@@ -52,7 +52,7 @@ class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceO
 
       "return arrivals summary for unloading xml negative acknowledgement" in {
         val request = FakeRequest(GET, routes.ArrivalSummaryController.getSummary(unloadingXmlNegativeAckArrivalId).url)
-        val result = route(app, request).value
+        val result  = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"
@@ -65,7 +65,7 @@ class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceO
       "return rejected arrivals" in {
 
         val request = FakeRequest(GET, routes.ArrivalSummaryController.get(3, 1).url)
-        val result = route(app, request).value
+        val result  = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"
@@ -73,8 +73,8 @@ class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceO
 
       "return rejected arrivals for xml negative acknowledgement" in {
         val messageId = 2
-        val request = FakeRequest(GET, routes.ArrivalSummaryController.get(xmlNegativeAckArrivalId, messageId).url)
-        val result = route(app, request).value
+        val request   = FakeRequest(GET, routes.ArrivalSummaryController.get(xmlNegativeAckArrivalId, messageId).url)
+        val result    = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"
@@ -82,8 +82,8 @@ class ArrivalSummaryControllerSpec extends AnyFreeSpec with Matchers with GuiceO
 
       "return rejected arrivals for unloading xml negative acknowledgement" in {
         val messageId = 4
-        val request = FakeRequest(GET, routes.ArrivalSummaryController.get(unloadingXmlNegativeAckArrivalId, messageId).url)
-        val result = route(app, request).value
+        val request   = FakeRequest(GET, routes.ArrivalSummaryController.get(unloadingXmlNegativeAckArrivalId, messageId).url)
+        val result    = route(app, request).value
 
         status(result) mustEqual OK
         contentType(result).get mustEqual "application/json"

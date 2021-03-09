@@ -1,3 +1,4 @@
+import com.lucidchart.sbt.scalafmt.ScalafmtCorePlugin.autoImport.scalafmtOnCompile
 import play.sbt.routes.RoutesKeys
 import uk.gov.hmrc.SbtArtifactory
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
@@ -8,8 +9,8 @@ lazy val microservice = Project(appName, file("."))
   .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory)
   .disablePlugins(JUnitXmlReportPlugin)
   .settings(
-    majorVersion                     := 0,
-    libraryDependencies              ++= AppDependencies.compile ++ AppDependencies.test
+    majorVersion := 0,
+    libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test
   )
   .settings(publishingSettings: _*)
   .settings(resolvers += Resolver.jcenterRepo)
@@ -32,6 +33,7 @@ lazy val microservice = Project(appName, file("."))
 //    ),
 //    uglifyCompressOptions := Seq("unused=false", "dead_code=false"),
 //    pipelineStages in Assets := Seq(concat, uglify),
-    useSuperShell in ThisBuild := false
+    useSuperShell in ThisBuild := false,
+    scalafmtOnCompile in ThisBuild := true
   )
   .settings(scalaVersion := "2.12.11")
