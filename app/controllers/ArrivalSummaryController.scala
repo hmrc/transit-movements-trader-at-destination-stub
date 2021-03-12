@@ -17,6 +17,8 @@
 package controllers
 
 import com.google.inject.Inject
+import org.openqa.selenium.InvalidArgumentException
+import play.api.Logger
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
@@ -24,6 +26,8 @@ import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import utils.JsonUtils
 
 class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
+
+  val logger = Logger(s"application.${this.getClass.getSimpleName}")
 
   private val ArrivalNotificationMessageId: Int                  = 1
   private val DuplicateMRN: Int                                  = 3
@@ -76,9 +80,10 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case (UnloadingRemarksRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksRejectionArrivalId, UnloadingRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-generic.json")
-        case (UnloadingRemarksDateRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
+        case (UnloadingRemarksDateRejectionArrivalId, 1) => jsonUtils.readJsonFromFile("conf/resources/unloading-permission-with-seals.json") // IE043
+        case (UnloadingRemarksDateRejectionArrivalId, 2) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
         case (UnloadingRemarksDateRejectionArrivalId, UnloadingRejectionMessageId) =>
-          jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-date-error.json")
+          jsonUtils.readJsonFromFile("conf/resources/unloading-remarks-rejection-date-error.json") // IE058
         case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingPermissionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals-single.json")
         case (UnloadingRemarksMultipleRejectionArrivalId, UnloadingRemarksMessageId) => jsonUtils.readJsonFromFile("conf/resources/unloading-remarks.json")
@@ -93,6 +98,10 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case (UnloadingXMLSubmissionNegativeAckArrivalId, UnloadingXMLRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/arrival-xml-negative-acknowledgement.json")
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
+        case _ => {
+          logger.error(s"No match for ArrivalId=$arrivalId and MessageId=$messageId")
+          throw new InvalidArgumentException("No match for ArrivalId=$arrivalId and MessageId=$messageId")
+        }
       }
       Ok(json).as("application/json")
   }
