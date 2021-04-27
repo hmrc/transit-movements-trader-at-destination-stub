@@ -9,6 +9,7 @@ POST                    /message-notification                                 co
 GET                     /movements/arrivals                                   controllers.ArrivalsController.get
 POST                    /movements/arrivals                                   controllers.ArrivalsController.post
 PUT                     /movements/arrivals/:arrivalId                        controllers.ArrivalsController.put(arrivalId: Int)
+GET                     /movements/arrivals/:arrivalId                        controllers.ArrivalsController.getArrival(arrivalId: Int)
 
 # Get unloading permission
 GET                     /movements/arrivals/:arrivalId/unloading-permission   controllers.UnloadingPermissionController.get(arrivalId: Int)

@@ -41,4 +41,11 @@ class ArrivalsController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtil
       Accepted
   }
 
+  def getArrival(arrivalId: Int): Action[AnyContent] = Action {
+    implicit request =>
+      val json = jsonUtils.readJsonFromFile("conf/resources/arrival-single-response.json")
+
+      Ok(json).as("application/json")
+  }
+
 }

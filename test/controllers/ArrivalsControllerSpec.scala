@@ -30,9 +30,18 @@ class ArrivalsControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppP
 
     "GET" - {
 
-      "return arrival submitted" in {
+      "return arrivals submitted" in {
 
         val request = FakeRequest(GET, routes.ArrivalsController.get().url)
+        val result  = route(app, request).value
+
+        status(result) mustEqual OK
+        contentType(result).get mustEqual "application/json"
+      }
+
+      "return single arrival submitted" in {
+
+        val request = FakeRequest(GET, routes.ArrivalsController.getArrival(1).url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK
