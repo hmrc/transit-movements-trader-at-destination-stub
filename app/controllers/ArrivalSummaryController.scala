@@ -17,11 +17,8 @@
 package controllers
 
 import com.google.inject.Inject
-import org.openqa.selenium.InvalidArgumentException
 import play.api.Logger
-import play.api.mvc.Action
-import play.api.mvc.AnyContent
-import play.api.mvc.ControllerComponents
+import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import utils.JsonUtils
 
@@ -100,7 +97,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
         case _ => {
           logger.error(s"No match for ArrivalId=$arrivalId and MessageId=$messageId")
-          throw new InvalidArgumentException("No match for ArrivalId=$arrivalId and MessageId=$messageId")
+          throw new IllegalArgumentException("No match for ArrivalId=$arrivalId and MessageId=$messageId")
         }
       }
       Ok(json).as("application/json")

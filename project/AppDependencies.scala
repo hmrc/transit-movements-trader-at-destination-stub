@@ -1,15 +1,13 @@
 import play.core.PlayVersion.current
-import play.sbt.PlayImport._
-import sbt.Keys.libraryDependencies
 import sbt._
 
 object AppDependencies {
 
   val compile = Seq(
-    "uk.gov.hmrc"       %% "bootstrap-frontend-play-27"             % "3.3.0",
-    "uk.gov.hmrc"       %% "bootstrap-backend-play-27"             % "3.3.0",
-    "uk.gov.hmrc"       %% "play-nunjucks"                 % "0.23.0-play-26",
-    "uk.gov.hmrc"       %% "play-nunjucks-viewmodel"       % "0.8.0-play-26",
+    "uk.gov.hmrc"       %% "bootstrap-backend-play-27"     % "5.0.0",
+    "uk.gov.hmrc"       %% "bootstrap-frontend-play-27"    % "5.0.0",
+    "uk.gov.hmrc"       %% "play-nunjucks"                 % "0.27.0-play-27",
+    "uk.gov.hmrc"       %% "play-nunjucks-viewmodel"       % "0.13.0-play-27",
     "org.webjars.npm"   % "govuk-frontend"                 % "3.3.0",
     "wolfendale"        %% "scalacheck-gen-regexp"         % "0.1.1"
   )
