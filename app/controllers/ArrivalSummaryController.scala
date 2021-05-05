@@ -99,7 +99,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
         case _ => {
           logger.error(s"No match for ArrivalId=$arrivalId and MessageId=$messageId")
-          throw new IllegalArgumentException("No match for ArrivalId=$arrivalId and MessageId=$messageId")
+          throw new IllegalArgumentException(s"No match for ArrivalId=$arrivalId and MessageId=$messageId")
         }
       }
       Ok(json).as("application/json")
