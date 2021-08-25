@@ -26,20 +26,22 @@ import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
 class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerValidatorService: HeaderValidatorService) extends BackendController(cc) {
 
+  val logger: Logger = Logger(getClass().getSimpleName())
+
   def post(): Action[AnyContent] = Action {
     implicit request =>
       if (headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
           case Some(xml) =>
-            Logger.warn(s"validated XML $xml")
+            logger.warn(s"validated XML $xml")
             Accepted
               .withHeaders("Location" -> s"/arrivals/5")
           case e =>
-            Logger.warn(s"FAILED VALIDATING XML $e")
+            logger.warn(s"FAILED VALIDATING XML $e")
             BadRequest
         }
       } else {
-        Logger.warn("FAILED VALIDATING headers")
+        logger.warn("FAILED VALIDATING headers")
         BadRequest
       }
 
@@ -50,15 +52,15 @@ class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerVa
       if (headerValidatorService.validate(request.headers)) {
         request.body.asXml match {
           case Some(xml) =>
-            Logger.warn(s"validated XML $xml")
+            logger.warn(s"validated XML $xml")
             NoContent
               .withHeaders("Location" -> s"/arrivals/$arrivalId/messages/5")
           case e =>
-            Logger.warn(s"FAILED VALIDATING XML $e")
+            logger.warn(s"FAILED VALIDATING XML $e")
             BadRequest
         }
       } else {
-        Logger.warn("FAILED VALIDATING headers")
+        logger.warn("FAILED VALIDATING headers")
         BadRequest
       }
 

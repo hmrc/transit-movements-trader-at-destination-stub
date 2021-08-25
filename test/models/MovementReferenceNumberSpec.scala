@@ -40,7 +40,7 @@ class MovementReferenceNumberSpec extends AnyFreeSpec with Matchers with ScalaCh
 
       val result = pathBindable.bind("mrn", "99IT9876AB88901209")
 
-      result.right.value mustEqual mrn.value
+      result.value mustEqual mrn.value
     }
 
     "must deserialise" in {

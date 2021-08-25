@@ -36,4 +36,4 @@ lazy val microservice = Project(appName, file("."))
     useSuperShell in ThisBuild := false,
     scalafmtOnCompile in ThisBuild := true
   )
-  .settings(scalaVersion := "2.12.11")
+  .settings(scalaVersion := "2.12.12")
