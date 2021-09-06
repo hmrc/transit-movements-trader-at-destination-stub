@@ -1,5 +1,8 @@
-{"arrivals":
-  [
+{
+  "retrievedArrivals": 1,
+  "totalArrivals": 1,
+  "totalMatched": 1,
+  "arrivals": [
     {
       "arrivalId": 1,
       "movementReferenceNumber": "19IT02110010007826",
