@@ -16,17 +16,16 @@
 
 package controllers
 
-import javax.inject.Inject
 import models.MovementReferenceNumber
 import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.MessagesControllerComponents
-import play.twirl.api.Html
 import renderer.Renderer
 import services.MrnGeneratorService._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 
+import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class MrnGeneratorController @Inject()(renderer: Renderer, val controllerComponents: MessagesControllerComponents)(implicit ec: ExecutionContext)
@@ -38,8 +37,6 @@ class MrnGeneratorController @Inject()(renderer: Renderer, val controllerCompone
       val json         = Json.obj("generatedMrn" -> generatedMrn)
       renderer
         .render("generatedMrn.njk", json)
-        .map((x: Html) => {
-          Ok(x)
-        })
+        .map(Ok(_))
   }
 }

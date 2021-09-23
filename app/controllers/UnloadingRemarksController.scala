@@ -25,7 +25,7 @@ import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 class UnloadingRemarksController @Inject()(cc: ControllerComponents) extends BackendController(cc) {
 
   def post(arrivalId: Int): Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       Accepted
   }
 
