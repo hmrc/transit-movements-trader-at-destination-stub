@@ -25,24 +25,24 @@ import utils.JsonUtils
 class ArrivalsController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
 
   def get: Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       val json = jsonUtils.readJsonFromFile("conf/resources/arrival-response.json")
 
       Ok(json).as("application/json")
   }
 
   def post: Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       Accepted
   }
 
   def put(arrivalId: Int): Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       Accepted
   }
 
   def getArrival(arrivalId: Int): Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       val json = jsonUtils.readJsonFromFile("conf/resources/arrival-single-response.json")
 
       Ok(json).as("application/json")

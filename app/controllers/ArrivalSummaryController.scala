@@ -17,16 +17,14 @@
 package controllers
 
 import com.google.inject.Inject
-import play.api.Logger
+import play.api.Logging
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import utils.JsonUtils
 
-class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) {
-
-  val logger = Logger(s"application.${this.getClass.getSimpleName}")
+class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: JsonUtils) extends BackendController(cc) with Logging {
 
   private val ArrivalNotificationMessageId: Int                  = 1
   private val DuplicateMRN: Int                                  = 3
@@ -37,7 +35,6 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
   private val NonFunctionalMessageId: Int                        = 2
   private val XMLSubmissionNegativeAcknowledgementArrivalId: Int = 12
   private val UnloadingXMLSubmissionNegativeAckArrivalId: Int    = 13
-  private val MessageId1: Int                                    = 1
   private val MessageId2: Int                                    = 2
 
   private val UnloadingRemarksRejectionArrivalId         = 8
@@ -50,7 +47,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
   private val UnloadingXMLRejectionMessageId: Int        = 4
 
   def getSummary(arrivalId: Int): Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       val json = arrivalId match {
         case DuplicateMRN                                  => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-duplicate.json")
         case GenericMRN                                    => jsonUtils.readJsonFromFile("conf/resources/arrival-summary-generic.json")
@@ -69,7 +66,7 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
   }
 
   def get(arrivalId: Int, messageId: Int): Action[AnyContent] = Action {
-    implicit request =>
+    _ =>
       val json = (arrivalId, messageId) match {
         case (DuplicateMRN, DuplicateMRNMessageId)            => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-duplicate.json")
         case (GenericMRN, GenericArrivalMessageId)            => jsonUtils.readJsonFromFile("conf/resources/arrival-rejection-generic.json")
@@ -97,10 +94,9 @@ class ArrivalSummaryController @Inject()(cc: ControllerComponents, jsonUtils: Js
         case (UnloadingXMLSubmissionNegativeAckArrivalId, UnloadingXMLRejectionMessageId) =>
           jsonUtils.readJsonFromFile("conf/resources/arrival-xml-negative-acknowledgement.json")
         case (_, ArrivalNotificationMessageId) => jsonUtils.readJsonFromFile("conf/resources/arrival-notification-message.json")
-        case _ => {
+        case _ =>
           logger.error(s"No match for ArrivalId=$arrivalId and MessageId=$messageId")
           throw new IllegalArgumentException(s"No match for ArrivalId=$arrivalId and MessageId=$messageId")
-        }
       }
       Ok(json).as("application/json")
   }

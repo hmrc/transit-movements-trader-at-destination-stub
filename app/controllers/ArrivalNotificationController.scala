@@ -16,17 +16,18 @@
 
 package controllers
 
-import javax.inject.Inject
-import play.api.Logger
+import play.api.Logging
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import services.HeaderValidatorService
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
-class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerValidatorService: HeaderValidatorService) extends BackendController(cc) {
+import javax.inject.Inject
 
-  val logger: Logger = Logger(getClass().getSimpleName())
+class ArrivalNotificationController @Inject()(cc: ControllerComponents, headerValidatorService: HeaderValidatorService)
+    extends BackendController(cc)
+    with Logging {
 
   def post(): Action[AnyContent] = Action {
     implicit request =>

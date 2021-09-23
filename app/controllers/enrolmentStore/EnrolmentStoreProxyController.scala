@@ -16,13 +16,13 @@
 
 package controllers.enrolmentStore
 
-import javax.inject.Inject
 import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import utils.JsonUtils
 
+import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class EnrolmentStoreProxyController @Inject()(val executionContext: ExecutionContext, cc: ControllerComponents, jsonUtils: JsonUtils)

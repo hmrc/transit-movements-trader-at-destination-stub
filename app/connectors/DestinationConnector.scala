@@ -17,14 +17,15 @@
 package connectors
 
 import config.AppConfig
-import javax.inject.Inject
+import uk.gov.hmrc.http.HttpReads.Implicits.readRaw
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.http.HttpResponse
 import uk.gov.hmrc.http.HttpClient
+import uk.gov.hmrc.http.HttpResponse
+
+import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import scala.xml.Node
-import uk.gov.hmrc.http.HttpReads.Implicits.readRaw
 
 class DestinationConnector @Inject()(val config: AppConfig, val http: HttpClient)(implicit ec: ExecutionContext) {
 
