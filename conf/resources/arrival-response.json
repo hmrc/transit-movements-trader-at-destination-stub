@@ -10,6 +10,12 @@
       "status": "ArrivalSubmitted",
       "created": "2020-05-29T08:20:00.000Z",
       "updated": "2020-05-29T08:20:00.000Z",
+      "messagesMetaData": [
+        {
+          "messageType": "IE007",
+          "dateTime": "2020-05-29T08:20:00.000Z"
+        }
+      ],
       "messages": [
         {
           "dateTime": "2020-05-29T08:20:00.000Z",
@@ -28,6 +34,16 @@
       "status": "UnloadingPermission",
       "created": "2020-05-30T08:20:00.000Z",
       "updated": "2020-05-30T08:20:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime": "2020-05-30T08:20:00.000Z",
+          "messageType": "IE007"
+        },
+        {
+          "dateTime" : "2020-05-30T13:03:00.000Z",
+          "messageType" : "IE043"
+        }
+      ],
       "messages": [
         {
           "dateTime": "2020-05-30T08:20:00.000Z",
@@ -52,6 +68,16 @@
       "status" : "ArrivalRejected",
       "created" : "2020-06-01T15:01:00.000Z",
       "updated" : "2020-06-01T15:02:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-01T15:01:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-01T15:02:00.000Z",
+          "messageType" : "IE008"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-01T15:01:00.000Z",
@@ -76,6 +102,16 @@
       "status" : "GoodsReleased",
       "created" : "2020-06-02T11:31:00.000Z",
       "updated" : "2020-06-02T11:31:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-02T11:31:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-02T11:31:00.000Z",
+          "messageType" : "IE025"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-02T11:31:00.000Z",
@@ -100,6 +136,16 @@
       "status" : "UnloadingPermission",
       "created" : "2020-06-01T15:44:00.000Z",
       "updated" : "2020-06-01T15:44:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-01T15:44:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-01T15:44:00.000Z",
+          "messageType" : "IE043"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-01T15:44:00.000Z",
@@ -124,6 +170,20 @@
       "status" : "UnloadingRemarksSubmitted",
       "created" : "2020-06-01T15:27:00.000Z",
       "updated" : "2020-06-03T15:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-01T15:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-01T15:31:00.000Z",
+          "messageType" : "IE043"
+        },
+        {
+          "dateTime" : "2020-06-03T15:56:00.000Z",
+          "messageType" : "IE044"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-01T15:27:00.000Z",
@@ -155,6 +215,16 @@
       "status" : "ArrivalRejected",
       "created" : "2020-06-05T15:01:00.000Z",
       "updated" : "2020-06-05T15:02:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-05T15:01:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-05T15:02:00.000Z",
+          "messageType" : "IE008"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-05T15:01:00.000Z",
@@ -179,6 +249,24 @@
       "status" : "UnloadingRemarksRejected",
       "created" : "2020-06-01T15:27:00.000Z",
       "updated" : "2020-06-03T15:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-01T15:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-01T15:31:00.000Z",
+          "messageType" : "IE043"
+        },
+        {
+          "dateTime" : "2020-06-03T15:56:00.000Z",
+          "messageType" : "IE044"
+        },
+        {
+          "dateTime" : "2020-06-04T15:56:00.000Z",
+          "messageType" : "IE058"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-01T15:27:00.000Z",
@@ -217,6 +305,24 @@
       "status" : "UnloadingRemarksRejected",
       "created" : "2020-06-01T15:27:00.000Z",
       "updated" : "2020-06-03T15:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-01T15:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-01T15:31:00.000Z",
+          "messageType" : "IE043"
+        },
+        {
+          "dateTime" : "2020-06-03T15:56:00.000Z",
+          "messageType" : "IE044"
+        },
+        {
+          "dateTime" : "2020-06-04T15:56:00.000Z",
+          "messageType" : "IE058"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-01T15:27:00.000Z",
@@ -255,6 +361,24 @@
       "status" : "UnloadingRemarksRejected",
       "created" : "2020-06-01T15:27:00.000Z",
       "updated" : "2020-06-03T15:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2020-06-01T15:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-06-01T15:31:00.000Z",
+          "messageType" : "IE043"
+        },
+        {
+          "dateTime" : "2020-06-03T15:56:00.000Z",
+          "messageType" : "IE044"
+        },
+        {
+          "dateTime" : "2020-06-04T15:56:00.000Z",
+          "messageType" : "IE058"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2020-06-01T15:27:00.000Z",
@@ -293,6 +417,16 @@
       "status" : "ArrivalRejected",
       "created" : "2021-01-01T12:27:00.000Z",
       "updated" : "2021-01-01T15:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2021-01-01T12:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2021-01-01T15:56:00.000Z",
+          "messageType" : "IE008"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2021-01-01T12:27:00.000Z",
@@ -317,6 +451,16 @@
       "status" : "ArrivalXMLSubmissionNegativeAcknowledgement",
       "created" : "2021-01-01T12:27:00.000Z",
       "updated" : "2021-01-01T15:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2021-01-01T12:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2021-01-01T15:56:00.000Z",
+          "messageType" : "IE917"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2021-01-01T12:27:00.000Z",
@@ -341,6 +485,32 @@
       "status" : "UnloadingRemarksXMLSubmissionNegativeAcknowledgement",
       "created" : "2021-02-04T12:27:00.000Z",
       "updated" : "2021-02-04T20:56:00.000Z",
+      "messagesMetaData": [
+        {
+          "dateTime" : "2021-02-04T12:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2021-02-04T15:56:00.000Z",
+          "messageType" : "IE917"
+        },
+        {
+          "dateTime" : "2021-02-04T16:27:00.000Z",
+          "messageType" : "IE007"
+        },
+        {
+          "dateTime" : "2020-02-04T18:31:00.000Z",
+          "messageType" : "IE043"
+        },
+        {
+          "dateTime" : "2020-02-04T19:56:00.000Z",
+          "messageType" : "IE044"
+        },
+        {
+          "dateTime" : "2020-02-04T15:02:00.000Z",
+          "messageType" : "IE917"
+        }
+      ],
       "messages" : [
         {
           "dateTime" : "2021-02-04T12:27:00.000Z",
