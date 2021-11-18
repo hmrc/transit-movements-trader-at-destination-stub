@@ -32,7 +32,7 @@ class ArrivalsControllerSpec extends AnyFreeSpec with Matchers with GuiceOneAppP
 
       "return arrivals submitted" in {
 
-        val request = FakeRequest(GET, routes.ArrivalsController.get().url)
+        val request = FakeRequest(GET, routes.ArrivalsController.get.url)
         val result  = route(app, request).value
 
         status(result) mustEqual OK
