@@ -28,3 +28,4 @@ yarn-error.log
 project/metals.sbt
 .bloop/
 project/.bloop/
+.DS_Store
