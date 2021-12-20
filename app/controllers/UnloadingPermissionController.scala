@@ -29,11 +29,14 @@ class UnloadingPermissionController @Inject()(cc: ControllerComponents, jsonUtil
 
   def get(arrivalId: Int): Action[AnyContent] = Action {
     _ =>
-      val json = arrivalId match {
-        case WithoutSeals => jsonUtils.readJsonFromFile("conf/resources/unloading-response-without-seals.json")
-        case _            => jsonUtils.readJsonFromFile("conf/resources/unloading-response-with-seals.json")
+      val fileName = arrivalId match {
+        case WithoutSeals => "unloading-response-without-seals.json"
+        case _            => "unloading-response-with-seals.json"
       }
-      Ok(json).as("application/json")
+      val json = jsonUtils.readJsonFromFile(s"conf/resources/$fileName")
+      Ok(json).withHeaders(
+        CONTENT_DISPOSITION -> s"attachment; filename=$fileName"
+      )
   }
 
 }
