@@ -448,19 +448,10 @@
       "arrivalId" : 12,
       "movementReferenceNumber" : "67QJPVXD78GHIJYQT",
       "eoriNumber" : "A2100005",
-      "status" : "ArrivalXMLSubmissionNegativeAcknowledgement",
+      "status" : "XMLSubmissionNegativeAcknowledgement",
+      "previousStatus" : "ArrivalSubmitted",
       "created" : "2021-01-01T12:27:00.000Z",
       "updated" : "2021-01-01T15:56:00.000Z",
-      "messagesMetaData": [
-        {
-          "dateTime" : "2021-01-01T12:27:00.000Z",
-          "messageType" : "IE007"
-        },
-        {
-          "dateTime" : "2021-01-01T15:56:00.000Z",
-          "messageType" : "IE917"
-        }
-      ],
       "messages" : [
         {
           "dateTime" : "2021-01-01T12:27:00.000Z",
@@ -482,35 +473,10 @@
       "arrivalId" : 13,
       "movementReferenceNumber" : "99QJPVXD78GHIJYQT",
       "eoriNumber" : "A2100005",
-      "status" : "UnloadingRemarksXMLSubmissionNegativeAcknowledgement",
+      "status" : "XMLSubmissionNegativeAcknowledgement",
+      "previousStatus" : "UnloadingRemarksSubmitted",
       "created" : "2021-02-04T12:27:00.000Z",
       "updated" : "2021-02-04T20:56:00.000Z",
-      "messagesMetaData": [
-        {
-          "dateTime" : "2021-02-04T12:27:00.000Z",
-          "messageType" : "IE007"
-        },
-        {
-          "dateTime" : "2021-02-04T15:56:00.000Z",
-          "messageType" : "IE917"
-        },
-        {
-          "dateTime" : "2021-02-04T16:27:00.000Z",
-          "messageType" : "IE007"
-        },
-        {
-          "dateTime" : "2021-02-04T18:31:00.000Z",
-          "messageType" : "IE043"
-        },
-        {
-          "dateTime" : "2021-02-04T19:56:00.000Z",
-          "messageType" : "IE044"
-        },
-        {
-          "dateTime" : "2021-02-04T20:02:00.000Z",
-          "messageType" : "IE917"
-        }
-      ],
       "messages" : [
         {
           "dateTime" : "2021-02-04T12:27:00.000Z",
