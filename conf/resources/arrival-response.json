@@ -314,8 +314,7 @@
       "arrivalId" : 12,
       "movementReferenceNumber" : "67QJPVXD78GHIJYQT",
       "eoriNumber" : "A2100005",
-      "status" : "XMLSubmissionNegativeAcknowledgement",
-      "previousStatus" : "ArrivalSubmitted",
+      "status" : "ArrivalSubmittedNegativeAcknowledgement",
       "created" : "2021-01-01T12:27:00.000Z",
       "updated" : "2021-01-01T15:56:00.000Z",
       "messages" : [
@@ -339,8 +338,7 @@
       "arrivalId" : 13,
       "movementReferenceNumber" : "99QJPVXD78GHIJYQT",
       "eoriNumber" : "A2100005",
-      "status" : "XMLSubmissionNegativeAcknowledgement",
-      "previousStatus" : "UnloadingRemarksSubmitted",
+      "status" : "UnloadingRemarksSubmittedNegativeAcknowledgement",
       "created" : "2021-02-04T12:27:00.000Z",
       "updated" : "2021-02-04T20:56:00.000Z",
       "messages" : [
